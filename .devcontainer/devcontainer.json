@@ -3,32 +3,16 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "8gb",
+    "storage": "16gb"
+  },
   "features": {
     "ghcr.io/devcontainers/features/git:1": {
       "ppa": true,
       "version": "latest"
     },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    },
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.12"
-    },
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "21"
-    },
-    "ghcr.io/devcontainers/features/go:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/terraform:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-      "version": "latest",
-      "helm": "latest",
-      "minikube": "none"
-    },
-    "ghcr.io/devcontainers/features/powershell:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": true,
       "version": "latest"
@@ -44,12 +28,7 @@
     },
     "ghcr.io/devcontainers/features/dotnet:2": {
       "version": "10.0",
-      "additionalVersions": "8.0, 9.0"
-    },
-    "ghcr.io/devcontainers/features/azure-cli:1": {
-      "version": "latest",
-      "installBicep": true,
-      "bicepVersion": "latest"
+      "additionalVersions": "8.0"
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "version": "latest",
@@ -67,7 +46,6 @@
         "GitHub.copilot",
         "GitHub.copilot-chat",
         "github.vscode-github-actions",
-        "ms-vscode.vscode-js-profile-flame",
         "openai.chatgpt"
       ],
       "settings": {
@@ -80,13 +58,25 @@
         "editor.codeActionsOnSave": {
           "source.fixAll": "explicit",
           "source.organizeImports": "explicit"
-        }
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          },
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "terminal.integrated.shellIntegration.enabled": true,
+        "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+        "terminal.integrated.stickyScroll.enabled": true,
+        "terminal.integrated.suggest.enabled": true
       }
     }
   },
   // Environment variables for dev container (non-sensitive only)
   // Secrets should be provided via User Secrets or .devcontainer/devcontainer.local.env (gitignored)
-  // See docs/security/secrets-guide.md for comprehensive secret management
   "containerEnv": {
     "ASPNETCORE_ENVIRONMENT": "Development",
     "DOTNET_ENVIRONMENT": "Development",
@@ -101,19 +91,18 @@
     "HVO_REDIS_HOST": "redis",
     "HVO_REDIS_HOST_LOCAL": "127.0.0.1",
     "HVO_REDIS_PORT": "6379",
-    // Identity Hardening - Logging Configuration (non-sensitive)
+    // Logging Configuration (non-sensitive)
     "LOGGING_LOGLEVEL_DEFAULT": "Information",
     "LOGGING_LOGLEVEL_MICROSOFT_ASPNETCORE": "Warning"
   },
-  "remoteEnv": {},
-  // Port mappings with allInterfaces for Docker-from-Docker accessibility
-  // 5000-5001: Main HVO.SkyMonitor app (HTTP/HTTPS)
-  // 5010-5011: Camera Agent (HTTP/HTTPS)
+  "remoteEnv": {
+    // Forward GitHub token from host so gh CLI works without re-auth
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+    "GH_TOKEN": "${localEnv:GH_TOKEN}"
+  },
+  // Port mappings
+  // 5000-5001: HVO.Enterprise sample apps (HTTP/HTTPS)
   // 5432: PostgreSQL, 6379: Redis
-  // 9000-9001: MinIO (API/Console)
-  // 7096: Logic Host HTTPS (dotnet run)
-  // 5174: SkyMonitor container mode (HTTP)
-  // 5130: Camera agent container mode
   "forwardPorts": [
     5000,
     5001,
@@ -142,7 +131,7 @@
     "onAutoForward": "silent"
   },
   // Ensure host-side secrets directory exists to avoid bind mount errors
-  "initializeCommand": "bash -lc 'mkdir -p \\\"$HOME/.microsoft/usersecrets\\\"'",
+  "initializeCommand": "mkdir -p \"$HOME/.microsoft/usersecrets\"",
   // Mount user secrets from host into container
   // Allows dev container to access locally stored secrets
   "mounts": [

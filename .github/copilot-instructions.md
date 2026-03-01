@@ -982,3 +982,23 @@ When suggesting code:
 5. Always include necessary using statements (implicit usings are disabled)
 6. Provide XML documentation for public APIs
 7. Follow the established patterns in the codebase (Result<T>, Option<T>, IOneOf)
+
+## Dev Container Tool Policy
+
+The dev container does **not** include Node.js, Python, or Azure CLI. Do **not** attempt to use these tools or suggest installing them.
+
+- **Scripting & automation**: Use `bash`/`zsh` shell scripts, `gh` CLI, or `dotnet` CLI
+- **JSON processing**: Use `jq` (installed) or .NET `System.Text.Json`
+- **Issue/PR management**: Use `gh issue create`, `gh pr create`, etc.
+- **Search**: Use `rg` (ripgrep, installed) for text search
+- **EF Core / database CLI**: Not installed — use `dotnet` CLI or EF via code
+- **Never** suggest `npm`, `npx`, `pip`, `python`, `az`, or `dotnet-script` commands
+
+### Heredoc / Multi-Line String Warning
+
+**Do NOT use `cat << 'EOF'` or any heredoc syntax in terminal commands.** Heredocs are unreliable in this environment — content frequently gets corrupted, garbled, or truncated. Instead:
+
+1. Write multi-line content to a file using the file-creation tool (e.g., `create_file`).
+2. Reference that file in the terminal command (e.g., `gh issue create --body-file /tmp/issue-body.md`).
+
+This applies to **all** cases where you need to pass multi-line text to a CLI command.

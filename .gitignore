@@ -429,3 +429,21 @@ artifacts/
 
 # Local tool manifest
 .config/dotnet-tools.json
+
+# ===================================================================
+# HVO.Enterprise - Secrets and environment-specific config
+# ===================================================================
+# These files contain real API keys, PATs, and endpoints - NEVER commit
+appsettings.Development.json
+appsettings.Test.json
+appsettings.*.local.json
+
+# Environment variable files (may contain secrets)
+.env.*
+!.env.template
+
+# ===================================================================
+# Test & Coverage output
+# ===================================================================
+TestResults/
+coverage-report/

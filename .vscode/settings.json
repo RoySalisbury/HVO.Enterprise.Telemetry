@@ -1,14 +1,13 @@
 {
+    "files.exclude": {
+        "**/BuildHost-*": true
+    },
     "chat.tools.terminal.autoApprove": {
         "gh": true,
-        "git checkout": true,
+        "git push": true,
         "dotnet test": true,
         "dotnet build": true,
         "dotnet run": true,
-        "/^cd /workspaces/HVO\\.Enterprise && python3 -c \"\nimport re, os\n\ndef check_file\\(filepath\\):\n    findings = \\[\\]\n    with open\\(filepath, 'r'\\) as f:\n        lines = f\\.readlines\\(\\)\n    \n    # Track class/struct nesting and visibility\n    scope_stack = \\[\\]  # Track if we're inside internal/private class\n    \n    for i, line in enumerate\\(lines\\):\n        stripped = line\\.strip\\(\\)\n        \n        # Track class/struct/interface declarations\n        m = re\\.match\\(r'\\(public\\|internal\\|private\\|protected\\)\\\\s\\+\\.\\*\\?\\(sealed\\\\s\\+\\|abstract\\\\s\\+\\|static\\\\s\\+\\|partial\\\\s\\+\\)\\*\\(class\\|struct\\|interface\\|enum\\)\\\\s\\+\\(\\\\w\\+\\)', stripped\\)\n        if m:\n            visibility = m\\.group\\(1\\)\n            scope_stack\\.append\\(visibility\\)\n        \n        # Very rough brace tracking \\(only for class context; not perfect but good enough\\)\n        \n        if not re\\.match\\(r'public\\\\s\\+', stripped\\):\n            continue\n        if stripped\\.startswith\\('///'\\) or stripped\\.startswith\\('//'\\):\n            continue\n            \n        # Check if preceded by XML doc\n        has_doc = False\n        for j in range\\(i-1, max\\(-1, i-16\\), -1\\):\n            prev = lines\\[j\\]\\.strip\\(\\) if j >= 0 else ''\n            if '///' in prev:\n                has_doc = True\n                break\n            if prev\\.startswith\\('\\['\\) and prev\\.endswith\\('\\]'\\):\n                continue\n            if prev\\.startswith\\('//'\\):\n                continue\n            if prev == '':\n                continue\n            if prev == '\\{':\n                continue\n            break\n        \n        if not has_doc:\n            findings\\.append\\(\\(i\\+1, stripped\\[:120\\]\\)\\)\n    return findings\n\n# Get the full output\ncount = 0\nfor root, dirs, files in sorted\\(os\\.walk\\('src/'\\)\\):\n    for f in sorted\\(files\\):\n        if f\\.endswith\\('\\.cs'\\):\n            fp = os\\.path\\.join\\(root, f\\)\n            results = check_file\\(fp\\)\n            for line, code in results:\n                print\\(f'\\{fp\\}:\\{line\\}: \\{code\\}'\\)\n                count \\+= 1\n\nprint\\(f'\\\\nTotal: \\{count\\} findings'\\)\n\" 2>&1 \\| wc -l\n$/": {
-            "approve": true,
-            "matchCommandLine": true
-        },
         "dotnet package": true
     }
 }
