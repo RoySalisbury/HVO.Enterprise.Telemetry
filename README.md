@@ -1,6 +1,9 @@
 # HVO.Enterprise
 
 [![Build Status](https://github.com/RoySalisbury/HVO.Enterprise/workflows/CI/badge.svg)](https://github.com/RoySalisbury/HVO.Enterprise/actions)
+[![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/tests.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
+[![Line Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-line.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
+[![Branch Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-branch.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
 [![.NET Standard](https://img.shields.io/badge/.NET%20Standard-2.0-blue)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -45,6 +48,25 @@ HVO.Enterprise/
 > Shared functional primitives (Result, Option, OneOf, guards, extensions) now come from the external [HVO.Core](https://www.nuget.org/packages/HVO.Core) NuGet package that lives in the [HVO.SDK](https://github.com/RoySalisbury/HVO.SDK) repository.
 
 ## Packages
+
+### NuGet Availability
+
+| Package | Version | Downloads |
+|---------|---------|-----------|
+| `HVO.Common` | [![NuGet](https://img.shields.io/nuget/v/HVO.Common.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Common) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Common.svg?label=downloads)](https://www.nuget.org/packages/HVO.Common) |
+| `HVO.Enterprise.Telemetry` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry) |
+| `HVO.Enterprise.Telemetry.OpenTelemetry` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.OpenTelemetry.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.OpenTelemetry) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.OpenTelemetry.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.OpenTelemetry) |
+| `HVO.Enterprise.Telemetry.IIS` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.IIS.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.IIS) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.IIS.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.IIS) |
+| `HVO.Enterprise.Telemetry.Wcf` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Wcf.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Wcf) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Wcf.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Wcf) |
+| `HVO.Enterprise.Telemetry.Serilog` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Serilog.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Serilog) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Serilog.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Serilog) |
+| `HVO.Enterprise.Telemetry.AppInsights` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.AppInsights.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.AppInsights) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.AppInsights.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.AppInsights) |
+| `HVO.Enterprise.Telemetry.Datadog` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Datadog.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Datadog) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Datadog.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Datadog) |
+| `HVO.Enterprise.Telemetry.Data` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data) |
+| `HVO.Enterprise.Telemetry.Data.EfCore` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.EfCore.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.EfCore) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.EfCore.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.EfCore) |
+| `HVO.Enterprise.Telemetry.Data.AdoNet` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.AdoNet.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.AdoNet) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.AdoNet.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.AdoNet) |
+| `HVO.Enterprise.Telemetry.Data.RabbitMQ` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.RabbitMQ.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.RabbitMQ) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.RabbitMQ.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.RabbitMQ) |
+| `HVO.Enterprise.Telemetry.Data.Redis` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.Redis.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.Redis) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.Redis.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.Redis) |
+| `HVO.Enterprise.Telemetry.Grpc` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Grpc.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Grpc) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Grpc.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Grpc) |
 
 ### HVO.Core (NuGet dependency)
 
@@ -93,6 +115,8 @@ Core telemetry library providing:
 | `Telemetry.Grpc` | gRPC server/client interceptors with `rpc.*` semantic conventions |
 
 ## Quick Start
+
+> Prefer a copy-paste friendly walkthrough? See [docs/quickstart.md](docs/quickstart.md).
 
 ### Installation
 
@@ -247,6 +271,9 @@ See [benchmark results](docs/benchmarks/benchmark-report-2026-02-08.md) for deta
 
 | Document | Description |
 |----------|-------------|
+| [Quick Start](docs/quickstart.md) | Minimal end-to-end example requested in Issue #90 |
+| [Configuration Schema](docs/configuration-schema.md) | Complete JSON shape for `TelemetryOptions` |
+| [API Reference](docs/api-reference.md) | Key types (`Telemetry`, `IOperationScope`, builders, HTTP handler) |
 | [Architecture](docs/ARCHITECTURE.md) | System design, component diagrams, threading model |
 | [Platform Differences](docs/DIFFERENCES.md) | .NET Framework 4.8 vs .NET 8+ comparison matrix |
 | [Migration Guide](docs/MIGRATION.md) | Migrating from other telemetry libraries |

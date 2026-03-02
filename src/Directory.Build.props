@@ -9,4 +9,11 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)..\docs\assets\nuget-icon.png" Pack="true" PackagePath="\" Link="nuget-icon.png" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(GenerateDocumentationFile)' == 'true' and '$(DocumentationFile)' != ''">
+    <None Include="$(DocumentationFile)"
+          Pack="true"
+          PackagePath="\"
+          Visible="false" />
+  </ItemGroup>
 </Project>

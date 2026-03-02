@@ -105,7 +105,17 @@ For each user story:
 
 ### Using the Provided Script
 
-A Python script is provided to automate issue creation. See `create-github-issues.py`.
+Use `scripts/create-github-issues.sh` to automate issue creation with the GitHub CLI:
+
+```bash
+# Dry run (prints the title/labels/body path per story)
+./scripts/create-github-issues.sh
+
+# Create all issues
+./scripts/create-github-issues.sh --no-dry-run
+```
+
+This script mirrors the manual process, including completed-story labels and the full issue body content.
 
 ## Method 3: Import Tool
 
