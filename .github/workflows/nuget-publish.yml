@@ -64,7 +64,7 @@ jobs:
       - name: Pack all projects
         run: dotnet pack --configuration Release --output ./artifacts
       # Upload both .nupkg and .snupkg (symbol packages)
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: nuget-packages
           path: |
