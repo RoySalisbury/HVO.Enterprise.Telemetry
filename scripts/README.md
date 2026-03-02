@@ -21,28 +21,34 @@ This directory contains automation scripts for managing the HVO.Enterprise proje
 cat scripts/create-issues.md
 ```
 
-### 2. `create-github-issues.py`
+### 2. `create-github-issues.sh`
 
-**Purpose**: Python script for automated GitHub issue creation via GitHub API.
+**Purpose**: Shell script that creates GitHub issues directly via the `gh` CLI.
 
-**Description**: Parses user story markdown files and creates corresponding GitHub issues using the PyGithub library.
+**Description**: Parses every user story markdown file, builds the full issue body (Description, Acceptance Criteria, Technical Requirements, etc.), applies the correct label set, and optionally creates the issue immediately.
 
 **Requirements**:
 ```bash
-pip install PyGithub
+gh auth login      # GitHub CLI authentication
+jq --version       # jq is bundled in the dev container
 ```
 
 **Usage**:
 ```bash
-# Dry run (shows what would be created)
-python scripts/create-github-issues.py
+# Dry run (default)
+./scripts/create-github-issues.sh
 
 # Actually create issues
-export GITHUB_TOKEN=your_token_here
-python scripts/create-github-issues.py --no-dry-run
+./scripts/create-github-issues.sh --no-dry-run
+
+# Override the destination repository
+./scripts/create-github-issues.sh --repo other-owner/other-repo --no-dry-run
 ```
 
-**Note**: Currently in dry-run mode only. Uncomment the GitHub API code to enable actual issue creation.
+**Notes**:
+- Dry run mode shows the computed title/labels/body path for each story without calling GitHub.
+- The script enforces the same completed-story mapping (US-001/2/3/4/19) and label scheme as the historical Python version.
+- Issues are created using `gh issue create --body-file <tempfile>`, so no Python runtime is required.
 
 ### 3. `generate-issue-commands.sh` ⭐ **RECOMMENDED**
 
