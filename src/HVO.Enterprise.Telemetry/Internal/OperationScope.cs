@@ -300,7 +300,15 @@ namespace HVO.Enterprise.Telemetry.Internal
 
             var normalized = NormalizeTagValue(key, value);
             if (normalized == null)
+            {
+                if (_tags != null)
+                {
+                    _tags.Remove(key);
+                }
+
+                _activity?.SetTag(key, null);
                 return;
+            }
 
             if (_tags == null)
                 _tags = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);

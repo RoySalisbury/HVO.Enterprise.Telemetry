@@ -228,6 +228,8 @@ scope.WithTag("metric.orders_processed", 1);
 scope.WithProperty("message", "Order completed");
 ```
 
+> **Null handling:** Calling `scope.WithTag("key", null)` removes the tag if it was previously set. Use this to clear sensitive values without mutating the tag key casing.
+
 ---
 
 ## Migration Path 2: From Serilog (No Unified Tracing)

@@ -79,7 +79,7 @@ namespace HVO.Enterprise.Telemetry
         TimeSpan Elapsed { get; }
         
         /// <summary>
-        /// Adds a tag to the operation.
+        /// Adds a tag to the operation. Passing <see langword="null"/> removes the tag if it exists.
         /// </summary>
         IOperationScope WithTag(string key, object? value);
         

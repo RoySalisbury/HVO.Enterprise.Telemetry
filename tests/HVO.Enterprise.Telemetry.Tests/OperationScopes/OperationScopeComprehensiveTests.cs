@@ -83,8 +83,15 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void OperationScope_WithTag_NullValue_AddsTag()
         {
             using var scope = CreateScope("null-value-op");
+            scope.WithTag("key", "value");
+
             scope.WithTag("key", null);
-            // Should not throw
+
+            // Legacy test name retained for historical baselines; null now removes the tag.
+            if (scope.Activity != null)
+            {
+                Assert.IsNull(scope.Activity.GetTagItem("key"));
+            }
         }
 
         [TestMethod]

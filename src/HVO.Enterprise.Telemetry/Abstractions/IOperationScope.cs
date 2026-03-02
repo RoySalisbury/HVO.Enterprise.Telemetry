@@ -33,8 +33,12 @@ namespace HVO.Enterprise.Telemetry.Abstractions
         /// Adds a tag to the operation.
         /// </summary>
         /// <param name="key">Tag key.</param>
-        /// <param name="value">Tag value.</param>
+        /// <param name="value">Tag value. Passing <see langword="null"/> removes the tag if it was previously set.</param>
         /// <returns>The current scope.</returns>
+        /// <remarks>
+        /// Supplying <see langword="null"/> is treated as a directive to remove the tag rather than storing a null value.
+        /// This enables fluent code to clear sensitive values without throwing or mutating the tag key casing.
+        /// </remarks>
         IOperationScope WithTag(string key, object? value);
 
         /// <summary>
