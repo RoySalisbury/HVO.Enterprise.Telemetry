@@ -76,10 +76,10 @@ extract_section() {
         END {
             start=0
             end=line_count
-            while (start < end && lines[start] ~ /^\s*$/) {
+            while (start < end && lines[start] ~ /^[[:space:]]*$/) {
                 start++
             }
-            while (end > start && lines[end-1] ~ /^\s*$/) {
+            while (end > start && lines[end-1] ~ /^[[:space:]]*$/) {
                 end--
             }
             for (i=start; i<end; i++) {

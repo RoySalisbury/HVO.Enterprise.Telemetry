@@ -17,7 +17,7 @@ This guide shows the smallest set of steps required to enable HVO Enterprise Tel
 
 ## 2. Add telemetry configuration
 
-Add a `Telemetry` section to `appsettings.json`. This shape exactly matches `TelemetryOptions` and is documented in [docs/configuration-schema.md](docs/configuration-schema.md).
+Add a `Telemetry` section to `appsettings.json`. This shape exactly matches `TelemetryOptions` and is documented in [configuration-schema.md](configuration-schema.md).
 
 ```json
 {
@@ -84,6 +84,6 @@ For older ASP.NET (.NET Framework 4.8), call `Telemetry.Initialize(options => { 
 
 ## Next steps
 
-- Review the configuration surface in [docs/configuration-schema.md](docs/configuration-schema.md).
-- Explore the full API surface in [docs/api-reference.md](docs/api-reference.md).
-- Browse the [samples/HVO.Enterprise.Samples.Net8](samples/HVO.Enterprise.Samples.Net8/) application for end-to-end scenarios.
+- Review the configuration surface in [configuration-schema.md](configuration-schema.md).
+- Explore the full API surface in [api-reference.md](api-reference.md).
+- Browse the [samples/HVO.Enterprise.Samples.Net8](../samples/HVO.Enterprise.Samples.Net8/) application for end-to-end scenarios.

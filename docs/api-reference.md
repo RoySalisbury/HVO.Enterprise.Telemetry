@@ -14,7 +14,7 @@ This guide summarizes the primary public APIs exposed by `HVO.Enterprise.Telemet
 
 ## Telemetry static API
 
-Defined in [src/HVO.Enterprise.Telemetry/Telemetry.cs](src/HVO.Enterprise.Telemetry/Telemetry.cs). Use this when DI is not available (e.g., ASP.NET 4.8, console utilities).
+Defined in [Telemetry.cs](../src/HVO.Enterprise.Telemetry/Telemetry.cs). Use this when DI is not available (e.g., ASP.NET 4.8, console utilities).
 
 | Member | Description |
 |--------|-------------|
@@ -53,12 +53,12 @@ catch (Exception ex)
 
 ## Dependency injection
 
-Extension methods live in [src/HVO.Enterprise.Telemetry/TelemetryServiceCollectionExtensions.cs](src/HVO.Enterprise.Telemetry/TelemetryServiceCollectionExtensions.cs).
+Extension methods live in [TelemetryServiceCollectionExtensions.cs](../src/HVO.Enterprise.Telemetry/TelemetryServiceCollectionExtensions.cs).
 
 | Method | Purpose |
 |--------|---------|
 | `AddTelemetry(Action<TelemetryOptions>? configure = null)` | Registers the telemetry service, hosted service, correlation provider, and statistics singleton. Accepts an optional delegate to mutate options. |
-| `AddTelemetry(IConfiguration section)` | Binds `TelemetryOptions` from configuration (see [docs/configuration-schema.md](docs/configuration-schema.md)). |
+| `AddTelemetry(IConfiguration section)` | Binds `TelemetryOptions` from configuration (see [configuration-schema.md](configuration-schema.md)). |
 | `AddTelemetry(Action<TelemetryBuilder> configure)` | Registers core services, then exposes a fluent builder for advanced configuration. |
 
 Related helpers:
@@ -71,7 +71,7 @@ Related helpers:
 
 ## TelemetryBuilder
 
-`TelemetryBuilder` (see [src/HVO.Enterprise.Telemetry/TelemetryBuilder.cs](src/HVO.Enterprise.Telemetry/TelemetryBuilder.cs)) is returned by the `AddTelemetry(Action<TelemetryBuilder>)` overload.
+`TelemetryBuilder` (see [TelemetryBuilder.cs](../src/HVO.Enterprise.Telemetry/TelemetryBuilder.cs)) is returned by the `AddTelemetry(Action<TelemetryBuilder>)` overload.
 
 Common members:
 
@@ -81,11 +81,11 @@ Common members:
 | `AddActivitySource(string name)` | Adds an `ActivitySource` name so the operation scope factory can attach to your custom instrumentation. |
 | `AddHttpInstrumentation(Action<HttpInstrumentationOptions>? configure = null)` | Enables outgoing HTTP client instrumentation and W3C header propagation. |
 | `WithFirstChanceExceptionMonitoring(Action<FirstChanceExceptionOptions>? configure = null)` | Hooks `AppDomain.CurrentDomain.FirstChanceException` to capture suppressed exceptions for diagnostics. |
-| `WithDatadogExporter(...)`, `WithAppInsights(...)`, `WithOpenTelemetry(...)` | Provided by extension packages under `src/HVO.Enterprise.Telemetry.*`. |
+| `WithDatadogExporter(...)`, `WithAppInsights(...)`, `WithOpenTelemetry(...)` | Provided by extension packages under [`src/HVO.Enterprise.Telemetry.*`](../src/). |
 
 ## Operation scopes
 
-`IOperationScope` and friends live in [src/HVO.Enterprise.Telemetry/Abstractions/IOperationScope.cs](src/HVO.Enterprise.Telemetry/Abstractions/IOperationScope.cs).
+`IOperationScope` and friends live in [IOperationScope.cs](../src/HVO.Enterprise.Telemetry/Abstractions/IOperationScope.cs).
 
 | Member | Description |
 |--------|-------------|
@@ -101,7 +101,7 @@ Operation scopes automatically dispose activities, calculate duration, and emit 
 
 ## Correlation context
 
-`CorrelationContext` (see [src/HVO.Enterprise.Telemetry/Correlation/CorrelationContext.cs](src/HVO.Enterprise.Telemetry/Correlation/CorrelationContext.cs)) manages AsyncLocal state.
+`CorrelationContext` (see [CorrelationContext.cs](../src/HVO.Enterprise.Telemetry/Correlation/CorrelationContext.cs)) manages AsyncLocal state.
 
 Key members:
 
@@ -113,7 +113,7 @@ Use this when you need to flow custom correlation IDs from message headers or jo
 
 ## HTTP instrumentation
 
-`TelemetryHttpMessageHandler` (see [src/HVO.Enterprise.Telemetry/Http/TelemetryHttpMessageHandler.cs](src/HVO.Enterprise.Telemetry/Http/TelemetryHttpMessageHandler.cs)) is a ready-to-use `DelegatingHandler` that emits spans around outbound HTTP calls.
+`TelemetryHttpMessageHandler` (see [TelemetryHttpMessageHandler.cs](../src/HVO.Enterprise.Telemetry/Http/TelemetryHttpMessageHandler.cs)) is a ready-to-use `DelegatingHandler` that emits spans around outbound HTTP calls.
 
 ```csharp
 var handler = new TelemetryHttpMessageHandler(new HttpInstrumentationOptions
@@ -137,7 +137,7 @@ It records standard OpenTelemetry semantic conventions (`http.method`, `http.url
 
 ## Diagnostics
 
-The health/diagnostics helpers live in [src/HVO.Enterprise.Telemetry/HealthChecks](src/HVO.Enterprise.Telemetry/HealthChecks/).
+The health/diagnostics helpers live in [HealthChecks/](../src/HVO.Enterprise.Telemetry/HealthChecks/).
 
 - `TelemetryStatistics` implements `ITelemetryStatistics` and exposes queue depth, dropped payload counts, error rates, etc.
 - `TelemetryHealthCheck` consumes `ITelemetryStatistics` and reports `Healthy`, `Degraded`, or `Unhealthy` based on `TelemetryHealthCheckOptions` thresholds.
@@ -160,4 +160,4 @@ builder.Services.AddHealthChecks()
     .AddCheck<TelemetryHealthCheck>("telemetry");
 ```
 
-Refer to [docs/quickstart.md](docs/quickstart.md) for an end-to-end walkthrough and [docs/configuration-schema.md](docs/configuration-schema.md) for configuration binding details.
+Refer to [quickstart.md](quickstart.md) for an end-to-end walkthrough and [configuration-schema.md](configuration-schema.md) for configuration binding details.

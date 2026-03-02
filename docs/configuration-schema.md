@@ -1,6 +1,6 @@
 # Telemetry Configuration Schema
 
-`AddTelemetry(IConfiguration)` binds directly to `TelemetryOptions` (see [src/HVO.Enterprise.Telemetry/Configuration/TelemetryOptions.cs](src/HVO.Enterprise.Telemetry/Configuration/TelemetryOptions.cs)). This document explains every supported property so you can confidently author `appsettings.json`, environment variables, or any other configuration source.
+`AddTelemetry(IConfiguration)` binds directly to `TelemetryOptions` (see [TelemetryOptions.cs](../src/HVO.Enterprise.Telemetry/Configuration/TelemetryOptions.cs)). This document explains every supported property so you can confidently author `appsettings.json`, environment variables, or any other configuration source.
 
 ## Minimal configuration
 
@@ -16,7 +16,7 @@
 }
 ```
 
-> All properties are optional except `ServiceName`. Defaults are shown in the tables below.
+> All properties are optional. `ServiceName` defaults to `"Unknown"` but should always be set for meaningful telemetry. Defaults are shown in the tables below.
 
 ## Complete JSON shape
 
@@ -68,7 +68,7 @@
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `ServiceName` | string | `"Unknown"` | Logical service/app name used for traces, metrics, and exporters. **Required**. |
+| `ServiceName` | string | `"Unknown"` | Logical service/app name used for traces, metrics, and exporters. **Strongly recommended** — defaults to `"Unknown"` if omitted. |
 | `ServiceVersion` | string | `null` | Semantic version (e.g., `"1.2.3"`). Forwarded to exporters that support version tags. |
 | `Environment` | string | `null` | Deployment environment (`Production`, `Staging`, etc.). |
 | `Enabled` | bool | `true` | Global kill switch. When `false`, instrumentation short-circuits. |
@@ -90,7 +90,7 @@
 
 ### Logging options
 
-Defined in [src/HVO.Enterprise.Telemetry/Configuration/LoggingOptions.cs](src/HVO.Enterprise.Telemetry/Configuration/LoggingOptions.cs).
+Defined in [LoggingOptions.cs](../src/HVO.Enterprise.Telemetry/Configuration/LoggingOptions.cs).
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -99,7 +99,7 @@ Defined in [src/HVO.Enterprise.Telemetry/Configuration/LoggingOptions.cs](src/HV
 
 ### Metrics options
 
-Defined in [src/HVO.Enterprise.Telemetry/Configuration/MetricsOptions.cs](src/HVO.Enterprise.Telemetry/Configuration/MetricsOptions.cs).
+Defined in [MetricsOptions.cs](../src/HVO.Enterprise.Telemetry/Configuration/MetricsOptions.cs).
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -108,7 +108,7 @@ Defined in [src/HVO.Enterprise.Telemetry/Configuration/MetricsOptions.cs](src/HV
 
 ### Queue options
 
-Defined in [src/HVO.Enterprise.Telemetry/Configuration/QueueOptions.cs](src/HVO.Enterprise.Telemetry/Configuration/QueueOptions.cs).
+Defined in [QueueOptions.cs](../src/HVO.Enterprise.Telemetry/Configuration/QueueOptions.cs).
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -117,7 +117,7 @@ Defined in [src/HVO.Enterprise.Telemetry/Configuration/QueueOptions.cs](src/HVO.
 
 ### Feature flags
 
-Defined in [src/HVO.Enterprise.Telemetry/Configuration/FeatureFlags.cs](src/HVO.Enterprise.Telemetry/Configuration/FeatureFlags.cs).
+Defined in [FeatureFlags.cs](../src/HVO.Enterprise.Telemetry/Configuration/FeatureFlags.cs).
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -131,6 +131,6 @@ Defined in [src/HVO.Enterprise.Telemetry/Configuration/FeatureFlags.cs](src/HVO.
 - **Configuration providers**: Any `IConfiguration` source works (JSON, environment variables, Azure App Configuration, etc.).
 - **Environment variables** follow the `Telemetry__Queue__Capacity` naming convention (double underscores).
 - **Validation**: `TelemetryOptionsValidator` enforces ranges and will throw during startup if values are invalid.
-- **Hierarchical configuration**: Use attributes (see `TelemetryConfigurationAttribute`) or the [operation configuration API](src/HVO.Enterprise.Telemetry/Configuration/OperationConfiguration.cs) for per-type or per-method overrides.
+- **Hierarchical configuration**: Use attributes (see `TelemetryConfigurationAttribute`) or the [operation configuration API](../src/HVO.Enterprise.Telemetry/Configuration/OperationConfiguration.cs) for per-type or per-method overrides.
 
-For a step-by-step walkthrough, see [docs/quickstart.md](docs/quickstart.md).
+For a step-by-step walkthrough, see [quickstart.md](quickstart.md).
