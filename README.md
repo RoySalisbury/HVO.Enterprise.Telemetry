@@ -22,7 +22,6 @@
 ```
 HVO.Enterprise/
 ├── src/
-│   ├── HVO.Common/                            # Shared utilities (Result<T>, Option<T>, OneOf)
 │   ├── HVO.Enterprise.Telemetry/              # Core telemetry library
 │   ├── HVO.Enterprise.Telemetry.IIS/          # IIS hosting integration
 │   ├── HVO.Enterprise.Telemetry.Wcf/          # WCF instrumentation
@@ -43,11 +42,13 @@ HVO.Enterprise/
 └── docs/                                      # Documentation
 ```
 
+> Shared functional primitives (Result, Option, OneOf, guards, extensions) now come from the external [HVO.Core](https://www.nuget.org/packages/HVO.Core) NuGet package that lives in the [HVO.SDK](https://github.com/RoySalisbury/HVO.SDK) repository.
+
 ## Packages
 
-### HVO.Common
+### HVO.Core (NuGet dependency)
 
-Shared utilities and functional programming patterns used across all HVO projects:
+Shared utilities and functional programming patterns used across all HVO projects, published from [HVO.SDK](https://github.com/RoySalisbury/HVO.SDK):
 
 - **Result&lt;T&gt;** / **Result&lt;T, TEnum&gt;** — Functional error handling without exceptions
 - **Option&lt;T&gt;** — Type-safe optional values
@@ -55,7 +56,7 @@ Shared utilities and functional programming patterns used across all HVO project
 - **Extensions** — String, collection, and enum utilities
 - **Guard / Ensure** — Input validation and runtime assertions
 
-**Target**: .NET Standard 2.0
+**Target**: .NET Standard 2.0 (distributed as `HVO.Core` + `HVO.Core.SourceGenerators`)
 
 ### HVO.Enterprise.Telemetry
 
@@ -97,7 +98,7 @@ Core telemetry library providing:
 
 ```bash
 # Core library
-dotnet add package HVO.Common
+dotnet add package HVO.Core
 dotnet add package HVO.Enterprise.Telemetry
 
 # Platform-specific extensions (as needed)
@@ -160,7 +161,7 @@ public class Global : HttpApplication
 ### Using Result&lt;T&gt; for Error Handling
 
 ```csharp
-using HVO.Common.Results;
+using HVO.Core.Results;
 
 public Result<Customer> GetCustomer(int id)
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using HVO.Common.Extensions;
-using HvoCollectionExtensions = HVO.Common.Extensions.CollectionExtensions;
+using HVO.Core.Extensions;
+using HvoCollectionExtensions = HVO.Core.Extensions.CollectionExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HVO.Common.Tests.Extensions;

@@ -1,5 +1,5 @@
 using System;
-using HVO.Common.Options;
+using HVO.Core.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HVO.Common.Tests.Options;

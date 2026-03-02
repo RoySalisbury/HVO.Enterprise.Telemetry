@@ -12,6 +12,12 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
             CorrelationContext.Clear();
         }
 
+        [TestInitialize]
+        public void Initialize()
+        {
+            CorrelationContext.Clear();
+        }
+
         [TestMethod]
         public void GenerateCorrelationId_ReturnsNonNullId()
         {

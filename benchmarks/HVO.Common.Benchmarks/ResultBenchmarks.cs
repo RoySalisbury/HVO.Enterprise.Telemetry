@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
-using HVO.Common.Results;
+using HVO.Core.Results;
 
 namespace HVO.Common.Benchmarks
 {

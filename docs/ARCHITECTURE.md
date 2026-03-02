@@ -30,7 +30,7 @@ graph TB
         end
     end
 
-    subgraph "HVO.Common (netstandard2.0)"
+    subgraph "HVO.Core (NuGet)"
         RESULT["Result&lt;T&gt;"]
         OPTION["Option&lt;T&gt;"]
         ONEOF["OneOf / IOneOf&lt;T&gt;"]
@@ -41,14 +41,14 @@ graph TB
     A1 & A2 & A3 & A4 --> CORE
     CORE --> Extensions
     CORE --> Data
-    CORE --> HVO.Common
+    CORE --> RESULT
 ```
 
 ## Package Structure
 
 | Package | Target | Purpose |
 |---------|--------|---------|
-| [`HVO.Common`](../src/HVO.Common/) | netstandard2.0 | Shared utilities: `Result<T>`, `Option<T>`, `OneOf`, guards, extensions |
+| [`HVO.Core`](https://github.com/RoySalisbury/HVO.SDK/tree/main/src/HVO.Core) | netstandard2.0 | Shared utilities via NuGet: `Result<T>`, `Option<T>`, `OneOf`, guards, extensions |
 | [`HVO.Enterprise.Telemetry`](../src/HVO.Enterprise.Telemetry/) | netstandard2.0 | Core telemetry: tracing, metrics, logging, configuration |
 | [`HVO.Enterprise.Telemetry.IIS`](../src/HVO.Enterprise.Telemetry.IIS/) | netstandard2.0 | IIS lifecycle & request telemetry |
 | [`HVO.Enterprise.Telemetry.Wcf`](../src/HVO.Enterprise.Telemetry.Wcf/) | netstandard2.0 | WCF dispatch inspector integration |
@@ -477,17 +477,17 @@ sequenceDiagram
 | Microsoft.Extensions.Options | 8.0.0 | `IOptions<T>`, `IOptionsMonitor<T>` |
 | System.Threading.Channels | 7.0.0 | `Channel<T>` for async queue |
 
-## HVO.Common Utilities
+## HVO.Core Utilities (NuGet)
 
 General-purpose functional patterns shared across all HVO projects:
 
 | Type | File | Purpose |
 |------|------|---------|
-| `Result<T>` | [`Result.cs`](../src/HVO.Common/Results/Result.cs) | Railway-oriented error handling — success or failure without exceptions |
-| `Option<T>` | [`Option.cs`](../src/HVO.Common/Options/Option.cs) | Explicit representation of optional values (replaces nullable returns) |
-| `OneOf<T>` | [`OneOf.cs`](../src/HVO.Common/OneOf/OneOf.cs) | Discriminated union — type-safe variant containers |
-| `Guard` | [`Guard.cs`](../src/HVO.Common/Utilities/Guard.cs) | Precondition checks with descriptive exceptions |
-| `Ensure` | [`Ensure.cs`](../src/HVO.Common/Utilities/Ensure.cs) | Postcondition / invariant validation |
+| `Result<T>` | [`Result.cs`](https://github.com/RoySalisbury/HVO.SDK/blob/main/src/HVO.Core/Results/Result.cs) | Railway-oriented error handling — success or failure without exceptions |
+| `Option<T>` | [`Option.cs`](https://github.com/RoySalisbury/HVO.SDK/blob/main/src/HVO.Core/Options/Option.cs) | Explicit representation of optional values (replaces nullable returns) |
+| `OneOf<T>` | [`OneOf.cs`](https://github.com/RoySalisbury/HVO.SDK/blob/main/src/HVO.Core/OneOf/OneOf.cs) | Discriminated union — type-safe variant containers |
+| `Guard` | [`Guard.cs`](https://github.com/RoySalisbury/HVO.SDK/blob/main/src/HVO.Core/Utilities/Guard.cs) | Precondition checks with descriptive exceptions |
+| `Ensure` | [`Ensure.cs`](https://github.com/RoySalisbury/HVO.SDK/blob/main/src/HVO.Core/Utilities/Ensure.cs) | Postcondition / invariant validation |
 
 ## Performance Design Decisions
 

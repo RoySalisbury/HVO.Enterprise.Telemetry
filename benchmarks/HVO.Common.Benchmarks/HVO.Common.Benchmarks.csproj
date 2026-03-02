@@ -10,10 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\HVO.Common\HVO.Common.csproj" />
+    <PackageReference Include="HVO.Core" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
