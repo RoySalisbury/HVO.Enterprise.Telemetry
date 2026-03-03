@@ -4,15 +4,13 @@
 
 HVO.Enterprise is a modular .NET telemetry and logging library providing unified observability across all .NET platforms (.NET Framework 4.8 through .NET 10+). The solution includes:
 
-- **HVO.Common** - Shared utilities and functional patterns (`Result<T>`, `Option<T>`, discriminated unions) used across all HVO projects
+- **HVO.Core** (NuGet from [HVO.SDK](https://github.com/RoySalisbury/HVO.SDK)) - Shared utilities and functional patterns (`Result<T>`, `Option<T>`, discriminated unions) used across all HVO projects
 - **HVO.Enterprise.Telemetry** - Core telemetry library (distributed tracing, metrics, structured logging)
 - **Extension Packages** - Platform-specific integrations (IIS, WCF, Serilog, App Insights, Datadog, Database)
 
 The library targets .NET Standard 2.0 for single-binary deployment while supporting runtime-adaptive features for modern .NET versions. It standardizes logging and performance telemetry across diverse platforms including legacy WCF services, ASP.NET applications, and modern ASP.NET Core APIs.
 
-### HVO.Common Scope
-
-**HVO.Common** is a general-purpose utility library used across all HVO projects, not just the Enterprise telemetry project. It should contain **only general-purpose utilities and patterns** valuable for sharing across multiple projects. Domain-specific or telemetry-specific code belongs in the appropriate project-specific libraries (e.g., HVO.Enterprise.Telemetry).
+> **Note:** Shared functional primitives (`Result<T>`, `Option<T>`, OneOf, guards, extensions) come from the external [HVO.Core](https://www.nuget.org/packages/HVO.Core) NuGet package published from the [HVO.SDK](https://github.com/RoySalisbury/HVO.SDK) repository. There is no `HVO.Common` source project in this repo — the `HVO.Common.Tests` and `HVO.Common.Benchmarks` projects test the `HVO.Core` NuGet package.
 
 ## Target Frameworks
 
@@ -62,9 +60,12 @@ When working with .NET Framework 4.8.1 projects:
 ```
 HVO.Enterprise/
 ├── src/                          # Source code
-│   ├── HVO.Common/               # Shared utilities (.NET Standard 2.0)
-│   └── [other projects]
+│   └── HVO.Enterprise.Telemetry/  # Core telemetry library (.NET Standard 2.0)
 ├── tests/                        # Unit and integration tests
+│   ├── HVO.Common.Tests/         # Tests for HVO.Core NuGet package
+│   └── HVO.Enterprise.Telemetry.Tests/
+├── benchmarks/                   # Performance benchmarks
+│   └── HVO.Common.Benchmarks/    # Benchmarks for HVO.Core NuGet package
 ├── docs/                         # Documentation
 └── .github/                      # GitHub workflows and configuration
 ```
@@ -86,14 +87,14 @@ HVO.Enterprise/
 - **UPPER_CASE**: Constants only when truly constant values
 - **Async methods**: Suffix with `Async` (e.g., `GetDataAsync`)
 - **Namespace convention**: 
-  - `HVO.Common.*` for general-purpose utilities shared across all HVO projects
+  - `HVO.Core.*` for general-purpose utilities (published from HVO.SDK as NuGet)
   - `HVO.Enterprise.*` for Enterprise telemetry and related projects
 
 ### Code Organization
 
 - **One class per file**: Unless nested/private classes
 - **Namespace matches folder structure**: 
-  - `HVO.Common.ProjectName.FolderName` for HVO.Common project
+  - `HVO.Core.*` namespaces come from the HVO.Core NuGet package (do not create local source)
   - `HVO.Enterprise.ProjectName.FolderName` for Enterprise projects
 - **File organization**: usings → namespace → class members in logical groups
 - **Member ordering**: Constants → fields → properties → constructors → methods
@@ -104,7 +105,7 @@ This codebase uses functional error handling patterns:
 
 ```csharp
 // Use Result<T> for operations that can fail
-using HVO.Common.Results;
+using HVO.Core.Results;
 
 public Result<Customer> GetCustomer(int id)
 {
@@ -570,7 +571,7 @@ test(correlation): add AsyncLocal flow tests
 
 ### Using Result<T> in Services
 ```csharp
-using HVO.Common.Results;
+using HVO.Core.Results;
 
 public class CustomerService
 {
@@ -625,7 +626,7 @@ public class CustomerService
 
 ### Using Option<T> for Optional Values
 ```csharp
-using HVO.Common.Options;
+using HVO.Core.Options;
 
 public class ConfigurationService
 {
@@ -649,7 +650,7 @@ public class ConfigurationService
 
 ### IOneOf for Discriminated Unions
 ```csharp
-using HVO.Common.OneOf;
+using HVO.Core.OneOf;
 
 // Define the union type
 public interface IPaymentResult : IOneOf { }
@@ -708,7 +709,7 @@ else if (result.Is<FailedPayment>())
 ### Extension Method Patterns
 ```csharp
 // Group related extensions in dedicated classes
-namespace HVO.Common.Extensions
+namespace HVO.Core.Extensions
 {
     public static class StringExtensions
     {
@@ -728,7 +729,7 @@ namespace HVO.Common.Extensions
     {
         public static string GetDescription(this Enum value)
         {
-            // Implementation shown in HVO.Common
+            // Implementation shown in HVO.Core
         }
     }
 }
