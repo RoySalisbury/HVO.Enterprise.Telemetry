@@ -21,9 +21,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.13" />
   </ItemGroup>
 
   <ItemGroup>
