@@ -53,7 +53,6 @@ HVO.Enterprise/
 
 | Package | Version | Downloads |
 |---------|---------|-----------|
-| `HVO.Common` | [![NuGet](https://img.shields.io/nuget/v/HVO.Common.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Common) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Common.svg?label=downloads)](https://www.nuget.org/packages/HVO.Common) |
 | `HVO.Enterprise.Telemetry` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry) |
 | `HVO.Enterprise.Telemetry.OpenTelemetry` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.OpenTelemetry.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.OpenTelemetry) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.OpenTelemetry.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.OpenTelemetry) |
 | `HVO.Enterprise.Telemetry.IIS` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.IIS.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.IIS) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.IIS.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.IIS) |
