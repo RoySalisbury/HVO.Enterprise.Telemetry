@@ -1,0 +1,36 @@
+# OpenTelemetry Collector configuration for integration tests.
+# Used by docker-compose.test.yml to receive OTLP data from integration tests
+# and write it to the collector's debug exporter (stdout).
+#
+# This configuration intentionally uses a debug exporter so that integration
+# tests can confirm the collector accepted telemetry without requiring an
+# external observability backend.
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug]
+    metrics:
+      receivers: [otlp]
+      exporters: [debug]
+    logs:
+      receivers: [otlp]
+      exporters: [debug]
