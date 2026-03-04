@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.Data.EfCore.Tests.Integration
         private static readonly string _host =
             Environment.GetEnvironmentVariable("HVO_POSTGRES_HOST_LOCAL") ?? "127.0.0.1";
         private static readonly int _port =
-            int.TryParse(Environment.GetEnvironmentVariable("HVO_POSTGRES_PORT"), out var p) ? p : 5432;
+            int.TryParse(Environment.GetEnvironmentVariable("HVO_POSTGRES_PORT"), out var portValue) ? portValue : 5432;
         private static readonly string _database =
             Environment.GetEnvironmentVariable("HVO_POSTGRES_DATABASE") ?? "hvo";
         private static readonly string _username =

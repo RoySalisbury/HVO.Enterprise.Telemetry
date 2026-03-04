@@ -21,7 +21,7 @@ namespace HVO.Enterprise.Telemetry.Data.RabbitMQ.Tests.Integration
         private static readonly string _host =
             Environment.GetEnvironmentVariable("HVO_RABBITMQ_HOST") ?? "127.0.0.1";
         private static readonly int _port =
-            int.TryParse(Environment.GetEnvironmentVariable("HVO_RABBITMQ_PORT"), out var p) ? p : 5672;
+            int.TryParse(Environment.GetEnvironmentVariable("HVO_RABBITMQ_PORT"), out var portValue) ? portValue : 5672;
         private static readonly string _user =
             Environment.GetEnvironmentVariable("HVO_RABBITMQ_USER") ?? "guest";
         private static readonly string _pass =

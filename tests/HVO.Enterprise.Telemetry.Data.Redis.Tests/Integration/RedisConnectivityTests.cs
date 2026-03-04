@@ -20,7 +20,7 @@ namespace HVO.Enterprise.Telemetry.Data.Redis.Tests.Integration
         private static readonly string _host =
             Environment.GetEnvironmentVariable("HVO_REDIS_HOST_LOCAL") ?? "127.0.0.1";
         private static readonly int _port =
-            int.TryParse(Environment.GetEnvironmentVariable("HVO_REDIS_PORT"), out var p) ? p : 6379;
+            int.TryParse(Environment.GetEnvironmentVariable("HVO_REDIS_PORT"), out var portValue) ? portValue : 6379;
 
         private static bool IsRedisAvailable()
         {
