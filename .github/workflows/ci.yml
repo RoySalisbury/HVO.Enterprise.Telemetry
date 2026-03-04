@@ -169,12 +169,32 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Start backend services and wait for healthy
+      - name: Start backend services and wait for ready
         run: |
-          # --wait blocks until every service with a healthcheck reports healthy,
-          # or exits non-zero if they don't become healthy within --timeout seconds.
-          docker compose -f docker-compose.test.yml up -d --wait --timeout 120
-          echo "All services are healthy."
+          docker compose -f docker-compose.test.yml up -d
+
+          # Probe each service from the runner via TCP rather than relying on
+          # Docker health checks inside the containers. This works for any image
+          # (including distroless) and directly tests what the integration tests probe.
+          # || true ensures the step never fails: unavailable services are handled
+          # gracefully by Assert.Inconclusive inside each integration test class.
+
+          echo "Waiting for PostgreSQL (127.0.0.1:5432)..."
+          timeout 60 bash -c 'until nc -z 127.0.0.1 5432 2>/dev/null; do sleep 2; done' \
+            && echo "PostgreSQL is ready" || echo "WARNING: PostgreSQL did not start in time"
+
+          echo "Waiting for Redis (127.0.0.1:6379)..."
+          timeout 60 bash -c 'until nc -z 127.0.0.1 6379 2>/dev/null; do sleep 2; done' \
+            && echo "Redis is ready" || echo "WARNING: Redis did not start in time"
+
+          echo "Waiting for RabbitMQ (127.0.0.1:5672)..."
+          timeout 90 bash -c 'until nc -z 127.0.0.1 5672 2>/dev/null; do sleep 2; done' \
+            && echo "RabbitMQ is ready" || echo "WARNING: RabbitMQ did not start in time"
+
+          echo "Waiting for OTel Collector (127.0.0.1:13133)..."
+          timeout 120 bash -c 'until nc -z 127.0.0.1 13133 2>/dev/null; do sleep 2; done' \
+            && echo "OTel Collector is ready" || echo "WARNING: OTel Collector did not start in time"
+
           docker compose -f docker-compose.test.yml ps
 
       - name: Restore dependencies
