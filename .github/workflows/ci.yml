@@ -151,3 +151,74 @@ jobs:
           label: tests
           message: "${{ steps.coverage.outputs.tests_passed }} passed"
           color: ${{ steps.coverage.outputs.tests_failed == '0' && 'brightgreen' || 'red' }}
+
+  integration-tests:
+    name: Integration Tests (Docker backends)
+    runs-on: ubuntu-latest
+    # Run integration tests on pushes to main/feature branches and on PRs targeting main.
+    # They are a non-blocking informational job — failures create a visible annotation
+    # but do not prevent merging (continue-on-error: true).
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Start backend services and wait for healthy
+        run: |
+          # --wait blocks until every service with a healthcheck reports healthy,
+          # or exits non-zero if they don't become healthy within --timeout seconds.
+          docker compose -f docker-compose.test.yml up -d --wait --timeout 120
+          echo "All services are healthy."
+          docker compose -f docker-compose.test.yml ps
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run integration tests
+        env:
+          HVO_POSTGRES_HOST_LOCAL: "127.0.0.1"
+          HVO_POSTGRES_PORT: "5432"
+          HVO_POSTGRES_DATABASE: "hvo"
+          HVO_POSTGRES_USERNAME: "hvo_dev"
+          HVO_POSTGRES_PASSWORD: "hvo_dev_password"
+          HVO_REDIS_HOST_LOCAL: "127.0.0.1"
+          HVO_REDIS_PORT: "6379"
+          HVO_RABBITMQ_HOST: "127.0.0.1"
+          HVO_RABBITMQ_PORT: "5672"
+          HVO_RABBITMQ_USER: "guest"
+          HVO_RABBITMQ_PASS: "guest"
+          HVO_OTLP_GRPC_HOST: "127.0.0.1"
+          HVO_OTLP_GRPC_PORT: "4317"
+          HVO_OTLP_HTTP_HOST: "127.0.0.1"
+          HVO_OTLP_HTTP_PORT: "4318"
+          HVO_OTLP_HEALTH_HOST: "127.0.0.1"
+          HVO_OTLP_HEALTH_PORT: "13133"
+        run: |
+          dotnet test HVO.Enterprise.sln \
+            --no-build \
+            --configuration Release \
+            --filter "TestCategory=Integration" \
+            --results-directory ./TestResults-Integration \
+            --logger "trx;LogFileName=integration-test-results.trx" \
+            --logger "console;verbosity=normal"
+
+      - name: Publish integration test results
+        uses: dorny/test-reporter@v2
+        if: always()
+        with:
+          name: Integration Test Results
+          path: TestResults-Integration/integration-test-results.trx
+          reporter: dotnet-trx
+
+      - name: Stop backend services
+        if: always()
+        run: docker compose -f docker-compose.test.yml down -v
