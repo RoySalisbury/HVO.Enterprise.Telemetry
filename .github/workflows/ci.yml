@@ -181,7 +181,7 @@ jobs:
             echo "Waiting for $service..."
             for i in $(seq 1 30); do
               status=$(docker compose -f docker-compose.test.yml ps --format json "$service" \
-                | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0].get('Health',''))" 2>/dev/null || echo "")
+                | jq -r '.[0].Health // ""' 2>/dev/null || echo "")
               if [ "$status" = "healthy" ]; then
                 echo "$service is healthy"
                 break

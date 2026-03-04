@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using HVO.Enterprise.Telemetry.Data.EfCore;
 using HVO.Enterprise.Telemetry.Data.EfCore.Configuration;
 using HVO.Enterprise.Telemetry.Data.EfCore.Extensions;
+using HVO.Enterprise.Telemetry.Data.EfCore.Tests.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace HVO.Enterprise.Telemetry.Data.EfCore.Tests.Integration
@@ -135,15 +136,6 @@ namespace HVO.Enterprise.Telemetry.Data.EfCore.Tests.Integration
             var canConnect = ctx.Database.CanConnect();
 
             Assert.IsTrue(canConnect);
-        }
-
-        /// <summary>
-        /// Minimal DbContext used only for integration connectivity tests.
-        /// </summary>
-        private sealed class IntegrationTestDbContext : DbContext
-        {
-            public IntegrationTestDbContext(DbContextOptions<IntegrationTestDbContext> options)
-                : base(options) { }
         }
     }
 }

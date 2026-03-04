@@ -1,7 +1,6 @@
 using System;
 using System.Net.Http;
 using System.Net.Sockets;
-using System.Threading;
 using HVO.Enterprise.Telemetry.OpenTelemetry;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -121,9 +120,6 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests.Integration
             });
 
             using var provider = services.BuildServiceProvider();
-
-            // Give the background exporters a moment to connect
-            Thread.Sleep(TimeSpan.FromSeconds(2));
 
             // If we got here without exception, the provider initialized successfully
             Assert.IsNotNull(provider);
