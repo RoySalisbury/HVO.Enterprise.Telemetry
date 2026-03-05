@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.AppInsights</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Description>Application Insights integration for HVO.Enterprise.Telemetry with dual-mode support (OTLP and Direct SDK), telemetry initializers for Activity tracing and correlation context enrichment.</Description>
     <PackageTags>telemetry;application-insights;appinsights;azure;monitoring;tracing;correlation</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>

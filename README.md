@@ -65,7 +65,7 @@ HVO.Enterprise/
 | `HVO.Enterprise.Telemetry.Data.AdoNet` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.AdoNet.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.AdoNet) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.AdoNet.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.AdoNet) |
 | `HVO.Enterprise.Telemetry.Data.RabbitMQ` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.RabbitMQ.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.RabbitMQ) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.RabbitMQ.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.RabbitMQ) |
 | `HVO.Enterprise.Telemetry.Data.Redis` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Data.Redis.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.Redis) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Data.Redis.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Data.Redis) |
-| `HVO.Enterprise.Telemetry.Grpc` | [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.Grpc.svg?logo=nuget&label=nuget)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Grpc) | [![Downloads](https://img.shields.io/nuget/dt/HVO.Enterprise.Telemetry.Grpc.svg?label=downloads)](https://www.nuget.org/packages/HVO.Enterprise.Telemetry.Grpc) |
+| `HVO.Enterprise.Telemetry.Grpc` | Pending release (tracking `docs/user-stories/US-036-grpc-interceptor-extension.md`) | N/A |
 
 ### HVO.Core (NuGet dependency)
 
@@ -279,6 +279,8 @@ See [benchmark results](docs/benchmarks/benchmark-report-2026-02-08.md) for deta
 | [Roadmap](docs/ROADMAP.md) | Version compatibility, breaking change policy |
 | [Design Decisions](docs/project-plan.md) | Background, rationale for key architectural decisions |
 | [Versioning](docs/VERSIONING.md) | Versioning strategy and release process |
+| [Testing](docs/testing.md) | Test layers, docker-compose harness, filters |
+| [Pipeline Integration](docs/pipeline-integration.md) | GitHub Actions workflow, tag-based publishing, release order |
 | [Benchmarks](docs/benchmarks/benchmark-report-2026-02-08.md) | Performance benchmark results |
 | [Sample Config](docs/examples/telemetry.json) | Example `appsettings.json` for telemetry |
 | [Sample App](samples/HVO.Enterprise.Samples.Net8/) | Weather monitoring API with full telemetry |

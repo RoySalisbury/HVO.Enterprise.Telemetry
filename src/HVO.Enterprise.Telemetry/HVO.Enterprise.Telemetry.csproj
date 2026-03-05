@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Description>Core telemetry library providing unified observability (distributed tracing, metrics, structured logging) across all .NET platforms (.NET Framework 4.8 through .NET 10+)</Description>
     <PackageTags>telemetry;tracing;metrics;logging;observability;opentelemetry;distributed-tracing</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>

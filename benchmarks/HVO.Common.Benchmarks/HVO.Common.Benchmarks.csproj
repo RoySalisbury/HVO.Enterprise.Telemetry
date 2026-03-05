@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
-    <PackageReference Include="HVO.Core" Version="1.1.0" />
+    <PackageReference Include="HVO.Core" Version="1.1.1" />
   </ItemGroup>
 
 </Project>

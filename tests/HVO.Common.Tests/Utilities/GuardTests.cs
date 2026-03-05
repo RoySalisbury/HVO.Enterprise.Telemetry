@@ -68,15 +68,15 @@ public class GuardTests
     }
 
     [TestMethod]
-    public void AgainstNegativeOrZero_ThrowsWhenZero()
+    public void AgainstLessThanOrEqual_ThrowsWhenZero()
     {
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => Guard.AgainstNegativeOrZero(0, 0));
+        Assert.ThrowsException<ArgumentOutOfRangeException>(() => Guard.AgainstLessThanOrEqual(0, 0));
     }
 
     [TestMethod]
-    public void AgainstNegativeOrZero_ReturnsValueWhenPositive()
+    public void AgainstLessThanOrEqual_ReturnsValueWhenPositive()
     {
-        var result = Guard.AgainstNegativeOrZero(5, 0);
+        var result = Guard.AgainstLessThanOrEqual(5, 0);
         Assert.AreEqual(5, result);
     }
 
