@@ -578,7 +578,7 @@ services.AddDatadogTelemetry(o =>
 });
 
 // Also enrich App Insights
-services.AddApplicationInsightsBridge();
+services.AddAppInsightsTelemetry();
 ```
 
 ### How do I configure OTLP export with environment variables only?
@@ -661,7 +661,7 @@ services.AddApplicationInsightsTelemetry(config);
 
 // Add HVO telemetry alongside it
 services.AddTelemetry(o => o.ServiceName = "MyService");
-services.AddApplicationInsightsBridge();  // Bridges HVO → App Insights
+services.AddAppInsightsTelemetry();  // Bridges HVO → App Insights
 
 // Gradually migrate your tracking code:
 // Before: telemetryClient.TrackEvent("OrderCreated");

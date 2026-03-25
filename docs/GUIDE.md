@@ -909,10 +909,9 @@ using HVO.Enterprise.Telemetry.AppInsights;
 
 services.AddTelemetry(options => { options.ServiceName = "MyService"; });
 
-services.AddApplicationInsightsBridge(options =>
+services.AddAppInsightsTelemetry(options =>
 {
     options.ConnectionString = "InstrumentationKey=...;IngestionEndpoint=...";
-    options.EnableCorrelationEnrichment = true;
 });
 ```
 
