@@ -268,9 +268,13 @@ See [benchmark results](docs/benchmarks/benchmark-report-2026-02-08.md) for deta
 
 ## Documentation
 
+> **New to HVO.Enterprise.Telemetry?** Start with the **[Comprehensive User Guide](docs/GUIDE.md)** — it covers everything from installation to advanced usage with examples and edge cases. See the **[FAQ](docs/FAQ.md)** for common questions.
+
 | Document | Description |
 |----------|-------------|
-| [Quick Start](docs/quickstart.md) | Minimal end-to-end example requested in Issue #90 |
+| **[📖 User Guide](docs/GUIDE.md)** | **Comprehensive guide** — installation, getting started, core concepts, configuration, extension packages, proxy instrumentation, advanced patterns, troubleshooting |
+| **[❓ FAQ](docs/FAQ.md)** | **Frequently asked questions** — common confusion points, edge cases, migration guidance |
+| [Quick Start](docs/quickstart.md) | Minimal copy-paste setup example |
 | [Configuration Schema](docs/configuration-schema.md) | Complete JSON shape for `TelemetryOptions` |
 | [API Reference](docs/api-reference.md) | Key types (`Telemetry`, `IOperationScope`, builders, HTTP handler) |
 | [Architecture](docs/ARCHITECTURE.md) | System design, component diagrams, threading model |
