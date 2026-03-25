@@ -141,7 +141,7 @@ Ask yourself:
 
 2. **What logging framework do I use?**
    - Serilog → install `.Serilog` for native enrichers
-   - Microsoft.Extensions.Logging → the core package handles enrichment automatically
+   - Microsoft.Extensions.Logging → use the core package and enable enrichment via `AddTelemetryLoggingEnrichment()`
 
 3. **What platform am I on?**
    - IIS → install `.IIS`
@@ -188,7 +188,8 @@ dotnet add package HVO.Enterprise.Telemetry.OpenTelemetry  # if exporting via OT
     "DefaultSamplingRate": 1.0,
     "ActivitySources": [
       "HVO.Enterprise.Telemetry",
-      "MyService.*"
+      "MyService.Api",
+      "MyService.Domain"
     ],
     "Logging": {
       "EnableCorrelationEnrichment": true
@@ -213,8 +214,11 @@ builder.Services.AddTelemetry(builder.Configuration.GetSection("Telemetry"));
 
 // Add optional features
 builder.Services.AddTelemetryLoggingEnrichment();  // Enrich ILogger with CorrelationId, TraceId
-builder.Services.AddTelemetryStatistics();          // Enable diagnostics endpoint
 builder.Services.AddTelemetryHealthCheck();          // Health check integration
+
+// Register ASP.NET Core health checks with the telemetry check
+builder.Services.AddHealthChecks()
+    .AddCheck<TelemetryHealthCheck>("telemetry");
 
 // Add OTLP export (if using OpenTelemetry package)
 builder.Services.AddOpenTelemetryExport(options =>
@@ -358,8 +362,9 @@ builder.Services.AddTelemetry(telemetry =>
             options.ServiceName = "MyService";
             options.DefaultSamplingRate = 0.5;
         })
-        .AddActivitySource("MyService.*")
-        .AddActivitySource("SharedLibrary.*")
+        .AddActivitySource("MyService.Api")
+        .AddActivitySource("MyService.Domain")
+        .AddActivitySource("SharedLibrary.Core")
         .AddHttpInstrumentation(http =>
         {
             http.CaptureRequestHeaders = true;
@@ -676,12 +681,12 @@ shape with defaults:
 
     "Logging": {
       "EnableCorrelationEnrichment": true,
-      "MinimumLevel": "Information"
+      "MinimumLevel": {}
     },
 
     "Metrics": {
       "Enabled": true,
-      "CollectionIntervalSeconds": 60
+      "CollectionIntervalSeconds": 10
     },
 
     "Queue": {
@@ -690,9 +695,9 @@ shape with defaults:
     },
 
     "Features": {
-      "EnableHttpInstrumentation": false,
-      "EnableProxyInstrumentation": false,
-      "EnableExceptionTracking": false,
+      "EnableHttpInstrumentation": true,
+      "EnableProxyInstrumentation": true,
+      "EnableExceptionTracking": true,
       "EnableParameterCapture": false
     },
 
@@ -713,17 +718,17 @@ shape with defaults:
 | `Environment` | `string?` | `null` | Deployment environment (`Development`, `Staging`, `Production`). |
 | `Enabled` | `bool` | `true` | Master switch. `false` disables all telemetry (operation scopes become no-ops). |
 | `DefaultSamplingRate` | `double` | `1.0` | Probability `[0.0, 1.0]` that any operation is sampled. `1.0` = sample everything, `0.1` = sample 10%. |
-| `ActivitySources` | `List<string>` | `["HVO.Enterprise.Telemetry"]` | Activity source names to listen on. Add your app's source names here. Supports wildcards like `"MyApp.*"`. |
+| `ActivitySources` | `List<string>` | `["HVO.Enterprise.Telemetry"]` | Activity source names to listen on. Add your app's `ActivitySource.Name` values here. Matching is exact; wildcards are not supported. |
 | `Sampling` | `Dictionary<string, SamplingOptions>` | `{}` | Per-source sampling overrides, keyed by Activity source name. |
 | `Logging.EnableCorrelationEnrichment` | `bool` | `true` | Inject CorrelationId/TraceId/SpanId into ILogger scopes. |
-| `Logging.MinimumLevel` | `string` | `"Information"` | Minimum log level for telemetry internal logging. |
+| `Logging.MinimumLevel` | `Dictionary<string, string>` | `{}` | Per-category minimum log level overrides. Keys are logger category names, values are `LogLevel` strings (e.g., `"Debug"`, `"Warning"`). |
 | `Metrics.Enabled` | `bool` | `true` | Enable the metrics subsystem. |
-| `Metrics.CollectionIntervalSeconds` | `int` | `60` | How often (in seconds) metrics are flushed. Must be > 0. |
+| `Metrics.CollectionIntervalSeconds` | `int` | `10` | How often (in seconds) metrics are flushed. Must be > 0. |
 | `Queue.Capacity` | `int` | `10000` | Maximum items in the background processing queue. Must be ≥ 100. |
 | `Queue.BatchSize` | `int` | `100` | Items per batch when flushing. Must be in `(0, Capacity]`. |
-| `Features.EnableHttpInstrumentation` | `bool` | `false` | Auto-instrument outbound HTTP calls via `TelemetryHttpMessageHandler`. |
-| `Features.EnableProxyInstrumentation` | `bool` | `false` | Enable DispatchProxy-based automatic method instrumentation. |
-| `Features.EnableExceptionTracking` | `bool` | `false` | Track and aggregate exceptions via `ExceptionAggregator`. |
+| `Features.EnableHttpInstrumentation` | `bool` | `true` | Auto-instrument outbound HTTP calls via `TelemetryHttpMessageHandler`. |
+| `Features.EnableProxyInstrumentation` | `bool` | `true` | Enable DispatchProxy-based automatic method instrumentation. |
+| `Features.EnableExceptionTracking` | `bool` | `true` | Track and aggregate exceptions via `ExceptionAggregator`. |
 | `Features.EnableParameterCapture` | `bool` | `false` | Capture method parameters as span tags (use with care for PII). |
 | `ResourceAttributes` | `Dictionary<string, object>` | `{}` | Additional OTLP resource attributes attached to all telemetry. |
 
@@ -988,11 +993,28 @@ Automatic W3C TraceContext propagation in WCF SOAP headers.
 
 Lifecycle management for IIS-hosted applications.
 
-#### Setup
+#### Setup (Static / .NET Framework)
 
 ```csharp
 // In Global.asax Application_Start
-Telemetry.Initialize(config => config.ForIIS());
+var telemetryOptions = new TelemetryOptions
+{
+    ServiceName = "MyIISApp",
+    // Configure other options as needed
+};
+
+Telemetry.Initialize(telemetryOptions);
+
+// Register IIS lifecycle management so telemetry flushes on AppDomain unload
+var lifecycleManager = new IisLifecycleManager(telemetryService: null);
+lifecycleManager.Initialize();
+```
+
+#### Setup (DI / ASP.NET Core on IIS)
+
+```csharp
+services.AddTelemetry(options => { options.ServiceName = "MyIISApp"; });
+services.AddIisTelemetryIntegration();
 ```
 
 The IIS extension:
@@ -1190,6 +1212,8 @@ calls with automatic spans.
 ```csharp
 services.AddTelemetry(builder => builder.AddHttpInstrumentation());
 
+services.AddTransient<TelemetryHttpMessageHandler>();
+
 services.AddHttpClient("MyApi", client =>
 {
     client.BaseAddress = new Uri("https://api.example.com");
@@ -1373,12 +1397,18 @@ Register the telemetry health check to monitor telemetry subsystem health:
 ```csharp
 services.AddTelemetryHealthCheck();
 
+// Register standard health checks and the TelemetryHealthCheck instance
+services.AddHealthChecks()
+    .AddCheck<TelemetryHealthCheck>("telemetry");
+
 // Or with custom options:
 services.AddTelemetryHealthCheck(new TelemetryHealthCheckOptions
 {
     DegradedQueueDepthPercent = 70,   // Report "Degraded" when queue is 70% full
     UnhealthyQueueDepthPercent = 90   // Report "Unhealthy" when queue is 90% full
 });
+services.AddHealthChecks()
+    .AddCheck<TelemetryHealthCheck>("telemetry");
 
 // Map health check endpoints
 app.MapHealthChecks("/health");
@@ -1480,7 +1510,7 @@ Use the `AlwaysSampleErrors` flag to ensure errors are never dropped by sampling
   "Telemetry": {
     "DefaultSamplingRate": 0.01,
     "Sampling": {
-      "MyApp.*": {
+      "MyApp.Api": {
         "Rate": 0.01,
         "AlwaysSampleErrors": true
       }
@@ -1608,7 +1638,7 @@ scope.WithTag("userId", userId);
 // ❌ Computes JSON even if the span is not sampled
 scope.WithTag("response", JsonSerializer.Serialize(response));
 
-// ✅ Only computed on disposal, and only if span is active
+// ✅ Value computed lazily on scope disposal for real scopes (NoOp scopes skip evaluation)
 scope.WithProperty("response", () => JsonSerializer.Serialize(response));
 ```
 
@@ -1631,9 +1661,9 @@ scope.WithProperty("response", () => JsonSerializer.Serialize(response));
 
 3. **Are your Activity sources registered?**
    If you use custom activity source names, make sure they're in the
-   `ActivitySources` list:
+   `ActivitySources` list (matching is exact-name based; wildcards are not supported):
    ```json
-   { "Telemetry": { "ActivitySources": ["HVO.Enterprise.Telemetry", "MyApp.*"] } }
+   { "Telemetry": { "ActivitySources": ["HVO.Enterprise.Telemetry", "MyApp.ServiceA", "MyApp.ServiceB"] } }
    ```
 
 4. **Is sampling dropping everything?**

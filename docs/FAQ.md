@@ -464,9 +464,9 @@ without a restart.
 
 | Feature Flag | Default | Performance Cost | Recommended For |
 |-------------|---------|-----------------|-----------------|
-| `EnableHttpInstrumentation` | `false` | Low (~50ns per HTTP call) | Apps making outbound HTTP calls |
-| `EnableProxyInstrumentation` | `false` | Low (~100ns per proxied call) | Apps using interface-based DI |
-| `EnableExceptionTracking` | `false` | Negligible (on exception only) | All production apps |
+| `EnableHttpInstrumentation` | `true` | Low (~50ns per HTTP call) | Apps making outbound HTTP calls |
+| `EnableProxyInstrumentation` | `true` | Low (~100ns per proxied call) | Apps using interface-based DI |
+| `EnableExceptionTracking` | `true` | Negligible (on exception only) | All production apps |
 | `EnableParameterCapture` | `false` | Medium (depends on parameter size) | Development/debugging; be careful in production (PII risk) |
 
 **For production, we recommend:**
@@ -628,7 +628,7 @@ telemetry adds <0.001% overhead.
 3. **Disable unused features** — Only enable Feature Flags you actually need.
 
 4. **Use `WithProperty` for expensive values** — Defers computation to
-   disposal time, and only evaluates if the span is active.
+   scope disposal time (NoOp scopes skip evaluation entirely).
 
 5. **Watch tag cardinality** — Avoid dynamically generated tag keys. Use
    a fixed set of keys with variable values.
@@ -636,8 +636,9 @@ telemetry adds <0.001% overhead.
 ### What happens if the background queue fills up?
 
 The background processing queue has a bounded capacity (default: 10,000 items).
-When the queue is full, new items are **dropped** (not blocking). This is
-intentional — telemetry should never slow down your application.
+When the queue is full, the **oldest queued items are dropped** to make room
+for **new items**, and enqueue remains non-blocking. This is intentional —
+telemetry should never slow down your application.
 
 If the queue is consistently filling up:
 - Your exporter backend may be slow or unreachable
@@ -720,8 +721,9 @@ services.AddTelemetry(o => o.Environment = "Production");
 
 ### What happens if telemetry is not initialized and I call StartOperation()?
 
-**Static API:** Throws `InvalidOperationException` with the message
-"Telemetry has not been initialized."
+**Static API:** Throws `InvalidOperationException` indicating telemetry has not
+been initialized, with guidance to call `Telemetry.Initialize()` or register
+telemetry via `AddTelemetry()`.
 
 ```csharp
 // This throws if Initialize() hasn't been called
