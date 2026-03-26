@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Trace;
 
 namespace HVO.Enterprise.Telemetry.OpenTelemetry
 {
@@ -119,6 +121,58 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
             new Dictionary<string, string>();
 
         /// <summary>
+        /// Gets or sets additional ActivitySource names to register in the TracerProvider.
+        /// These are registered alongside the built-in HVO activity sources.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// options.AdditionalActivitySources.Add("MyApp");
+        /// options.AdditionalActivitySources.Add("MyApp.HttpClient");
+        /// </code>
+        /// </example>
+        public IList<string> AdditionalActivitySources { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Gets or sets additional Meter names to register in the MeterProvider.
+        /// These are registered alongside the built-in HVO meter.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// options.AdditionalMeterNames.Add("MyApp.Metrics");
+        /// </code>
+        /// </example>
+        public IList<string> AdditionalMeterNames { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether standard .NET runtime meters are registered.
+        /// When enabled, registers well-known meters such as <c>Microsoft.AspNetCore.Hosting</c>,
+        /// <c>System.Net.Http</c>, and others.
+        /// Default: <see langword="false"/> (opt-in).
+        /// </summary>
+        public bool EnableStandardMeters { get; set; }
+
+        /// <summary>
+        /// Gets or sets an optional callback to further configure the <see cref="TracerProviderBuilder"/>.
+        /// Use this for advanced scenarios such as adding ASP.NET Core or HttpClient instrumentation.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// options.ConfigureTracerProvider = builder =>
+        /// {
+        ///     builder.AddAspNetCoreInstrumentation();
+        ///     builder.AddHttpClientInstrumentation();
+        /// };
+        /// </code>
+        /// </example>
+        public Action<TracerProviderBuilder>? ConfigureTracerProvider { get; set; }
+
+        /// <summary>
+        /// Gets or sets an optional callback to further configure the <see cref="MeterProviderBuilder"/>.
+        /// Use this for advanced scenarios such as adding custom instrumentation.
+        /// </summary>
+        public Action<MeterProviderBuilder>? ConfigureMeterProvider { get; set; }
+
+        /// <summary>
         /// Applies environment variable defaults following OTel conventions.
         /// Explicit property values take precedence over environment variables.
         /// </summary>
@@ -128,6 +182,14 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
             if (!string.IsNullOrEmpty(endpoint) && Endpoint == "http://localhost:4317")
             {
                 Endpoint = endpoint;
+            }
+
+            // Auto-detect transport from well-known ports (only if transport was not explicitly configured)
+            if (Transport == OtlpTransport.Grpc
+                && Uri.TryCreate(Endpoint, UriKind.Absolute, out var uri)
+                && uri.Port == 4318)
+            {
+                Transport = OtlpTransport.HttpProtobuf;
             }
 
             ServiceName ??= System.Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME");

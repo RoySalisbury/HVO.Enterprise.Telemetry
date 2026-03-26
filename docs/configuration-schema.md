@@ -134,3 +134,55 @@ Defined in [FeatureFlags.cs](../src/HVO.Enterprise.Telemetry/Configuration/Featu
 - **Hierarchical configuration**: Use attributes (see `TelemetryConfigurationAttribute`) or the [operation configuration API](../src/HVO.Enterprise.Telemetry/Configuration/OperationConfiguration.cs) for per-type or per-method overrides.
 
 For a step-by-step walkthrough, see [quickstart.md](quickstart.md).
+
+---
+
+## OpenTelemetry Export Configuration (`OtlpExportOptions`)
+
+The `HVO.Enterprise.Telemetry.OpenTelemetry` package is configured separately via `AddOpenTelemetryExport()`. It supports both programmatic configuration and standard OpenTelemetry environment variables.
+
+### Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `Endpoint` | string | `"http://localhost:4317"` | OTLP collector endpoint. Env: `OTEL_EXPORTER_OTLP_ENDPOINT`. |
+| `Transport` | `OtlpTransport` | `Grpc` | Transport protocol. Auto-detected from port: 4318 → `HttpProtobuf`. |
+| `ServiceName` | string? | `null` | Service name for resource attributes. Env: `OTEL_SERVICE_NAME`. |
+| `ServiceVersion` | string? | `null` | Service version for resource attributes. |
+| `Environment` | string? | `null` | Deployment environment. Env: `OTEL_RESOURCE_ATTRIBUTES` (`deployment.environment`). |
+| `EnableTraceExport` | bool | `true` | Enable OTLP trace export. |
+| `EnableMetricsExport` | bool | `true` | Enable OTLP metrics export. |
+| `EnableLogExport` | bool | `false` | Enable OTLP log export (opt-in). |
+| `EnableStandardMeters` | bool | `false` | Register well-known .NET meters (`Microsoft.AspNetCore.Hosting`, `System.Net.Http`, etc.). |
+| `EnablePrometheusEndpoint` | bool | `false` | Enable Prometheus scrape endpoint (requires ASP.NET Core). |
+| `PrometheusEndpointPath` | string | `"/metrics"` | Prometheus endpoint path. |
+| `MetricsExportInterval` | TimeSpan | 60s | Periodic metrics export interval. |
+| `TraceBatchExportDelay` | TimeSpan | 5s | Trace batch export scheduled delay. |
+| `TraceBatchMaxSize` | int | 512 | Maximum traces per export batch. |
+| `TraceBatchMaxQueueSize` | int | 2048 | Maximum queued traces before dropping. |
+| `TemporalityPreference` | `MetricsTemporality` | `Cumulative` | Metrics aggregation temporality. |
+| `ResourceAttributes` | `IDictionary<string, string>` | empty | Additional OTEL resource attributes. |
+| `Headers` | `IDictionary<string, string>` | empty | OTLP headers (e.g., API keys). Env: `OTEL_EXPORTER_OTLP_HEADERS`. |
+| `AdditionalActivitySources` | `IList<string>` | empty | Custom ActivitySource names to register in TracerProvider. |
+| `AdditionalMeterNames` | `IList<string>` | empty | Custom Meter names to register in MeterProvider. |
+| `ConfigureTracerProvider` | `Action<TracerProviderBuilder>?` | `null` | Callback for advanced tracer configuration. |
+| `ConfigureMeterProvider` | `Action<MeterProviderBuilder>?` | `null` | Callback for advanced meter configuration. |
+
+### Environment Variables
+
+| Variable | Maps To |
+|----------|---------|
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `Endpoint` (only when at default value) |
+| `OTEL_SERVICE_NAME` | `ServiceName` (only when null) |
+| `OTEL_RESOURCE_ATTRIBUTES` | `ResourceAttributes` + `Environment` (`deployment.environment` key) |
+| `OTEL_EXPORTER_OTLP_HEADERS` | `Headers` (only for keys not already set) |
+
+### Transport Auto-Detection
+
+When `Transport` is at its default (`Grpc`), the port from the configured `Endpoint` is checked:
+
+- Port **4317** → `OtlpTransport.Grpc` (no change)
+- Port **4318** → `OtlpTransport.HttpProtobuf` (auto-detected)
+- Other ports → no change (remains `Grpc`)
+
+Explicitly setting `Transport` prevents auto-detection.

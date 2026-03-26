@@ -31,6 +31,13 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
             Assert.IsNull(options.ServiceName);
             Assert.IsNull(options.ServiceVersion);
             Assert.IsNull(options.Environment);
+            Assert.IsNotNull(options.AdditionalActivitySources);
+            Assert.AreEqual(0, options.AdditionalActivitySources.Count);
+            Assert.IsNotNull(options.AdditionalMeterNames);
+            Assert.AreEqual(0, options.AdditionalMeterNames.Count);
+            Assert.IsFalse(options.EnableStandardMeters);
+            Assert.IsNull(options.ConfigureTracerProvider);
+            Assert.IsNull(options.ConfigureMeterProvider);
         }
 
         [TestMethod]
@@ -252,6 +259,173 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
             options.Headers["Authorization"] = "Bearer token123";
 
             Assert.AreEqual("Bearer token123", options.Headers["Authorization"]);
+        }
+
+        [TestMethod]
+        public void AdditionalActivitySources_CanBeModified()
+        {
+            var options = new OtlpExportOptions();
+            options.AdditionalActivitySources.Add("MyApp");
+            options.AdditionalActivitySources.Add("MyApp.HttpClient");
+
+            Assert.AreEqual(2, options.AdditionalActivitySources.Count);
+            Assert.AreEqual("MyApp", options.AdditionalActivitySources[0]);
+            Assert.AreEqual("MyApp.HttpClient", options.AdditionalActivitySources[1]);
+        }
+
+        [TestMethod]
+        public void AdditionalMeterNames_CanBeModified()
+        {
+            var options = new OtlpExportOptions();
+            options.AdditionalMeterNames.Add("MyApp.Metrics");
+
+            Assert.AreEqual(1, options.AdditionalMeterNames.Count);
+            Assert.AreEqual("MyApp.Metrics", options.AdditionalMeterNames[0]);
+        }
+
+        [TestMethod]
+        public void EnableStandardMeters_CanBeSet()
+        {
+            var options = new OtlpExportOptions { EnableStandardMeters = true };
+
+            Assert.IsTrue(options.EnableStandardMeters);
+        }
+
+        [TestMethod]
+        public void ConfigureTracerProvider_CanBeSet()
+        {
+            var invoked = false;
+            var options = new OtlpExportOptions
+            {
+                ConfigureTracerProvider = _ => invoked = true
+            };
+
+            Assert.IsNotNull(options.ConfigureTracerProvider);
+            options.ConfigureTracerProvider(null!);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void ConfigureMeterProvider_CanBeSet()
+        {
+            var invoked = false;
+            var options = new OtlpExportOptions
+            {
+                ConfigureMeterProvider = _ => invoked = true
+            };
+
+            Assert.IsNotNull(options.ConfigureMeterProvider);
+            options.ConfigureMeterProvider(null!);
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_Port4318_SetsHttpProtobufTransport()
+        {
+            var options = new OtlpExportOptions();
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4318");
+
+            try
+            {
+                options.ApplyEnvironmentDefaults();
+                Assert.AreEqual("http://collector:4318", options.Endpoint);
+                Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
+            }
+            finally
+            {
+                System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", null);
+            }
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_Port4317_KeepsGrpcTransport()
+        {
+            var options = new OtlpExportOptions();
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4317");
+
+            try
+            {
+                options.ApplyEnvironmentDefaults();
+                Assert.AreEqual("http://collector:4317", options.Endpoint);
+                Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
+            }
+            finally
+            {
+                System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", null);
+            }
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_ExplicitTransport_NotOverriddenByPort()
+        {
+            // Explicitly set transport away from the default (Grpc)
+            // so that environment-based auto-detection should NOT change it.
+            var options = new OtlpExportOptions
+            {
+                Transport = OtlpTransport.HttpProtobuf
+            };
+
+            // Environment sets endpoint with the "HTTP" OTLP port (4318), which would normally
+            // trigger auto-detection if the transport were still at its default (Grpc).
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4318");
+
+            try
+            {
+                options.ApplyEnvironmentDefaults();
+
+                // Because Transport was explicitly set, it should not be overridden
+                // by the auto-detection based on the endpoint port.
+                Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
+            }
+            finally
+            {
+                System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", null);
+            }
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_ExplicitEndpointPort4318_AutoDetectsTransport()
+        {
+            // When endpoint is set programmatically (not via env var) to port 4318,
+            // auto-detection should still work if transport is at default.
+            var options = new OtlpExportOptions
+            {
+                Endpoint = "http://collector:4318"
+            };
+
+            options.ApplyEnvironmentDefaults();
+
+            Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_NonStandardPort_KeepsGrpcTransport()
+        {
+            var options = new OtlpExportOptions();
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:9090");
+
+            try
+            {
+                options.ApplyEnvironmentDefaults();
+                Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
+            }
+            finally
+            {
+                System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", null);
+            }
+        }
+
+        [TestMethod]
+        public void ApplyEnvironmentDefaults_InvalidUri_KeepsGrpcTransport()
+        {
+            var options = new OtlpExportOptions
+            {
+                Endpoint = "not-a-valid-uri"
+            };
+
+            options.ApplyEnvironmentDefaults();
+
+            Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
         }
     }
 }

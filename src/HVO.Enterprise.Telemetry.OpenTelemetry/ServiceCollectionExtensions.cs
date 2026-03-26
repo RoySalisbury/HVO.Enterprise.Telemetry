@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -16,6 +17,22 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
     /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Well-known .NET runtime and ASP.NET Core meter names registered when
+        /// <see cref="OtlpExportOptions.EnableStandardMeters"/> is <see langword="true"/>.
+        /// </summary>
+        internal static readonly string[] StandardMeterNames = new[]
+        {
+            "Microsoft.AspNetCore.Hosting",
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "Microsoft.AspNetCore.Http.Connections",
+            "Microsoft.AspNetCore.Routing",
+            "Microsoft.AspNetCore.Diagnostics",
+            "Microsoft.AspNetCore.RateLimiting",
+            "System.Net.Http",
+            "System.Net.NameResolution",
+            "System.Net.Security",
+        };
         /// <summary>
         /// Adds OpenTelemetry OTLP export for traces, metrics, and optionally logs.
         /// </summary>
@@ -70,16 +87,46 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
             // Register activity source registrar
             services.TryAddSingleton<HvoActivitySourceRegistrar>();
 
-            // Register OTel SDK infrastructure
-            services.AddOpenTelemetry();
+            // Peek at the configure delegate to determine if log export is requested.
+            // This avoids unconditionally registering the OTel LoggerProvider (which adds
+            // per-log overhead) when consumers only want traces and/or metrics.
+            var earlyOptions = new OtlpExportOptions();
+            configure?.Invoke(earlyOptions);
 
-            // Configure TracerProvider with HVO activity sources and OTLP exporter
+            // Register OTel SDK infrastructure; logging pipeline is configured separately when enabled.
+            var otelBuilder = services.AddOpenTelemetry();
+            if (earlyOptions.EnableLogExport)
+            {
+                // Register the log exporter during service configuration (not deferred),
+                // because LoggerProviderBuilder.AddOtlpExporter requires access to the
+                // service collection which is unavailable after BuildServiceProvider().
+                otelBuilder.WithLogging(loggingBuilder =>
+                {
+                    loggingBuilder.AddOtlpExporter();
+                });
+
+                // Map our OtlpExportOptions to the SDK's OtlpExporterOptions for the log exporter.
+                // The trace and metrics exporters configure their OtlpExporterOptions inline;
+                // the log exporter (registered above without inline config) relies on this binding.
+                services.AddOptions<OtlpExporterOptions>()
+                    .Configure<IOptions<OtlpExportOptions>>((exporterOpts, hvoOpts) =>
+                    {
+                        MapExporterOptions(exporterOpts, hvoOpts.Value);
+                    });
+            }
+
+            // Configure TracerProvider with HVO activity sources, additional sources, and OTLP exporter
             services.ConfigureOpenTelemetryTracerProvider((sp, builder) =>
             {
                 var options = sp.GetRequiredService<IOptions<OtlpExportOptions>>().Value;
                 var registrar = sp.GetRequiredService<HvoActivitySourceRegistrar>();
 
                 foreach (var source in registrar.GetSourceNames())
+                {
+                    builder.AddSource(source);
+                }
+
+                foreach (var source in options.AdditionalActivitySources)
                 {
                     builder.AddSource(source);
                 }
@@ -93,14 +140,30 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
                         MapExporterOptions(exporterOptions, options);
                     });
                 }
+
+                options.ConfigureTracerProvider?.Invoke(builder);
             });
 
-            // Configure MeterProvider with HVO meter name and OTLP exporter
+            // Configure MeterProvider with HVO meter, additional meters, standard meters, and OTLP exporter
             services.ConfigureOpenTelemetryMeterProvider((sp, builder) =>
             {
                 var options = sp.GetRequiredService<IOptions<OtlpExportOptions>>().Value;
 
                 builder.AddMeter("HVO.Enterprise.Telemetry");
+
+                foreach (var meter in options.AdditionalMeterNames)
+                {
+                    builder.AddMeter(meter);
+                }
+
+                if (options.EnableStandardMeters)
+                {
+                    foreach (var meter in StandardMeterNames)
+                    {
+                        builder.AddMeter(meter);
+                    }
+                }
+
                 builder.ConfigureResource(CreateResourceAction(options));
 
                 if (options.EnableMetricsExport)
@@ -115,6 +178,17 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
                             : MetricReaderTemporalityPreference.Cumulative;
                     });
                 }
+
+                options.ConfigureMeterProvider?.Invoke(builder);
+            });
+
+            // Configure LoggerProvider resource attributes.
+            // Note: the OTLP exporter was registered in WithLogging() above because
+            // LoggerProviderBuilder.AddOtlpExporter() requires service-time registration.
+            services.ConfigureOpenTelemetryLoggerProvider((sp, builder) =>
+            {
+                var options = sp.GetRequiredService<IOptions<OtlpExportOptions>>().Value;
+                builder.ConfigureResource(CreateResourceAction(options));
             });
 
             return services;
