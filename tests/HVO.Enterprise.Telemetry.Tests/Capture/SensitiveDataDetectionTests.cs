@@ -19,7 +19,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Capture
 
         // ─── Built-in pattern detection ─────────────────────────────────
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("password", true)]
         [DataRow("Password", true)]
         [DataRow("userPassword", true)]
@@ -125,17 +125,15 @@ namespace HVO.Enterprise.Telemetry.Tests.Capture
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterSensitivePattern_NullPattern_Throws()
         {
-            _capture.RegisterSensitivePattern(null!, RedactionStrategy.Mask);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.RegisterSensitivePattern(null!, RedactionStrategy.Mask));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RegisterSensitivePattern_EmptyPattern_Throws()
         {
-            _capture.RegisterSensitivePattern("", RedactionStrategy.Mask);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.RegisterSensitivePattern("", RedactionStrategy.Mask));
         }
 
         [TestMethod]

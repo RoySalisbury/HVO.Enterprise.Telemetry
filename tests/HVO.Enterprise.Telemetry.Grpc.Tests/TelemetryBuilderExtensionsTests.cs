@@ -14,7 +14,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
         [TestMethod]
         public void WithGrpcInstrumentation_NullBuilder_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 ((TelemetryBuilder)null!).WithGrpcInstrumentation());
         }
 

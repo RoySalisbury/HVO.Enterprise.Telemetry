@@ -33,10 +33,9 @@ namespace HVO.Enterprise.Telemetry.Data.Redis.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullSessionFactory_ThrowsArgumentNullException()
         {
-            new RedisTelemetryProfiler((Func<ProfilingSession>)null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new RedisTelemetryProfiler((Func<ProfilingSession>)null!));
         }
 
         [TestMethod]

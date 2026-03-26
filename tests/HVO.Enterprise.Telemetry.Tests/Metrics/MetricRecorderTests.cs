@@ -29,75 +29,88 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void MetricTag_WithEmptyKey_ThrowsException()
         {
-            _ = new MetricTag(string.Empty, "value");
+            Assert.ThrowsExactly<ArgumentException>(() => _ = new MetricTag(string.Empty, "value"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void MetricTag_DefaultStruct_ThrowsOnValidate()
         {
-            var tag = default(MetricTag);
-            tag.Validate();
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var tag = default(MetricTag);
+                tag.Validate();
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void CreateCounter_WithEmptyName_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            recorder.CreateCounter(string.Empty);
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                recorder.CreateCounter(string.Empty);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void CreateHistogram_WithWhitespaceName_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            recorder.CreateHistogram("   ");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                recorder.CreateHistogram("   ");
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateObservableGauge_WithNullCallback_ThrowsException()
         {
-            var recorder = new EventCounterRecorder();
-            recorder.CreateObservableGauge("test.gauge", null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var recorder = new EventCounterRecorder();
+                recorder.CreateObservableGauge("test.gauge", null!);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Counter_WithDefaultTag_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            var counter = recorder.CreateCounter("test.default.tag");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                var counter = recorder.CreateCounter("test.default.tag");
 
-            var tag = default(MetricTag);
-            counter.Add(1, tag);
+                var tag = default(MetricTag);
+                counter.Add(1, tag);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Counter_WithDefaultTagInArray_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            var counter = recorder.CreateCounter("test.default.tag.array");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                var counter = recorder.CreateCounter("test.default.tag.array");
 
-            var tags = new MetricTag[] { new MetricTag("valid", "value"), default(MetricTag) };
-            counter.Add(1, tags);
+                var tags = new MetricTag[] { new MetricTag("valid", "value"), default(MetricTag) };
+                counter.Add(1, tags);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Histogram_WithDefaultTag_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            var histogram = recorder.CreateHistogram("test.default.tag.histogram");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                var histogram = recorder.CreateHistogram("test.default.tag.histogram");
 
-            var tag = default(MetricTag);
-            histogram.Record(1, tag);
+                var tag = default(MetricTag);
+                histogram.Record(1, tag);
+            });
         }
 
         [TestMethod]
@@ -272,23 +285,27 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Counter_WithNegativeValue_ThrowsException()
         {
-            var recorder = MetricRecorderFactory.Instance;
-            var counter = recorder.CreateCounter("test.counter.negative");
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
+            {
+                var recorder = MetricRecorderFactory.Instance;
+                var counter = recorder.CreateCounter("test.counter.negative");
 
-            counter.Add(-1);
+                counter.Add(-1);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void EventCounterCounter_WithNegativeValue_ThrowsException()
         {
-            var recorder = new EventCounterRecorder();
-            var counter = recorder.CreateCounter("legacy.counter.negative");
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
+            {
+                var recorder = new EventCounterRecorder();
+                var counter = recorder.CreateCounter("legacy.counter.negative");
 
-            counter.Add(-1);
+                counter.Add(-1);
+            });
         }
 
         [TestMethod]

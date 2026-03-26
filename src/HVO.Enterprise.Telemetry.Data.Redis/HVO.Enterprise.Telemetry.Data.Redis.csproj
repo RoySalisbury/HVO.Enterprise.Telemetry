@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Data.Redis</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>Redis extension for HVO.Enterprise.Telemetry providing automatic distributed tracing for StackExchange.Redis operations via profiling integration with OpenTelemetry semantic conventions.</Description>
     <PackageTags>telemetry;redis;cache;tracing;instrumentation</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>v1.0.2: Update StackExchange.Redis dependency from 2.6.122 to 2.11.8.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="StackExchange.Redis" Version="2.11.8" />
   </ItemGroup>
 
   <ItemGroup>

@@ -446,45 +446,39 @@ namespace HVO.Enterprise.Telemetry.Tests.Capture
         // ─── Argument validation ────────────────────────────────────────
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameter_NullName_Throws()
         {
-            _capture.CaptureParameter(null!, "x", typeof(string), ParameterCaptureOptions.Default);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameter(null!, "x", typeof(string), ParameterCaptureOptions.Default));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameter_NullType_Throws()
         {
-            _capture.CaptureParameter("x", "v", null!, ParameterCaptureOptions.Default);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameter("x", "v", null!, ParameterCaptureOptions.Default));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameter_NullOptions_Throws()
         {
-            _capture.CaptureParameter("x", "v", typeof(string), null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameter("x", "v", typeof(string), null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullParameters_Throws()
         {
-            _capture.CaptureParameters(null!, new object?[] { }, ParameterCaptureOptions.Default);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameters(null!, new object?[] { }, ParameterCaptureOptions.Default));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullValues_Throws()
         {
-            _capture.CaptureParameters(new ParameterInfo[0], null!, ParameterCaptureOptions.Default);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameters(new ParameterInfo[0], null!, ParameterCaptureOptions.Default));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullOptions_Throws()
         {
-            _capture.CaptureParameters(new ParameterInfo[0], new object?[] { }, null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => _capture.CaptureParameters(new ParameterInfo[0], new object?[] { }, null!));
         }
 
         // ─── CaptureLevel enum values ───────────────────────────────────

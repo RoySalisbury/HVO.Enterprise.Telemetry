@@ -34,14 +34,14 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void Constructor_NullPropertyName_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new CorrelationTelemetryInitializer(propertyName: null!));
         }
 
         [TestMethod]
         public void Constructor_EmptyPropertyName_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new CorrelationTelemetryInitializer(propertyName: ""));
         }
 
@@ -70,7 +70,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         public void Initialize_NullTelemetry_ThrowsArgumentNullException()
         {
             var initializer = new CorrelationTelemetryInitializer();
-            Assert.ThrowsException<ArgumentNullException>(() => initializer.Initialize(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => initializer.Initialize(null!));
         }
 
         [TestMethod]

@@ -65,10 +65,9 @@ namespace HVO.Enterprise.Telemetry.Data.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddDataTelemetryBase_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddDataTelemetryBase(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddDataTelemetryBase(null!));
         }
 
         [TestMethod]

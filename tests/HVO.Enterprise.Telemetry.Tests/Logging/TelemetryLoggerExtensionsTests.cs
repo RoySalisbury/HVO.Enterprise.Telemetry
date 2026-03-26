@@ -13,7 +13,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
         public void AddTelemetryLoggingEnrichment_NullServices_ThrowsArgumentNullException()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 TelemetryLoggerExtensions.AddTelemetryLoggingEnrichment(null!));
         }
 
@@ -101,7 +101,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
             // No AddLogging() call — no existing ILoggerFactory
 
             // Act & Assert — should throw with guidance
-            var ex = Assert.ThrowsException<InvalidOperationException>(() =>
+            var ex = Assert.ThrowsExactly<InvalidOperationException>(() =>
                 services.AddTelemetryLoggingEnrichment());
 
             Assert.IsTrue(ex.Message.Contains("AddLogging"),

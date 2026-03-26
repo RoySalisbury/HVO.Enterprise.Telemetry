@@ -10,7 +10,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void WithAppInsights_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithAppInsights(
                     null!, (Action<AppInsightsOptions>?)null));
         }
@@ -18,7 +18,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void WithAppInsights_ConnectionString_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithAppInsights(
                     null!, "connection-string"));
         }

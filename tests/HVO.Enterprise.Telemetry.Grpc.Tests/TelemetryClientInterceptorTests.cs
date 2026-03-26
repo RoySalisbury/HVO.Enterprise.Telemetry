@@ -36,7 +36,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
         [TestMethod]
         public void Constructor_NullOptions_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryClientInterceptor(null!));
         }
 
@@ -257,7 +257,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
                     throw new RpcException(new Status(StatusCode.Unavailable, "Service unavailable"));
                 };
 
-            Assert.ThrowsException<RpcException>(() =>
+            Assert.ThrowsExactly<RpcException>(() =>
                 interceptor.BlockingUnaryCall(new TestRequest(), context, continuation));
 
             Assert.IsNotNull(capturedActivity);
@@ -283,7 +283,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
                     throw new TimeoutException("Connection timed out");
                 };
 
-            Assert.ThrowsException<TimeoutException>(() =>
+            Assert.ThrowsExactly<TimeoutException>(() =>
                 interceptor.BlockingUnaryCall(new TestRequest(), context, continuation));
 
             Assert.IsNotNull(capturedActivity);

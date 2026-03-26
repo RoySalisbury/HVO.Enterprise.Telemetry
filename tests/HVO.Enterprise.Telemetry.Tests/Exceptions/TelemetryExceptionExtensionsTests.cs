@@ -20,7 +20,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         public void RecordException_NullException_ThrowsArgumentNullException()
         {
             Exception ex = null!;
-            Assert.ThrowsException<ArgumentNullException>(() => ex.RecordException());
+            Assert.ThrowsExactly<ArgumentNullException>(() => ex.RecordException());
         }
 
         [TestMethod]
@@ -193,7 +193,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         [TestMethod]
         public void Configure_NullOptions_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryExceptionExtensions.Configure(null!));
         }
 

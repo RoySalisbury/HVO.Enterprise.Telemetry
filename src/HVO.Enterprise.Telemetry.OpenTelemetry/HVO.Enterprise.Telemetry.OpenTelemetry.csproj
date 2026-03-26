@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.OpenTelemetry</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>OpenTelemetry OTLP exporter integration for HVO.Enterprise.Telemetry — exports traces, metrics, and logs to any OTLP-compatible backend (Jaeger, Zipkin, Grafana Tempo, Honeycomb, Dynatrace, New Relic, Splunk, Elastic, Prometheus).</Description>
     <PackageTags>telemetry;opentelemetry;otlp;exporter;tracing;metrics;jaeger;zipkin;grafana</PackageTags>
-    <PackageReleaseNotes>v1.1.0: Auto-detect transport protocol from endpoint port (#141); add support for custom ActivitySources, Meters, standard .NET meters, log export, and TracerProvider/MeterProvider callbacks (#142).</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.1: Update OpenTelemetry SDK dependencies from 1.9.0 to 1.15.0; suppress gRPC deprecation warning for netstandard2.0 targets.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.3" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.3" />

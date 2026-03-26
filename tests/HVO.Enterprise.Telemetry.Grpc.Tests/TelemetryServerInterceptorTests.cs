@@ -35,7 +35,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
         [TestMethod]
         public void Constructor_NullOptions_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryServerInterceptor(null!));
         }
 
@@ -232,7 +232,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
 
             var mockContext = CreateMockServerCallContext("/test.Service/GetItem");
 
-            await Assert.ThrowsExceptionAsync<RpcException>(async () =>
+            await Assert.ThrowsExactlyAsync<RpcException>(async () =>
                 await interceptor.UnaryServerHandler(new TestRequest(), mockContext, continuation));
 
             Assert.IsNotNull(capturedActivity);
@@ -255,7 +255,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
 
             var mockContext = CreateMockServerCallContext("/test.Service/GetItem");
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(async () =>
                 await interceptor.UnaryServerHandler(new TestRequest(), mockContext, continuation));
 
             Assert.IsNotNull(capturedActivity);

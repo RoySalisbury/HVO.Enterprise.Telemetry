@@ -151,7 +151,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void OperationScope_Fail_NullException_ThrowsArgumentNullException()
         {
             using var scope = CreateScope("fail-null-op");
-            Assert.ThrowsException<ArgumentNullException>(() => scope.Fail(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => scope.Fail(null!));
         }
 
         // --- Disposed state guards ---

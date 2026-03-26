@@ -154,7 +154,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
         {
             var options = new HttpInstrumentationOptions { MaxBodyCaptureSize = 0 };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
         {
             var options = new HttpInstrumentationOptions { MaxBodyCaptureSize = -1 };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         // -------------------------------------------------------------------

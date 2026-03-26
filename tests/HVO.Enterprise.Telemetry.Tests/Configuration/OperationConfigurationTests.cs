@@ -44,7 +44,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
                 SamplingRate = 1.5
             };
 
-            Assert.ThrowsException<InvalidOperationException>(() => config.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => config.Validate());
         }
     }
 }

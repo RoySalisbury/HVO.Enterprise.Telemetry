@@ -111,7 +111,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
         public void RecordException_NullActivity_ThrowsArgumentNull()
         {
             Activity? nullActivity = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => nullActivity!.RecordException(new Exception("test")));
         }
 
@@ -122,7 +122,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
             using var source = new ActivitySource("Test.ActivityExtensions." + Guid.NewGuid().ToString("N"));
             using var activity = source.StartActivity("test-op")!;
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => activity.RecordException(null!));
         }
 

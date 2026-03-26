@@ -146,7 +146,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void AddTelemetry_ThrowsOnNullServices()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryServiceCollectionExtensions.AddTelemetry(null!));
         }
 

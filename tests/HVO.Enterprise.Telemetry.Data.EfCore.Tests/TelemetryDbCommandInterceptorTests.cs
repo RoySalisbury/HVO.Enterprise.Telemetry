@@ -46,13 +46,12 @@ namespace HVO.Enterprise.Telemetry.Data.EfCore.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullActivitySource_ThrowsArgumentNullException()
         {
-            new TelemetryDbCommandInterceptor((ActivitySource)null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new TelemetryDbCommandInterceptor((ActivitySource)null!));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "EXECUTE")]
         [DataRow("", "EXECUTE")]
         [DataRow("   ", "EXECUTE")]

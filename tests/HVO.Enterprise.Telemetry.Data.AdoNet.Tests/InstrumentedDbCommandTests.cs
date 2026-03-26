@@ -12,7 +12,7 @@ namespace HVO.Enterprise.Telemetry.Data.AdoNet.Tests
         /// the shared <see cref="HVO.Enterprise.Telemetry.Data.Common.SqlOperationDetector"/>
         /// and returns correct results for all supported SQL operation types.
         /// </summary>
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "EXECUTE")]
         [DataRow("", "EXECUTE")]
         [DataRow("   ", "EXECUTE")]
@@ -37,10 +37,9 @@ namespace HVO.Enterprise.Telemetry.Data.AdoNet.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullCommand_ThrowsArgumentNullException()
         {
-            new InstrumentedDbCommand(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new InstrumentedDbCommand(null!));
         }
 
         [TestMethod]

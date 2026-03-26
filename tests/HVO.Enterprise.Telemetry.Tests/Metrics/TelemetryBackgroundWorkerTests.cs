@@ -46,19 +46,17 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WithZeroCapacity_ThrowsException()
         {
             // Act
-            new TelemetryBackgroundWorker(capacity: 0);
+            Assert.ThrowsExactly<ArgumentException>(() => new TelemetryBackgroundWorker(capacity: 0));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WithNegativeCapacity_ThrowsException()
         {
             // Act
-            new TelemetryBackgroundWorker(capacity: -1);
+            Assert.ThrowsExactly<ArgumentException>(() => new TelemetryBackgroundWorker(capacity: -1));
         }
 
         [TestMethod]
@@ -68,7 +66,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
             using var worker = new TelemetryBackgroundWorker();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => worker.TryEnqueue(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => worker.TryEnqueue(null!));
         }
 
         [TestMethod]
@@ -466,7 +464,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
             worker.Dispose();
 
             // Act & Assert
-            await Assert.ThrowsExceptionAsync<ObjectDisposedException>(async () =>
+            await Assert.ThrowsExactlyAsync<ObjectDisposedException>(async () =>
                 await worker.FlushAsync(TimeSpan.FromSeconds(1)));
         }
 
@@ -484,33 +482,39 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WithNegativeMaxRestartAttempts_ThrowsArgumentException()
         {
             // Act
-            using var worker = new TelemetryBackgroundWorker(capacity: 100, maxRestartAttempts: -1);
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                using var worker = new TelemetryBackgroundWorker(capacity: 100, maxRestartAttempts: -1);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WithNegativeRestartDelay_ThrowsArgumentException()
         {
             // Act
-            using var worker = new TelemetryBackgroundWorker(
-                capacity: 100,
-                maxRestartAttempts: 3,
-                baseRestartDelay: TimeSpan.FromSeconds(-1));
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                using var worker = new TelemetryBackgroundWorker(
+                    capacity: 100,
+                    maxRestartAttempts: 3,
+                    baseRestartDelay: TimeSpan.FromSeconds(-1));
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Constructor_WithExcessiveRestartDelay_ThrowsArgumentException()
         {
             // Act
-            using var worker = new TelemetryBackgroundWorker(
-                capacity: 100,
-                maxRestartAttempts: 3,
-                baseRestartDelay: TimeSpan.FromMinutes(10));
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                using var worker = new TelemetryBackgroundWorker(
+                    capacity: 100,
+                    maxRestartAttempts: 3,
+                    baseRestartDelay: TimeSpan.FromMinutes(10));
+            });
         }
 
         [TestMethod]

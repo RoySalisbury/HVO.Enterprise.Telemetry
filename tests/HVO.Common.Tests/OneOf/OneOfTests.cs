@@ -83,7 +83,7 @@ public class OneOfTests
         OneOf<int, string> oneOf = 42;
 
         // Act & Assert
-        Assert.ThrowsException<InvalidOperationException>(() => { var value = oneOf.AsT2; });
+        Assert.ThrowsExactly<InvalidOperationException>(() => { var value = oneOf.AsT2; });
     }
 
     [TestMethod]
@@ -119,7 +119,7 @@ public class OneOfTests
     {
         OneOf<int, string, bool> value = 99;
 
-        Assert.ThrowsException<InvalidOperationException>(() =>
+        Assert.ThrowsExactly<InvalidOperationException>(() =>
         {
             var result = value.AsT2;
         });
@@ -156,7 +156,7 @@ public class OneOfTests
     {
         OneOf<int, string, bool, double> value = "value";
 
-        Assert.ThrowsException<InvalidOperationException>(() =>
+        Assert.ThrowsExactly<InvalidOperationException>(() =>
         {
             var result = value.AsT3;
         });
@@ -165,7 +165,7 @@ public class OneOfTests
     [TestMethod]
     public void OneOfExtensions_Is_ThrowsWhenNull()
     {
-        Assert.ThrowsException<ArgumentNullException>(() =>
+        Assert.ThrowsExactly<ArgumentNullException>(() =>
         {
             IOneOf? value = null;
             _ = OneOfExtensions.Is<int>(value!);
@@ -215,6 +215,6 @@ public class OneOfTests
         OneOf<int, string> oneOf = 42;
 
         // Act & Assert
-        Assert.ThrowsException<InvalidOperationException>(() => oneOf.As<string>());
+        Assert.ThrowsExactly<InvalidOperationException>(() => oneOf.As<string>());
     }
 }

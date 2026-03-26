@@ -20,7 +20,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
         public void AddIisTelemetryIntegration_ThrowsArgumentNullException_ForNullServices()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddIisTelemetryIntegration(null!));
         }
 
@@ -105,7 +105,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
         [TestMethod]
         public void WithIisIntegration_ThrowsArgumentNullException_ForNullBuilder()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithIisIntegration(null!));
         }
 

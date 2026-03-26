@@ -11,11 +11,10 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
     public class TelemetryLifetimeExtensionsTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddTelemetryLifetime_WithNullServices_ThrowsException()
         {
             // Act
-            TelemetryLifetimeExtensions.AddTelemetryLifetime(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => TelemetryLifetimeExtensions.AddTelemetryLifetime(null!));
         }
 
         [TestMethod]

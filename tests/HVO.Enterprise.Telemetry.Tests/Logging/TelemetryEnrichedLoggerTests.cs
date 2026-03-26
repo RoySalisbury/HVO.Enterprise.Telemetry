@@ -39,7 +39,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
         public void Constructor_NullInnerLogger_ThrowsArgumentNullException()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryEnrichedLogger(null!, new TelemetryLoggerOptions()));
         }
 
@@ -47,7 +47,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
         public void Constructor_NullOptions_ThrowsArgumentNullException()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryEnrichedLogger(_innerLogger, null!));
         }
 

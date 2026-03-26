@@ -38,7 +38,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void Constructor_Static_ThrowsOnNullOptions()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new TelemetryService((TelemetryOptions)null!, NullLoggerFactory.Instance));
         }
 
@@ -62,7 +62,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
             var factory = new OperationScopeFactory("HVO.Enterprise.Telemetry");
             var logger = NullLogger<TelemetryService>.Instance;
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new TelemetryService((IOptions<TelemetryOptions>)null!, stats, factory, logger));
         }
 
@@ -138,7 +138,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void StartOperation_ThrowsOnNullName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.StartOperation(null!));
         }
 
@@ -146,7 +146,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void StartOperation_ThrowsOnEmptyName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.StartOperation(""));
         }
 
@@ -194,7 +194,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void TrackException_ThrowsOnNull()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => service.TrackException(null!));
         }
 
@@ -228,7 +228,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void TrackEvent_ThrowsOnNullName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.TrackEvent(null!));
         }
 
@@ -236,7 +236,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void TrackEvent_ThrowsOnEmptyName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.TrackEvent(""));
         }
 
@@ -270,7 +270,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void RecordMetric_ThrowsOnNullName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.RecordMetric(null!, 0));
         }
 
@@ -278,7 +278,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void RecordMetric_ThrowsOnEmptyName()
         {
             using var service = CreateService();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => service.RecordMetric("", 0));
         }
 

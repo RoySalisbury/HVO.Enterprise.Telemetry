@@ -291,7 +291,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
             using var handler = CreateHandler(inner);
             using var client = new HttpClient(handler);
 
-            await Assert.ThrowsExceptionAsync<HttpRequestException>(
+            await Assert.ThrowsExactlyAsync<HttpRequestException>(
                 () => client.GetAsync("https://api.example.com/users"));
 
             var activity = GetActivity();
@@ -306,7 +306,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
             using var handler = CreateHandler(inner);
             using var client = new HttpClient(handler);
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => client.GetAsync("https://api.example.com/users"));
 
             var activity = GetActivity();
@@ -326,7 +326,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
             using var handler = CreateHandler(inner);
             using var client = new HttpClient(handler);
 
-            var thrown = await Assert.ThrowsExceptionAsync<HttpRequestException>(
+            var thrown = await Assert.ThrowsExactlyAsync<HttpRequestException>(
                 () => client.GetAsync("https://api.example.com/users"));
 
             Assert.AreSame(expected, thrown, "Should rethrow the original exception.");
@@ -512,14 +512,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
             var task = (Task<HttpResponseMessage>)method!.Invoke(handler,
                 new object?[] { null, System.Threading.CancellationToken.None })!;
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(() => task);
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(() => task);
         }
 
         // -------------------------------------------------------------------
         // Multiple HTTP methods
         // -------------------------------------------------------------------
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("GET")]
         [DataRow("POST")]
         [DataRow("PUT")]
@@ -541,7 +541,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Http
         // Various HTTP status codes
         // -------------------------------------------------------------------
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(200, ActivityStatusCode.Unset)]
         [DataRow(201, ActivityStatusCode.Unset)]
         [DataRow(204, ActivityStatusCode.Unset)]

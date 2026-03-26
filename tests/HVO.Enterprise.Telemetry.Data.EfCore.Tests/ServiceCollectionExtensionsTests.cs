@@ -49,10 +49,9 @@ namespace HVO.Enterprise.Telemetry.Data.EfCore.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddEfCoreTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddEfCoreTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddEfCoreTelemetry(null!));
         }
 
         [TestMethod]

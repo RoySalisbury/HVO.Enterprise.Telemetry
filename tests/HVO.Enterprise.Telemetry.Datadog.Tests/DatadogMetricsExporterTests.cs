@@ -21,7 +21,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         [TestMethod]
         public void Constructor_NullOptions_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new DatadogMetricsExporter(null!));
         }
 
@@ -63,7 +63,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Counter_NullName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Counter(null!, 1));
         }
 
@@ -71,7 +71,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Counter_EmptyName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Counter("", 1));
         }
 
@@ -86,7 +86,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Gauge_NullName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Gauge(null!, 42.0));
         }
 
@@ -101,7 +101,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Histogram_NullName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Histogram(null!, 100));
         }
 
@@ -116,7 +116,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Distribution_NullName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Distribution(null!, 100));
         }
 
@@ -131,7 +131,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void Timing_NullName_ThrowsArgumentException()
         {
             using var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => exporter.Timing(null!, 100));
         }
 
@@ -141,7 +141,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
             exporter.Dispose();
 
-            Assert.ThrowsException<ObjectDisposedException>(
+            Assert.ThrowsExactly<ObjectDisposedException>(
                 () => exporter.Counter("test", 1));
         }
 
@@ -151,7 +151,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
             exporter.Dispose();
 
-            Assert.ThrowsException<ObjectDisposedException>(
+            Assert.ThrowsExactly<ObjectDisposedException>(
                 () => exporter.Gauge("test", 1.0));
         }
 
@@ -161,7 +161,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
             exporter.Dispose();
 
-            Assert.ThrowsException<ObjectDisposedException>(
+            Assert.ThrowsExactly<ObjectDisposedException>(
                 () => exporter.Histogram("test", 1.0));
         }
 
@@ -171,7 +171,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
             exporter.Dispose();
 
-            Assert.ThrowsException<ObjectDisposedException>(
+            Assert.ThrowsExactly<ObjectDisposedException>(
                 () => exporter.Distribution("test", 1.0));
         }
 
@@ -181,7 +181,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var exporter = new DatadogMetricsExporter(CreateDefaultOptions());
             exporter.Dispose();
 
-            Assert.ThrowsException<ObjectDisposedException>(
+            Assert.ThrowsExactly<ObjectDisposedException>(
                 () => exporter.Timing("test", 1.0));
         }
 

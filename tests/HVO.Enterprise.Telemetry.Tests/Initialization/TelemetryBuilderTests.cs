@@ -90,7 +90,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Builder_AddActivitySource_ThrowsOnEmpty()
         {
             var services = CreateBaseServices();
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
                 services.AddTelemetry(builder => builder.AddActivitySource("")));
         }
 
@@ -98,7 +98,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Builder_AddActivitySource_ThrowsOnNull()
         {
             var services = CreateBaseServices();
-            Assert.ThrowsException<ArgumentException>(() =>
+            Assert.ThrowsExactly<ArgumentException>(() =>
                 services.AddTelemetry(builder => builder.AddActivitySource(null!)));
         }
 
@@ -120,7 +120,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Builder_Configure_ThrowsOnNull()
         {
             var services = CreateBaseServices();
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 services.AddTelemetry(builder => builder.Configure(null!)));
         }
 
@@ -142,7 +142,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void AddTelemetry_BuilderOverload_ThrowsOnNullServices()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryServiceCollectionExtensions.AddTelemetry(
                     null!, (Action<TelemetryBuilder>)(_ => { })));
         }
@@ -151,7 +151,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void AddTelemetry_BuilderOverload_ThrowsOnNullConfigure()
         {
             var services = CreateBaseServices();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services.AddTelemetry((Action<TelemetryBuilder>)null!));
         }
     }

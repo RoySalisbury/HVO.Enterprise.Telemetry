@@ -52,10 +52,9 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullActivitySource_ThrowsArgumentNullException()
         {
-            new TelemetryClientEndpointBehavior(null!, null);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new TelemetryClientEndpointBehavior(null!, null));
         }
 
         [TestMethod]
@@ -89,14 +88,16 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyClientBehavior_NullClientRuntime_ThrowsArgumentNullException()
         {
-            // Arrange
-            var behavior = new TelemetryClientEndpointBehavior();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                // Arrange
+                var behavior = new TelemetryClientEndpointBehavior();
 
-            // Act
-            behavior.ApplyClientBehavior(null!, null!);
+                // Act
+                behavior.ApplyClientBehavior(null!, null!);
+            });
         }
 
         [TestMethod]

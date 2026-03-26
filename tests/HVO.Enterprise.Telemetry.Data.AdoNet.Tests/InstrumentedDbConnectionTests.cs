@@ -23,10 +23,9 @@ namespace HVO.Enterprise.Telemetry.Data.AdoNet.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullConnection_ThrowsArgumentNullException()
         {
-            new InstrumentedDbConnection(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new InstrumentedDbConnection(null!));
         }
 
         [TestMethod]

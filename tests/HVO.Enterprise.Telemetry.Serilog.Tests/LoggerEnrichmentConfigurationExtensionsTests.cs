@@ -81,10 +81,9 @@ namespace HVO.Enterprise.Telemetry.Serilog.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void WithActivity_NullConfiguration_Throws()
         {
-            LoggerEnrichmentConfigurationExtensions.WithActivity(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => LoggerEnrichmentConfigurationExtensions.WithActivity(null!));
         }
 
         // ===== WithCorrelation Extension Method Tests =====
@@ -141,10 +140,9 @@ namespace HVO.Enterprise.Telemetry.Serilog.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void WithCorrelation_NullConfiguration_Throws()
         {
-            LoggerEnrichmentConfigurationExtensions.WithCorrelation(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => LoggerEnrichmentConfigurationExtensions.WithCorrelation(null!));
         }
 
         // ===== WithTelemetry Convenience Method Tests =====
@@ -189,10 +187,9 @@ namespace HVO.Enterprise.Telemetry.Serilog.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void WithTelemetry_NullConfiguration_Throws()
         {
-            LoggerEnrichmentConfigurationExtensions.WithTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => LoggerEnrichmentConfigurationExtensions.WithTelemetry(null!));
         }
 
         // ===== Integration Tests =====

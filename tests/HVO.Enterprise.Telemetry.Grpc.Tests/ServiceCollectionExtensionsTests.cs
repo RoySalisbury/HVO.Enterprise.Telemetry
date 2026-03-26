@@ -14,7 +14,7 @@ namespace HVO.Enterprise.Telemetry.Grpc.Tests
         [TestMethod]
         public void AddGrpcTelemetry_NullServices_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 ((IServiceCollection)null!).AddGrpcTelemetry());
         }
 

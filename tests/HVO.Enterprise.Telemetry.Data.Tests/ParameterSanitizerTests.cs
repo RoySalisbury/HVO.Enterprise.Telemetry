@@ -76,7 +76,7 @@ namespace HVO.Enterprise.Telemetry.Data.Tests
             Assert.IsFalse(ParameterSanitizer.IsSensitiveParameter(string.Empty));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("password")]
         [DataRow("Password")]
         [DataRow("@password")]
@@ -98,7 +98,7 @@ namespace HVO.Enterprise.Telemetry.Data.Tests
             Assert.IsTrue(ParameterSanitizer.IsSensitiveParameter(name));
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("customerId")]
         [DataRow("name")]
         [DataRow("email")]

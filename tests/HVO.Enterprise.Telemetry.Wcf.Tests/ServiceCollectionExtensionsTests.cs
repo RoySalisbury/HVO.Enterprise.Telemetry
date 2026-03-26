@@ -82,10 +82,9 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddWcfTelemetryInstrumentation_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddWcfTelemetryInstrumentation(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddWcfTelemetryInstrumentation(null!));
         }
 
         [TestMethod]

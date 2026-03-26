@@ -49,10 +49,9 @@ namespace HVO.Enterprise.Telemetry.Data.AdoNet.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddAdoNetTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddAdoNetTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddAdoNetTelemetry(null!));
         }
 
         [TestMethod]

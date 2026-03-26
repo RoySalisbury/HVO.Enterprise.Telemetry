@@ -35,14 +35,14 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void Execute_NullFactory_ThrowsArgumentNullException()
         {
             IOperationScopeFactory? nullFactory = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => nullFactory!.Execute("op", () => { }));
         }
 
         [TestMethod]
         public void Execute_NullAction_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => _factory.Execute("op", (Action)null!));
         }
 
@@ -57,7 +57,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public void Execute_ActionThrows_RethrowsException()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => _factory.Execute("throwing-action", () => throw new InvalidOperationException("boom")));
         }
 
@@ -75,14 +75,14 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void ExecuteT_NullFactory_ThrowsArgumentNullException()
         {
             IOperationScopeFactory? nullFactory = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => nullFactory!.Execute("op", () => 42));
         }
 
         [TestMethod]
         public void ExecuteT_NullFunc_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => _factory.Execute("op", (Func<int>)null!));
         }
 
@@ -96,7 +96,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public void ExecuteT_FuncThrows_RethrowsException()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => _factory.Execute("throw-func", new Func<int>(() => throw new InvalidOperationException("boom"))));
         }
 
@@ -123,14 +123,14 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public async Task ExecuteAsync_NullFactory_ThrowsArgumentNullException()
         {
             IOperationScopeFactory? nullFactory = null;
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(
                 () => nullFactory!.ExecuteAsync("op", () => Task.CompletedTask));
         }
 
         [TestMethod]
         public async Task ExecuteAsync_NullAction_ThrowsArgumentNullException()
         {
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(
                 () => _factory.ExecuteAsync("op", (Func<Task>)null!));
         }
 
@@ -149,7 +149,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public async Task ExecuteAsync_ActionThrows_RethrowsException()
         {
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => _factory.ExecuteAsync("throw-async", async () =>
                 {
                     await Task.Yield();
@@ -170,14 +170,14 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public async Task ExecuteAsyncT_NullFactory_ThrowsArgumentNullException()
         {
             IOperationScopeFactory? nullFactory = null;
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(
                 () => nullFactory!.ExecuteAsync("op", () => Task.FromResult(42)));
         }
 
         [TestMethod]
         public async Task ExecuteAsyncT_NullFunc_ThrowsArgumentNullException()
         {
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(
                 () => _factory.ExecuteAsync("op", (Func<Task<int>>)null!));
         }
 
@@ -191,7 +191,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public async Task ExecuteAsyncT_FuncThrows_RethrowsException()
         {
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => _factory.ExecuteAsync("throw-async-func", new Func<Task<int>>(async () =>
                 {
                     await Task.Yield();

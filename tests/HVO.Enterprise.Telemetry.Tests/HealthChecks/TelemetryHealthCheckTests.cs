@@ -170,7 +170,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
         [TestMethod]
         public void Constructor_NullStatistics_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryHealthCheck(null!));
         }
 
@@ -183,7 +183,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 DegradedErrorRateThreshold = -1.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
                 new TelemetryHealthCheck(stats, badOptions));
         }
 

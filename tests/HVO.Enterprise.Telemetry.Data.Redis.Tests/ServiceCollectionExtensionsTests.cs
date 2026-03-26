@@ -50,10 +50,9 @@ namespace HVO.Enterprise.Telemetry.Data.Redis.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddRedisTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddRedisTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddRedisTelemetry(null!));
         }
 
         [TestMethod]

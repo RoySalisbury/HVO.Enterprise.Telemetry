@@ -24,7 +24,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         {
             var factory = CreateFactory();
 
-            Assert.ThrowsException<InvalidOperationException>(() =>
+            Assert.ThrowsExactly<InvalidOperationException>(() =>
                 factory.Execute("Test", () => throw new InvalidOperationException("boom")));
         }
 
@@ -48,7 +48,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         {
             var factory = CreateFactory();
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(() =>
                 factory.ExecuteAsync("Test", () => throw new InvalidOperationException("boom")));
         }
 
@@ -67,7 +67,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         {
             var factory = CreateFactory();
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(() =>
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(() =>
                 factory.ExecuteAsync<int>("Test", () => throw new InvalidOperationException("boom")));
         }
 

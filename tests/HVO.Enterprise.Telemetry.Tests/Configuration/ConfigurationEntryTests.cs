@@ -27,7 +27,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         [TestMethod]
         public void Constructor_NullConfiguration_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new ConfigurationEntry(ConfigurationLevel.Global, ConfigurationSourceKind.Code, "global", null!));
         }
     }

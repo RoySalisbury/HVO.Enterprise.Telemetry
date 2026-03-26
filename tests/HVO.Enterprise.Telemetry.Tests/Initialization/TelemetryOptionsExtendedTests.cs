@@ -49,14 +49,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Validate_ThrowsWhenServiceNameIsEmpty()
         {
             var options = new TelemetryOptions { ServiceName = "" };
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
 
         [TestMethod]
         public void Validate_ThrowsWhenServiceNameIsWhitespace()
         {
             var options = new TelemetryOptions { ServiceName = "   " };
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -84,14 +84,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Validate_ThrowsWhenSamplingRateIsNegative()
         {
             var options = new TelemetryOptions { DefaultSamplingRate = -0.1 };
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
 
         [TestMethod]
         public void Validate_ThrowsWhenSamplingRateAboveOne()
         {
             var options = new TelemetryOptions { DefaultSamplingRate = 1.1 };
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
 
         [TestMethod]

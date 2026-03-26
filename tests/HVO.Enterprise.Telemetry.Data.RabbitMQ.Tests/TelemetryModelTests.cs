@@ -10,10 +10,9 @@ namespace HVO.Enterprise.Telemetry.Data.RabbitMQ.Tests
     public class TelemetryModelTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullModel_ThrowsArgumentNullException()
         {
-            new TelemetryModel(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new TelemetryModel(null!));
         }
 
         [TestMethod]

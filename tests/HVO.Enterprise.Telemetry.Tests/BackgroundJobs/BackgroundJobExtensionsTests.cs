@@ -111,27 +111,24 @@ namespace HVO.Enterprise.Telemetry.Tests.BackgroundJobs
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void EnqueueWithContext_WithNullAction_ThrowsException()
         {
             // Act
-            BackgroundJobExtensions.EnqueueWithContext(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => BackgroundJobExtensions.EnqueueWithContext(null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public async Task EnqueueWithContextAsync_WithNullAction_ThrowsException()
         {
             // Act
-            await BackgroundJobExtensions.EnqueueWithContextAsync((Func<Task>)null!);
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(async () => await BackgroundJobExtensions.EnqueueWithContextAsync((Func<Task>)null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public async Task EnqueueWithContextAsyncGeneric_WithNullFunc_ThrowsException()
         {
             // Act
-            await BackgroundJobExtensions.EnqueueWithContextAsync((Func<Task<int>>)null!);
+            await Assert.ThrowsExactlyAsync<ArgumentNullException>(async () => await BackgroundJobExtensions.EnqueueWithContextAsync((Func<Task<int>>)null!));
         }
 
         // Note: Exception propagation test removed - unhandled exceptions in ThreadPool.QueueUserWorkItem

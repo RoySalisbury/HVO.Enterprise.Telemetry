@@ -30,7 +30,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
         public void Constructor_NullInnerProvider_ThrowsArgumentNullException()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new TelemetryEnrichedLoggerProvider(null!));
         }
 

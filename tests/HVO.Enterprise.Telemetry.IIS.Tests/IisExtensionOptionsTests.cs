@@ -94,7 +94,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
                 ShutdownTimeout = TimeSpan.FromSeconds(-1)
             };
 
-            var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            var ex = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
             Assert.AreEqual("ShutdownTimeout", ex.ParamName);
         }
 
@@ -106,7 +106,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
                 ShutdownTimeout = TimeSpan.FromSeconds(121)
             };
 
-            var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            var ex = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
             Assert.AreEqual("ShutdownTimeout", ex.ParamName);
         }
 

@@ -12,7 +12,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         [TestMethod]
         public void AddDatadogTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddDatadogTelemetry(null!));
         }
 
@@ -86,7 +86,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         [TestMethod]
         public void AddDatadogTelemetryFromEnvironment_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddDatadogTelemetryFromEnvironment(null!));
         }
 

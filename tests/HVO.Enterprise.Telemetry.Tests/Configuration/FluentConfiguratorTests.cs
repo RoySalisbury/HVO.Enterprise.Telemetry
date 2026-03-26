@@ -70,14 +70,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         public void GlobalConfigurator_AddTag_NullKey_ThrowsArgumentNullException()
         {
             var cfg = new GlobalConfigurator(_provider);
-            Assert.ThrowsException<ArgumentNullException>(() => cfg.AddTag(null!, "value"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => cfg.AddTag(null!, "value"));
         }
 
         [TestMethod]
         public void GlobalConfigurator_AddTag_EmptyKey_ThrowsArgumentNullException()
         {
             var cfg = new GlobalConfigurator(_provider);
-            Assert.ThrowsException<ArgumentNullException>(() => cfg.AddTag("", "value"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => cfg.AddTag("", "value"));
         }
 
         [TestMethod]
@@ -159,7 +159,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         public void TypeConfigurator_AddTag_NullKey_ThrowsArgumentNullException()
         {
             var cfg = new TypeConfigurator<string>(_provider);
-            Assert.ThrowsException<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
         }
 
         [TestMethod]
@@ -223,20 +223,20 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         public void NamespaceConfigurator_AddTag_NullKey_ThrowsArgumentNullException()
         {
             var cfg = new NamespaceConfigurator(_provider, "HVO.Enterprise.*");
-            Assert.ThrowsException<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
         }
 
         [TestMethod]
         public void NamespaceConfigurator_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new NamespaceConfigurator(null!, "ns"));
         }
 
         [TestMethod]
         public void NamespaceConfigurator_NullPattern_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new NamespaceConfigurator(_provider, null!));
         }
 
@@ -307,20 +307,20 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         {
             var method = GetSampleMethod();
             var cfg = new MethodConfigurator(_provider, method);
-            Assert.ThrowsException<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => cfg.AddTag(null!, "v"));
         }
 
         [TestMethod]
         public void MethodConfigurator_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new MethodConfigurator(null!, GetSampleMethod()));
         }
 
         [TestMethod]
         public void MethodConfigurator_NullMethod_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new MethodConfigurator(_provider, null!));
         }
 

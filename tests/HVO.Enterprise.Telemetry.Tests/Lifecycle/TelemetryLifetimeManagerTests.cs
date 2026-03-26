@@ -48,11 +48,10 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_WithNullWorker_ThrowsException()
         {
             // Act
-            new TelemetryLifetimeManager(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new TelemetryLifetimeManager(null!));
         }
 
         [TestMethod]

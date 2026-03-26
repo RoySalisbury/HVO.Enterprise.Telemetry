@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Serilog</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Description>Serilog enrichers for HVO.Enterprise.Telemetry providing automatic Activity tracing and correlation context enrichment in Serilog log events.</Description>
     <PackageTags>telemetry;serilog;enricher;logging;correlation;tracing</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.0: Update Serilog dependency from 3.1.1 to 4.3.1. BREAKING: Consumers must use Serilog 4.x or later.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>

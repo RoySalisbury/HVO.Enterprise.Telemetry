@@ -39,26 +39,30 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Initialize_NullActivitySource_ThrowsArgumentNullException()
         {
-            // Arrange
-            var proxy = new WcfDispatchInspectorProxy();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                // Arrange
+                var proxy = new WcfDispatchInspectorProxy();
 
-            // Act
-            proxy.Initialize(null!, new WcfExtensionOptions());
+                // Act
+                proxy.Initialize(null!, new WcfExtensionOptions());
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Initialize_NullOptions_ThrowsArgumentNullException()
         {
-            // Arrange
-            var proxy = new WcfDispatchInspectorProxy();
-            using var source = new ActivitySource("test.proxy");
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                // Arrange
+                var proxy = new WcfDispatchInspectorProxy();
+                using var source = new ActivitySource("test.proxy");
 
-            // Act
-            proxy.Initialize(source, null!);
+                // Act
+                proxy.Initialize(source, null!);
+            });
         }
     }
 }
