@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Serilog</PackageId>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <Description>Serilog enrichers for HVO.Enterprise.Telemetry providing automatic Activity tracing and correlation context enrichment in Serilog log events.</Description>
     <PackageTags>telemetry;serilog;enricher;logging;correlation;tracing</PackageTags>
-    <PackageReleaseNotes>v1.1.0: Update Serilog dependency from 3.1.1 to 4.3.1. BREAKING: Consumers must use Serilog 4.x or later.</PackageReleaseNotes>
+    <PackageReleaseNotes>v2.0.0: BREAKING — Update Serilog dependency from 3.1.1 to 4.3.1. Consumers must use Serilog 4.x or later. .NET Framework consumers may need binding redirects for Serilog 4.x (assembly version now matches package version).</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

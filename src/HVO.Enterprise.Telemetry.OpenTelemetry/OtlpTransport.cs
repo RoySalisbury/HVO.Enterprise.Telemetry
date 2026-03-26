@@ -5,10 +5,10 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
     /// </summary>
     public enum OtlpTransport
     {
-        /// <summary>gRPC transport (default, port 4317).</summary>
+        /// <summary>gRPC transport (port 4317).</summary>
         Grpc = 0,
 
-        /// <summary>HTTP/protobuf transport (port 4318).</summary>
+        /// <summary>HTTP/protobuf transport (default, port 4318).</summary>
         HttpProtobuf = 1
     }
 }

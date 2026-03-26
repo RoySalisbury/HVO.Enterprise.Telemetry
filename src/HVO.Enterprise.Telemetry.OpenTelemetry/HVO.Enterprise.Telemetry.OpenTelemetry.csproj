@@ -6,7 +6,7 @@
     <Version>1.1.1</Version>
     <Description>OpenTelemetry OTLP exporter integration for HVO.Enterprise.Telemetry — exports traces, metrics, and logs to any OTLP-compatible backend (Jaeger, Zipkin, Grafana Tempo, Honeycomb, Dynatrace, New Relic, Splunk, Elastic, Prometheus).</Description>
     <PackageTags>telemetry;opentelemetry;otlp;exporter;tracing;metrics;jaeger;zipkin;grafana</PackageTags>
-    <PackageReleaseNotes>v1.1.1: Update OpenTelemetry SDK dependencies from 1.9.0 to 1.15.0; suppress gRPC deprecation warning for netstandard2.0 targets.</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.1: Update OpenTelemetry SDK dependencies from 1.9.0 to 1.15.0; change default transport from gRPC to HTTP/Protobuf (gRPC deprecated on netstandard2.0); default endpoint changed from localhost:4317 to localhost:4318.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

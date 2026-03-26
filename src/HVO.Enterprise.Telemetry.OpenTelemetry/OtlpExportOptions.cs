@@ -18,18 +18,33 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
     /// </remarks>
     public sealed class OtlpExportOptions
     {
+        private OtlpTransport _transport = OtlpTransport.HttpProtobuf;
+        private bool _transportExplicitlySet;
+
         /// <summary>
         /// Gets or sets the OTLP collector endpoint.
         /// Falls back to <c>OTEL_EXPORTER_OTLP_ENDPOINT</c> environment variable.
-        /// Default: <c>"http://localhost:4317"</c> (gRPC).
+        /// Default: <c>"http://localhost:4318"</c> (HTTP/Protobuf).
         /// </summary>
-        public string Endpoint { get; set; } = "http://localhost:4317";
+        public string Endpoint { get; set; } = "http://localhost:4318";
 
         /// <summary>
         /// Gets or sets the OTLP transport protocol.
-        /// Default: <see cref="OtlpTransport.Grpc"/>.
+        /// Default: <see cref="OtlpTransport.HttpProtobuf"/>.
         /// </summary>
-        public OtlpTransport Transport { get; set; } = OtlpTransport.Grpc;
+        /// <remarks>
+        /// Changed from <see cref="OtlpTransport.Grpc"/> to <see cref="OtlpTransport.HttpProtobuf"/> in v1.1.1
+        /// because gRPC is no longer supported on .NET Framework / .NET Standard targets without a custom HttpClientFactory.
+        /// </remarks>
+        public OtlpTransport Transport
+        {
+            get => _transport;
+            set
+            {
+                _transport = value;
+                _transportExplicitlySet = true;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the service name for resource attributes.
@@ -179,17 +194,23 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
         internal void ApplyEnvironmentDefaults()
         {
             var endpoint = System.Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
-            if (!string.IsNullOrEmpty(endpoint) && Endpoint == "http://localhost:4317")
+            if (!string.IsNullOrEmpty(endpoint) && Endpoint == "http://localhost:4318")
             {
                 Endpoint = endpoint;
             }
 
             // Auto-detect transport from well-known ports (only if transport was not explicitly configured)
-            if (Transport == OtlpTransport.Grpc
-                && Uri.TryCreate(Endpoint, UriKind.Absolute, out var uri)
-                && uri.Port == 4318)
+            if (!_transportExplicitlySet
+                && Uri.TryCreate(Endpoint, UriKind.Absolute, out var uri))
             {
-                Transport = OtlpTransport.HttpProtobuf;
+                if (Transport == OtlpTransport.HttpProtobuf && uri.Port == 4317)
+                {
+                    _transport = OtlpTransport.Grpc;
+                }
+                else if (Transport == OtlpTransport.Grpc && uri.Port == 4318)
+                {
+                    _transport = OtlpTransport.HttpProtobuf;
+                }
             }
 
             ServiceName ??= System.Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME");
