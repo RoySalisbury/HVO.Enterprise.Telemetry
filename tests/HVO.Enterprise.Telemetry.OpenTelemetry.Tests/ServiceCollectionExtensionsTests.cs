@@ -192,7 +192,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         }
 
         [TestMethod]
-        public void AddOpenTelemetryExport_RegistersLoggerProvider()
+        public void AddOpenTelemetryExport_WithEnableLogExport_RegistersLoggerProvider()
         {
             var services = new ServiceCollection();
             services.AddLogging();
@@ -200,13 +200,39 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
             services.AddOpenTelemetryExport(options =>
             {
                 options.ServiceName = "test-service";
+                options.EnableLogExport = true;
             });
 
             var provider = services.BuildServiceProvider();
 
-            // WithLogging() should register an OpenTelemetry ILoggerProvider
-            var loggerFactory = provider.GetService<ILoggerFactory>();
-            Assert.IsNotNull(loggerFactory);
+            // When EnableLogExport is true, WithLogging() should register an
+            // OpenTelemetry ILoggerProvider in the service collection.
+            var loggerProviders = provider.GetServices<ILoggerProvider>();
+            Assert.IsTrue(
+                loggerProviders.Any(p => p.GetType().FullName!.Contains("OpenTelemetry")),
+                "Expected an OpenTelemetry ILoggerProvider to be registered when EnableLogExport is true.");
+            (provider as IDisposable)?.Dispose();
+        }
+
+        [TestMethod]
+        public void AddOpenTelemetryExport_WithoutEnableLogExport_DoesNotRegisterOtelLoggerProvider()
+        {
+            var services = new ServiceCollection();
+            services.AddLogging();
+            services.AddOptions<Configuration.TelemetryOptions>();
+            services.AddOpenTelemetryExport(options =>
+            {
+                options.ServiceName = "test-service";
+                // EnableLogExport defaults to false
+            });
+
+            var provider = services.BuildServiceProvider();
+
+            // When EnableLogExport is false (default), no OpenTelemetry ILoggerProvider should be registered.
+            var loggerProviders = provider.GetServices<ILoggerProvider>();
+            Assert.IsFalse(
+                loggerProviders.Any(p => p.GetType().FullName!.Contains("OpenTelemetry")),
+                "Expected no OpenTelemetry ILoggerProvider when EnableLogExport is false.");
             (provider as IDisposable)?.Dispose();
         }
 

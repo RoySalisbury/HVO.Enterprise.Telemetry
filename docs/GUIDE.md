@@ -817,7 +817,7 @@ In this example:
 
 ### 7.1 OpenTelemetry Export (`HVO.Enterprise.Telemetry.OpenTelemetry`)
 
-Exports traces and metrics via the OpenTelemetry Protocol (OTLP) to any
+Exports traces, metrics, and logs via the OpenTelemetry Protocol (OTLP) to any
 compatible backend.
 
 **Compatible Backends:** Jaeger, Grafana Tempo, Zipkin, Honeycomb, Dynatrace,
@@ -836,10 +836,91 @@ services.AddOpenTelemetryExport(options =>
     options.ServiceVersion = "1.0.0";
     options.Environment = "Production";
     options.Endpoint = "http://otel-collector:4317";   // gRPC
-    // options.Endpoint = "http://otel-collector:4318"; // HTTP/protobuf
-    options.Transport = OtlpTransport.Grpc;            // or OtlpTransport.Http
+    // options.Endpoint = "http://otel-collector:4318"; // HTTP/protobuf (auto-detected)
     options.EnableTraceExport = true;
     options.EnableMetricsExport = true;
+});
+```
+
+#### Transport Auto-Detection
+
+The transport protocol is automatically inferred from the endpoint port when
+`Transport` has not been explicitly set:
+
+- Port **4317** → `OtlpTransport.Grpc` (default, no change)
+- Port **4318** → `OtlpTransport.HttpProtobuf` (auto-detected)
+
+This prevents silent export failures when using HTTP/protobuf collectors
+(e.g., Azure Container Apps with Aspire Dashboard).
+
+```csharp
+// Transport is auto-detected — no need to set it manually:
+options.Endpoint = "http://otel-collector:4318"; // → HttpProtobuf
+```
+
+#### Custom ActivitySources and Meters
+
+Register application-specific ActivitySource and Meter names alongside the
+built-in HVO sources:
+
+```csharp
+services.AddOpenTelemetryExport(options =>
+{
+    options.ServiceName = "MyWebApi";
+    options.Endpoint = "http://otel-collector:4317";
+
+    // Register custom ActivitySources in the TracerProvider
+    options.AdditionalActivitySources.Add("MyApp");
+    options.AdditionalActivitySources.Add("MyApp.HttpClient");
+
+    // Register custom Meters in the MeterProvider
+    options.AdditionalMeterNames.Add("MyApp.Metrics");
+
+    // Opt-in to well-known .NET runtime meters (ASP.NET Core, Kestrel, System.Net.Http, etc.)
+    options.EnableStandardMeters = true;
+});
+```
+
+#### Log Export
+
+OTLP log export is opt-in. When enabled, structured logs are exported alongside
+traces and metrics:
+
+```csharp
+services.AddOpenTelemetryExport(options =>
+{
+    options.ServiceName = "MyWebApi";
+    options.Endpoint = "http://otel-collector:4317";
+    options.EnableLogExport = true;  // exports ILogger output via OTLP
+});
+```
+
+#### Advanced: Provider Callbacks
+
+For instrumentation packages that the library doesn't directly reference
+(e.g., `OpenTelemetry.Instrumentation.AspNetCore`), use callbacks:
+
+```csharp
+services.AddOpenTelemetryExport(options =>
+{
+    options.ServiceName = "MyWebApi";
+    options.Endpoint = "http://otel-collector:4317";
+    options.EnableLogExport = true;
+    options.EnableStandardMeters = true;
+
+    options.AdditionalActivitySources.Add("MyApp");
+
+    // Callbacks for packages the consumer references directly
+    options.ConfigureTracerProvider = builder =>
+    {
+        builder.AddAspNetCoreInstrumentation();
+        builder.AddHttpClientInstrumentation();
+    };
+
+    options.ConfigureMeterProvider = builder =>
+    {
+        builder.AddMeter("MyApp.CustomInstrumentation");
+    };
 });
 ```
 
@@ -863,7 +944,8 @@ services.AddOpenTelemetryExportFromEnvironment();
 
 | Type | Purpose |
 |------|---------|
-| `OtlpExportOptions` | Configuration for endpoint, transport, headers, service info |
+| `OtlpExportOptions` | Configuration for endpoint, transport, headers, sources, meters, callbacks |
+| `OtlpTransport` | Transport protocol enum: `Grpc` (4317) / `HttpProtobuf` (4318) |
 | `HvoActivitySourceRegistrar` | Discovers and registers HVO ActivitySource names |
 | `ServiceCollectionExtensions` | `AddOpenTelemetryExport()` / `AddOpenTelemetryExportFromEnvironment()` |
 

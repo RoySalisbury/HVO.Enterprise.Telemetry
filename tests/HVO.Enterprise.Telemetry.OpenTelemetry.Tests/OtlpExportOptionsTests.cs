@@ -358,24 +358,23 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void ApplyEnvironmentDefaults_ExplicitTransport_NotOverriddenByPort()
         {
+            // Explicitly set transport away from the default (Grpc)
+            // so that environment-based auto-detection should NOT change it.
             var options = new OtlpExportOptions
             {
                 Transport = OtlpTransport.HttpProtobuf
             };
-            // Even though Transport is already HttpProtobuf and endpoint has port 4318,
-            // the auto-detection only fires when Transport == Grpc (the default).
-            // Setting Transport explicitly to HttpProtobuf before env defaults means
-            // it stays HttpProtobuf — correct behavior.
+
+            // Environment sets endpoint with the "HTTP" OTLP port (4318), which would normally
+            // trigger auto-detection if the transport were still at its default (Grpc).
             System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4318");
 
             try
             {
-                // Endpoint won't be updated because it was changed from the default
-                // (well, actually it was not — the default is "http://localhost:4317" and we
-                // didn't change it). Reset to default to test the transport guard.
-                options.Endpoint = "http://localhost:4317"; // restore default for env override
-                options.Transport = OtlpTransport.Grpc; // restore to test the flow
                 options.ApplyEnvironmentDefaults();
+
+                // Because Transport was explicitly set, it should not be overridden
+                // by the auto-detection based on the endpoint port.
                 Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
             }
             finally

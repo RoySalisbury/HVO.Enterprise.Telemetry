@@ -262,6 +262,8 @@ namespace HVO.Enterprise.Samples.Net8.Configuration
                     options.Environment = extensions["OpenTelemetry:Environment"] ?? "development";
                     options.Endpoint = extensions["OpenTelemetry:Endpoint"] ?? "http://localhost:4317";
 
+                    // Transport is auto-detected from port (4318 → HttpProtobuf).
+                    // Only set explicitly when using a non-standard port.
                     var transport = extensions["OpenTelemetry:Transport"];
                     if (!string.IsNullOrEmpty(transport)
                         && Enum.TryParse<OtlpTransport>(transport, ignoreCase: true, out var transportValue))
@@ -273,6 +275,12 @@ namespace HVO.Enterprise.Samples.Net8.Configuration
                     options.EnableMetricsExport = true;
                     options.EnableLogExport = extensions.GetValue<bool>("OpenTelemetry:EnableLogExport");
                     options.EnablePrometheusEndpoint = extensions.GetValue<bool>("OpenTelemetry:EnablePrometheus");
+
+                    // Register standard .NET meters (ASP.NET Core, Kestrel, System.Net.Http, etc.)
+                    options.EnableStandardMeters = extensions.GetValue("OpenTelemetry:EnableStandardMeters", true);
+
+                    // Register the sample app's own ActivitySource so its spans appear in traces
+                    options.AdditionalActivitySources.Add("hvo-samples-net8");
                 });
             }
 
