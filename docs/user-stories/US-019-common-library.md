@@ -1,6 +1,6 @@
 # US-019: HVO.Common Library Structure
 
-**GitHub Issue**: [#21](https://github.com/RoySalisbury/HVO.Enterprise/issues/21)
+**GitHub Issue**: [#21](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/21)
 **Status**: ✅ Complete  
 **Category**: Extension Package (Foundation)  
 **Effort**: 5 story points  

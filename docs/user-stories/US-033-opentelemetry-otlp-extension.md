@@ -1,6 +1,6 @@
 # US-033: OpenTelemetry / OTLP Extension Package
 
-**GitHub Issue**: [#80](https://github.com/RoySalisbury/HVO.Enterprise/issues/80)  
+**GitHub Issue**: [#80](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/80)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 8 story points  
@@ -102,7 +102,7 @@ accept OTLP ingest.
     <Authors>HVO Enterprise</Authors>
     <Description>OpenTelemetry OTLP exporter integration for HVO.Enterprise.Telemetry — exports traces, metrics, and logs to any OTLP-compatible backend</Description>
     <PackageTags>telemetry;opentelemetry;otlp;tracing;metrics;jaeger;zipkin;prometheus;grafana</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

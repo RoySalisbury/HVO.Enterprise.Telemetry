@@ -1,7 +1,7 @@
 # US-024: Application Insights Extension Package
 
 **Status**: ✅ Complete  
-**GitHub Issue**: [#26](https://github.com/RoySalisbury/HVO.Enterprise/issues/26)  
+**GitHub Issue**: [#26](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/26)  
 **Category**: Extension Package  
 **Effort**: 5 story points  
 **Sprint**: 8
@@ -67,7 +67,7 @@ So that **my OpenTelemetry traces, metrics, and logs appear in Application Insig
     <Authors>HVO Enterprise</Authors>
     <Description>Application Insights integration for HVO.Enterprise.Telemetry with dual-mode support</Description>
     <PackageTags>telemetry;applicationinsights;azure;tracing;metrics;opentelemetry</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

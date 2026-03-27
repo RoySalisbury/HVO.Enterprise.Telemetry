@@ -1,6 +1,6 @@
 # US-011: Context Enrichment
 
-**GitHub Issue**: [#13](https://github.com/RoySalisbury/HVO.Enterprise/issues/13)
+**GitHub Issue**: [#13](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/13)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  

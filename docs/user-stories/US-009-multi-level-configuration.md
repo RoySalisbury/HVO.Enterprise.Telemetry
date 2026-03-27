@@ -1,6 +1,6 @@
 # US-009: Multi-Level Configuration
 
-**GitHub Issue**: [#11](https://github.com/RoySalisbury/HVO.Enterprise/issues/11)
+**GitHub Issue**: [#11](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/11)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  

@@ -1,6 +1,6 @@
 # US-018: DI and Static Initialization
 
-**GitHub Issue**: [#20](https://github.com/RoySalisbury/HVO.Enterprise/issues/20)  
+**GitHub Issue**: [#20](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/20)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 5 story points  

@@ -75,7 +75,7 @@ These should be marked with appropriate labels when creating issues.
 
 For each user story:
 
-1. Open the [Create User Story Issue](https://github.com/RoySalisbury/HVO.Enterprise/issues/new?template=user-story.yml) link
+1. Open the [Create User Story Issue](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/new?template=user-story.yml) link
 2. Fill in the fields from the corresponding markdown file:
    - **Story ID**: From the filename (e.g., US-001)
    - **Category**: From the markdown file header

@@ -1,6 +1,6 @@
 # US-012: Operation Scope
 
-**GitHub Issue**: [#14](https://github.com/RoySalisbury/HVO.Enterprise/issues/14)
+**GitHub Issue**: [#14](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/14)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  

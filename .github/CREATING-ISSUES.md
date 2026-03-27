@@ -6,7 +6,7 @@ This guide explains how to convert the user story documentation files in `docs/u
 
 ### Option 1: Manual Creation (Recommended for First Few Stories)
 
-1. **Go to GitHub Issues**: Navigate to https://github.com/RoySalisbury/HVO.Enterprise/issues
+1. **Go to GitHub Issues**: Navigate to https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues
 2. **Click "New Issue"**: Green button in top-right
 3. **Select "User Story" template**: Click "Get started" next to 💡 User Story
 4. **Fill in the form** using the content from your markdown file
@@ -123,7 +123,7 @@ for story in "${STORIES[@]}"; do
     
     # For now, we'll open the issue creation page
     echo "Please create issue for $story manually using the template"
-    echo "URL: https://github.com/RoySalisbury/HVO.Enterprise/issues/new?template=user-story.yml"
+    echo "URL: https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/new?template=user-story.yml"
     echo ""
 done
 ```
@@ -149,7 +149,7 @@ from github import Github
 
 # Configuration
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
-REPO_NAME = "RoySalisbury/HVO.Enterprise"
+REPO_NAME = "RoySalisbury/HVO.Enterprise.Telemetry"
 STORIES_DIR = Path("docs/user-stories")
 
 def parse_user_story(markdown_path):

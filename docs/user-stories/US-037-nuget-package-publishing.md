@@ -1,6 +1,6 @@
 # US-037: NuGet Package Publishing Infrastructure
 
-**GitHub Issue**: [#85](https://github.com/RoySalisbury/HVO.Enterprise/issues/85)
+**GitHub Issue**: [#85](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/85)
 **Status**: ✅ Complete
 **Category**: Infrastructure / DevOps
 **Effort**: Large (8-13 story points)
@@ -146,8 +146,8 @@ Each package should be versioned independently — updating one package should n
     <Company>HVO Enterprise</Company>
     <Copyright>Copyright © HVO Enterprise 2024-2026</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/RoySalisbury/HVO.Enterprise</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIcon>nuget-icon.png</PackageIcon>
     

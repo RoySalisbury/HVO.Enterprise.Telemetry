@@ -1,6 +1,6 @@
 # US-016: Statistics and Health Checks
 
-**GitHub Issue**: [#18](https://github.com/RoySalisbury/HVO.Enterprise/issues/18)  
+**GitHub Issue**: [#18](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/18)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 5 story points  

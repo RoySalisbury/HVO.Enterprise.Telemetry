@@ -1,6 +1,6 @@
 # US-008: Configuration Hot Reload
 
-**GitHub Issue**: [#10](https://github.com/RoySalisbury/HVO.Enterprise/issues/10)
+**GitHub Issue**: [#10](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/10)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  

@@ -1,6 +1,6 @@
 # US-023: Serilog Extension Package
 
-**GitHub Issue**: [#25](https://github.com/RoySalisbury/HVO.Enterprise/issues/25)  
+**GitHub Issue**: [#25](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/25)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 3 story points  
@@ -61,7 +61,7 @@ So that **my logs are correlated with distributed traces without manual context 
     <Authors>HVO Enterprise</Authors>
     <Description>Serilog enrichers for HVO.Enterprise.Telemetry correlation and Activity tracing</Description>
     <PackageTags>telemetry;serilog;logging;tracing;correlation;opentelemetry</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

@@ -61,9 +61,9 @@ So that **I can quickly understand the library, migrate existing applications, a
 ```markdown
 # HVO.Enterprise.Telemetry
 
-[![Build Status](https://github.com/RoySalisbury/HVO.Enterprise/workflows/CI/badge.svg)](...)
+[![Build Status](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/workflows/CI/badge.svg)](...)
 [![NuGet](https://img.shields.io/nuget/v/HVO.Enterprise.Telemetry.svg)](...)
-[![Test Coverage](https://img.shields.io/codecov/c/github/RoySalisbury/HVO.Enterprise)](...)
+[![Test Coverage](https://img.shields.io/codecov/c/github/RoySalisbury/HVO.Enterprise.Telemetry)](...)
 
 > Unified telemetry and observability for all .NET platforms - single binary from .NET Framework 4.8 to .NET 10+
 
@@ -1204,8 +1204,8 @@ await Task.Run(() => ProcessAsync());
 
 ## Support
 
-- GitHub Issues: https://github.com/RoySalisbury/HVO.Enterprise/issues
-- Documentation: https://github.com/RoySalisbury/HVO.Enterprise/docs
+- GitHub Issues: https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues
+- Documentation: https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/docs
 ```
 
 ### ARCHITECTURE.md Outline

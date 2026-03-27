@@ -1,9 +1,9 @@
 # HVO.Enterprise
 
-[![Build Status](https://github.com/RoySalisbury/HVO.Enterprise/workflows/CI/badge.svg)](https://github.com/RoySalisbury/HVO.Enterprise/actions)
-[![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/tests.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
-[![Line Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-line.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
-[![Branch Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-branch.json)](https://github.com/RoySalisbury/HVO.Enterprise/actions/workflows/ci.yml)
+[![Build Status](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/workflows/CI/badge.svg)](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/actions)
+[![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/tests.json)](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/actions/workflows/ci.yml)
+[![Line Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-line.json)](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/actions/workflows/ci.yml)
+[![Branch Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/RoySalisbury/97b18534aba3f1fac0072b22227a9209/raw/coverage-branch.json)](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/actions/workflows/ci.yml)
 [![.NET Standard](https://img.shields.io/badge/.NET%20Standard-2.0-blue)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 

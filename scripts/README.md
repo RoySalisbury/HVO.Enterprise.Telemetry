@@ -159,19 +159,19 @@ After creating all issues, verify:
 
 ```bash
 # Check total issue count
-gh issue list --repo RoySalisbury/HVO.Enterprise --label user-story | wc -l
+gh issue list --repo RoySalisbury/HVO.Enterprise.Telemetry --label user-story | wc -l
 # Should show: 30
 
 # Check completed stories
-gh issue list --repo RoySalisbury/HVO.Enterprise --label status:complete | wc -l
+gh issue list --repo RoySalisbury/HVO.Enterprise.Telemetry --label status:complete | wc -l
 # Should show: 5
 
 # Check not-started stories
-gh issue list --repo RoySalisbury/HVO.Enterprise --label status:not-started | wc -l
+gh issue list --repo RoySalisbury/HVO.Enterprise.Telemetry --label status:not-started | wc -l
 # Should show: 25
 
 # List all user story issues
-gh issue list --repo RoySalisbury/HVO.Enterprise --label user-story
+gh issue list --repo RoySalisbury/HVO.Enterprise.Telemetry --label user-story
 ```
 
 ## Troubleshooting

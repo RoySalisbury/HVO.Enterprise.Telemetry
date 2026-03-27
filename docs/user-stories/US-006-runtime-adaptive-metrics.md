@@ -1,6 +1,6 @@
 # US-006: Runtime-Adaptive Metrics
 
-**GitHub Issue**: [#8](https://github.com/RoySalisbury/HVO.Enterprise/issues/8)
+**GitHub Issue**: [#8](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/8)
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 8 story points  

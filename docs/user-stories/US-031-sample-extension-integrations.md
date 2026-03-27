@@ -1,6 +1,6 @@
 # US-031: Sample Application — Extension Integration & End-to-End Telemetry Output
 
-**GitHub Issue**: [#73](https://github.com/RoySalisbury/HVO.Enterprise/issues/73)  
+**GitHub Issue**: [#73](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/73)  
 **Status**: ✅ Complete  
 **Category**: Testing / Samples  
 **Effort**: 13 story points  

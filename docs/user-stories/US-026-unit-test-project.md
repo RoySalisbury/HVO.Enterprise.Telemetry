@@ -1,6 +1,6 @@
 # US-026: Unit Test Project
 
-**GitHub Issue**: [#28](https://github.com/RoySalisbury/HVO.Enterprise/issues/28)  
+**GitHub Issue**: [#28](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/28)  
 **Status**: ✅ Complete  
 **Category**: Testing  
 **Effort**: 30 story points  

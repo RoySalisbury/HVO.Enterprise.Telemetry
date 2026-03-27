@@ -8,10 +8,10 @@ Let's walk through creating an issue for **US-001: Core Package Setup and Depend
 
 ### Step 1: Open the Issue Template
 
-Click here: [Create New User Story](https://github.com/RoySalisbury/HVO.Enterprise/issues/new?template=user-story.yml)
+Click here: [Create New User Story](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/new?template=user-story.yml)
 
 Or navigate manually:
-1. Go to the [Issues page](https://github.com/RoySalisbury/HVO.Enterprise/issues)
+1. Go to the [Issues page](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues)
 2. Click the green "New issue" button
 3. Select "💡 User Story" → Click "Get started"
 
@@ -166,8 +166,8 @@ Copy the Notes section about design decisions, implementation tips, etc.
 ### Step 10: Fill in Related Documentation
 
 ```markdown
-- [Project Plan](https://github.com/RoySalisbury/HVO.Enterprise/blob/main/docs/project-plan.md#1-create-core-netstandard20-package-with-microsoft-abstractions)
-- [Coding Standards](https://github.com/RoySalisbury/HVO.Enterprise/blob/main/.github/copilot-instructions.md)
+- [Project Plan](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/blob/main/docs/project-plan.md#1-create-core-netstandard20-package-with-microsoft-abstractions)
+- [Coding Standards](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/blob/main/.github/copilot-instructions.md)
 - [.NET Standard 2.0 API Reference](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)
 ```
 

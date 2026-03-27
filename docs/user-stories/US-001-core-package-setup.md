@@ -1,6 +1,6 @@
 # US-001: Core Package Setup and Dependencies
 
-**GitHub Issue**: [#3](https://github.com/RoySalisbury/HVO.Enterprise/issues/3)  
+**GitHub Issue**: [#3](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/3)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 3 story points  
@@ -69,7 +69,7 @@ So that **I have a solid foundation for implementing telemetry features with .NE
     <Authors>HVO Enterprise</Authors>
     <Description>Core telemetry library for unified observability across .NET platforms</Description>
     <PackageTags>telemetry;logging;tracing;metrics;observability;opentelemetry</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <!-- Documentation -->

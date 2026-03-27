@@ -1,6 +1,6 @@
 # US-028: .NET 8 Sample Application
 
-**GitHub Issue**: [#30](https://github.com/RoySalisbury/HVO.Enterprise/issues/30)  
+**GitHub Issue**: [#30](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/30)  
 **Status**: ✅ Complete  
 **Category**: Testing  
 **Effort**: 13 story points  

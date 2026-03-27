@@ -1,6 +1,6 @@
 # US-017: HTTP Instrumentation
 
-**GitHub Issue**: [#19](https://github.com/RoySalisbury/HVO.Enterprise/issues/19)  
+**GitHub Issue**: [#19](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/19)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 3 story points  

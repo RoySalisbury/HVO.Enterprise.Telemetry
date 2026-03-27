@@ -1,7 +1,7 @@
 # US-013: ILogger Enrichment
 
 **Status**: ✅ Complete  
-**GitHub Issue**: [#15](https://github.com/RoySalisbury/HVO.Enterprise/issues/15)  
+**GitHub Issue**: [#15](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/15)  
 **Category**: Core Package  
 **Effort**: 5 story points  
 **Sprint**: 4

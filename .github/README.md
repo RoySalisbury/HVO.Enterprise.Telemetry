@@ -70,7 +70,7 @@ We have comprehensive user story documentation in `docs/user-stories/`. To conve
 
 ### Option 1: Manual Creation (Recommended)
 
-1. Go to [Issues → New Issue](https://github.com/RoySalisbury/HVO.Enterprise/issues/new/choose)
+1. Go to [Issues → New Issue](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/new/choose)
 2. Select "User Story" template
 3. Copy content from the corresponding markdown file in `docs/user-stories/`
 4. Apply appropriate labels

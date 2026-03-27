@@ -1,6 +1,6 @@
 # US-027: .NET Framework 4.8 Sample Application
 
-**GitHub Issue**: [#29](https://github.com/RoySalisbury/HVO.Enterprise/issues/29)  
+**GitHub Issue**: [#29](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/29)  
 **Status**: ❌ Not Started  
 **Category**: Testing  
 **Effort**: 13 story points  

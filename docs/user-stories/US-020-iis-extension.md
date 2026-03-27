@@ -1,6 +1,6 @@
 # US-020: IIS Extension Package
 
-**GitHub Issue**: [#22](https://github.com/RoySalisbury/HVO.Enterprise/issues/22)  
+**GitHub Issue**: [#22](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/22)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 3 story points  

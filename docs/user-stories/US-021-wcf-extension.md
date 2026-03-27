@@ -1,6 +1,6 @@
 # US-021: WCF Extension Package
 
-**GitHub Issue**: [#23](https://github.com/RoySalisbury/HVO.Enterprise/issues/23)  
+**GitHub Issue**: [#23](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/23)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 5 story points  

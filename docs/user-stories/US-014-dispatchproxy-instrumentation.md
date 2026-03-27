@@ -1,6 +1,6 @@
 # US-014: DispatchProxy Instrumentation
 
-**GitHub Issue**: [#16](https://github.com/RoySalisbury/HVO.Enterprise/issues/16)  
+**GitHub Issue**: [#16](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/16)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 8 story points  

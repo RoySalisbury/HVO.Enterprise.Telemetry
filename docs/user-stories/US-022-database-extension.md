@@ -1,6 +1,6 @@
 # US-022: Data Extension Packages
 
-**GitHub Issue**: [#24](https://github.com/RoySalisbury/HVO.Enterprise/issues/24)  
+**GitHub Issue**: [#24](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/24)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 8 story points  

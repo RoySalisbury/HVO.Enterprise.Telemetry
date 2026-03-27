@@ -1,6 +1,6 @@
 # US-005: Lifecycle Management
 
-**GitHub Issue**: [#7](https://github.com/RoySalisbury/HVO.Enterprise/issues/7)  
+**GitHub Issue**: [#7](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/7)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 5 story points  

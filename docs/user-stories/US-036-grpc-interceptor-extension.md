@@ -1,6 +1,6 @@
 # US-036: gRPC Interceptor Extension Package
 
-**GitHub Issue**: [#83](https://github.com/RoySalisbury/HVO.Enterprise/issues/83)  
+**GitHub Issue**: [#83](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/83)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 5 story points  
@@ -106,7 +106,7 @@ This was deferred from US-028 (NET 8 sample) and is now formalised as a dedicate
     <Authors>HVO Enterprise</Authors>
     <Description>gRPC interceptor integration for HVO.Enterprise.Telemetry — automatic distributed tracing for gRPC services and clients</Description>
     <PackageTags>telemetry;grpc;tracing;interceptor;distributed-tracing;correlation;rpc;opentelemetry</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

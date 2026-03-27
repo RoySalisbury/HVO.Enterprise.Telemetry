@@ -1,6 +1,6 @@
 # US-025: Datadog Extension Package
 
-**GitHub Issue**: [#27](https://github.com/RoySalisbury/HVO.Enterprise/issues/27)  
+**GitHub Issue**: [#27](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/27)  
 **Status**: ✅ Complete  
 **Category**: Extension Package  
 **Effort**: 5 story points  
@@ -67,7 +67,7 @@ So that **my telemetry appears in Datadog with optimal performance and full feat
     <Authors>HVO Enterprise</Authors>
     <Description>Datadog integration for HVO.Enterprise.Telemetry with dual-mode OTLP and DogStatsD support</Description>
     <PackageTags>telemetry;datadog;metrics;tracing;dogstatsd;opentelemetry</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

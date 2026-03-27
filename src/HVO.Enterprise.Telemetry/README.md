@@ -95,7 +95,7 @@ public Task<Order> GetOrderAsync(int id) { }
 
 ## Documentation
 
-For full documentation, examples, and architecture details, see the [GitHub repository](https://github.com/RoySalisbury/HVO.Enterprise).
+For full documentation, examples, and architecture details, see the [GitHub repository](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry).
 
 ## Target Framework
 
@@ -103,4 +103,4 @@ For full documentation, examples, and architecture details, see the [GitHub repo
 
 ## License
 
-MIT — see [LICENSE](https://github.com/RoySalisbury/HVO.Enterprise/blob/main/LICENSE) for details.
+MIT — see [LICENSE](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/blob/main/LICENSE) for details.

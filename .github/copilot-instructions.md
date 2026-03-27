@@ -812,7 +812,7 @@ When working on user stories, **ALWAYS** follow this pattern:
    - **NEVER work directly on main branch**
 
 3. **Update User Story Markdown**
-   - Add GitHub issue number at top: `**GitHub Issue**: [#N](https://github.com/RoySalisbury/HVO.Enterprise/issues/N)`
+   - Add GitHub issue number at top: `**GitHub Issue**: [#N](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/N)`
    - Change status to `🚧 In Progress`
    - Add start date if tracking sprints
 
@@ -881,7 +881,7 @@ The mapping is: **GitHub Issue # = User Story # + 2** (because issues #1 and #2 
 #### Required Updates in Markdown File
 
 1. **Add GitHub Issue Number** (at top of file)
-   - Add line after title: `**GitHub Issue**: [#N](https://github.com/RoySalisbury/HVO.Enterprise/issues/N)`
+   - Add line after title: `**GitHub Issue**: [#N](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/N)`
    - This prevents confusion between issue numbers and user story numbers
 
 2. **Update User Story Status**

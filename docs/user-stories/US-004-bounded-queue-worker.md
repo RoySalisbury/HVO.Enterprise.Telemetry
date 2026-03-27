@@ -1,6 +1,6 @@
 # US-004: Bounded Queue with Channel-Based Worker
 
-**GitHub Issue**: [#6](https://github.com/RoySalisbury/HVO.Enterprise/issues/6)  
+**GitHub Issue**: [#6](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/6)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 8 story points  

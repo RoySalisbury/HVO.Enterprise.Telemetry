@@ -1,6 +1,6 @@
 # US-035: Grafana Stack Extension Package (Loki, Tempo, Mimir)
 
-**GitHub Issue**: [#82](https://github.com/RoySalisbury/HVO.Enterprise/issues/82)  
+**GitHub Issue**: [#82](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/82)  
 **Status**: ❌ Not Started  
 **Category**: Extension Package  
 **Effort**: 5 story points  
@@ -98,7 +98,7 @@ This extension provides:
     <Authors>HVO Enterprise</Authors>
     <Description>Grafana stack integration for HVO.Enterprise.Telemetry — Loki log shipping, Tempo trace correlation, and Grafana Cloud convenience configuration</Description>
     <PackageTags>telemetry;grafana;loki;tempo;mimir;logging;tracing;metrics;observability</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

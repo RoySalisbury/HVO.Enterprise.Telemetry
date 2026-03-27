@@ -1,6 +1,6 @@
 # US-034: Seq Structured Log Extension Package
 
-**GitHub Issue**: [#81](https://github.com/RoySalisbury/HVO.Enterprise/issues/81)  
+**GitHub Issue**: [#81](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/81)  
 **Status**: ❌ Not Started  
 **Category**: Extension Package  
 **Effort**: 3 story points  
@@ -87,7 +87,7 @@ Both paths ensure that HVO correlation and tracing context flows into Seq automa
     <Authors>HVO Enterprise</Authors>
     <Description>Seq structured log integration for HVO.Enterprise.Telemetry — enriched log shipping via Serilog sink or direct HTTP ingestion</Description>
     <PackageTags>telemetry;seq;logging;structured-logging;correlation;tracing;datalust</PackageTags>
-    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RoySalisbury/HVO.Enterprise.Telemetry</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

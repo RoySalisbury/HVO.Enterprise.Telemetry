@@ -1,6 +1,6 @@
 # US-003: Background Job Correlation Utilities
 
-**GitHub Issue**: [#5](https://github.com/RoySalisbury/HVO.Enterprise/issues/5)  
+**GitHub Issue**: [#5](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/5)  
 **Status**: ✅ Complete  
 **Category**: Core Package  
 **Effort**: 5 story points  

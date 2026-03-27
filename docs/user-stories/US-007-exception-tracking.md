@@ -1,6 +1,6 @@
 # US-007: Exception Tracking
 
-**GitHub Issue**: [#9](https://github.com/RoySalisbury/HVO.Enterprise/issues/9)
+**GitHub Issue**: [#9](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/9)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  
@@ -687,7 +687,7 @@ namespace HVO.Enterprise.Telemetry.Exceptions
 
 **Completed**: 2026-02-08  
 **Implemented by**: GitHub Copilot (Cloud Agent)  
-**PR**: [#44](https://github.com/RoySalisbury/HVO.Enterprise/pull/44)
+**PR**: [#44](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/pull/44)
 
 ### What Was Implemented
 

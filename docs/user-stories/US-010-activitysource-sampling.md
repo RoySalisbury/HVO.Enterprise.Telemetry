@@ -1,6 +1,6 @@
 # US-010: ActivitySource Sampling
 
-**GitHub Issue**: [#12](https://github.com/RoySalisbury/HVO.Enterprise/issues/12)
+**GitHub Issue**: [#12](https://github.com/RoySalisbury/HVO.Enterprise.Telemetry/issues/12)
 
 **Status**: ✅ Complete  
 **Category**: Core Package  
