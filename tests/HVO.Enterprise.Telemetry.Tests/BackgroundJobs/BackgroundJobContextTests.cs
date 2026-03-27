@@ -221,11 +221,10 @@ namespace HVO.Enterprise.Telemetry.Tests.BackgroundJobs
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void FromValues_WithNullCorrelationId_ThrowsException()
         {
             // Act
-            BackgroundJobContext.FromValues(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => BackgroundJobContext.FromValues(null!));
         }
 
         // Note: Restore_WithNullContext test removed - calling an instance method on null 

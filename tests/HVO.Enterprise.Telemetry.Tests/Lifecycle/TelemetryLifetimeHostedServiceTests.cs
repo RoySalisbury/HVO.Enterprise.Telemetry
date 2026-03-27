@@ -57,26 +57,30 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_WithNullAppLifetime_ThrowsException()
         {
-            // Arrange
-            using var worker = new TelemetryBackgroundWorker();
-            using var manager = new TelemetryLifetimeManager(worker);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                // Arrange
+                using var worker = new TelemetryBackgroundWorker();
+                using var manager = new TelemetryLifetimeManager(worker);
 
-            // Act
-            new TelemetryLifetimeHostedService(null!, manager);
+                // Act
+                new TelemetryLifetimeHostedService(null!, manager);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_WithNullManager_ThrowsException()
         {
-            // Arrange
-            var appLifetime = new MockHostApplicationLifetime();
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                // Arrange
+                var appLifetime = new MockHostApplicationLifetime();
 
-            // Act
-            new TelemetryLifetimeHostedService(appLifetime, null!);
+                // Act
+                new TelemetryLifetimeHostedService(appLifetime, null!);
+            });
         }
 
         [TestMethod]

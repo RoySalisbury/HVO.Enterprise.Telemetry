@@ -308,27 +308,24 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CreateTraceParent_NullActivity_ThrowsArgumentNullException()
         {
             // Act
-            W3CTraceContextPropagator.CreateTraceParent((Activity)null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => W3CTraceContextPropagator.CreateTraceParent((Activity)null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void CreateTraceParent_NullTraceId_ThrowsArgumentException()
         {
             // Act
-            W3CTraceContextPropagator.CreateTraceParent(null!, "b7ad6b7169203331", ActivityTraceFlags.None);
+            Assert.ThrowsExactly<ArgumentException>(() => W3CTraceContextPropagator.CreateTraceParent(null!, "b7ad6b7169203331", ActivityTraceFlags.None));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void CreateTraceParent_NullSpanId_ThrowsArgumentException()
         {
             // Act
-            W3CTraceContextPropagator.CreateTraceParent("0af7651916cd43dd8448eb211c80319c", null!, ActivityTraceFlags.None);
+            Assert.ThrowsExactly<ArgumentException>(() => W3CTraceContextPropagator.CreateTraceParent("0af7651916cd43dd8448eb211c80319c", null!, ActivityTraceFlags.None));
         }
 
         [TestMethod]
@@ -375,11 +372,10 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetTraceState_NullActivity_ThrowsArgumentNullException()
         {
             // Act
-            W3CTraceContextPropagator.GetTraceState(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => W3CTraceContextPropagator.GetTraceState(null!));
         }
 
         [TestMethod]

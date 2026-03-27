@@ -165,60 +165,63 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void GetHeader_NullHeaders_ThrowsArgumentNullException()
         {
-            SoapHeaderAccessor.GetHeader(null!, "test");
+            Assert.ThrowsExactly<ArgumentNullException>(() => SoapHeaderAccessor.GetHeader(null!, "test"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddHeader_NullHeaders_ThrowsArgumentNullException()
         {
-            SoapHeaderAccessor.AddHeader(null!, "name", "value");
+            Assert.ThrowsExactly<ArgumentNullException>(() => SoapHeaderAccessor.AddHeader(null!, "name", "value"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void AddHeader_EmptyName_ThrowsArgumentException()
         {
-            var message = Message.CreateMessage(
-                MessageVersion.Soap12WSAddressing10,
-                "http://tempuri.org/Test",
-                "test body");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var message = Message.CreateMessage(
+                    MessageVersion.Soap12WSAddressing10,
+                    "http://tempuri.org/Test",
+                    "test body");
 
-            SoapHeaderAccessor.AddHeader(message.Headers, "", "value");
+                SoapHeaderAccessor.AddHeader(message.Headers, "", "value");
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void AddHeader_EmptyValue_ThrowsArgumentException()
         {
-            var message = Message.CreateMessage(
-                MessageVersion.Soap12WSAddressing10,
-                "http://tempuri.org/Test",
-                "test body");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var message = Message.CreateMessage(
+                    MessageVersion.Soap12WSAddressing10,
+                    "http://tempuri.org/Test",
+                    "test body");
 
-            SoapHeaderAccessor.AddHeader(message.Headers, "name", "");
+                SoapHeaderAccessor.AddHeader(message.Headers, "name", "");
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RemoveHeader_NullHeaders_ThrowsArgumentNullException()
         {
-            SoapHeaderAccessor.RemoveHeader(null!, "test");
+            Assert.ThrowsExactly<ArgumentNullException>(() => SoapHeaderAccessor.RemoveHeader(null!, "test"));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetHeader_EmptyName_ThrowsArgumentException()
         {
-            var message = Message.CreateMessage(
-                MessageVersion.Soap12WSAddressing10,
-                "http://tempuri.org/Test",
-                "test body");
+            Assert.ThrowsExactly<ArgumentException>(() =>
+            {
+                var message = Message.CreateMessage(
+                    MessageVersion.Soap12WSAddressing10,
+                    "http://tempuri.org/Test",
+                    "test body");
 
-            SoapHeaderAccessor.GetHeader(message.Headers, "");
+                SoapHeaderAccessor.GetHeader(message.Headers, "");
+            });
         }
 
         [TestMethod]

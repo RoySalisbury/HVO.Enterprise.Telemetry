@@ -10,7 +10,7 @@ namespace HVO.Enterprise.Telemetry.Tests
         [TestMethod]
         public void RecordException_ThrowsOnNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Telemetry.RecordException(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => Telemetry.RecordException(null!));
         }
 
         [TestMethod]

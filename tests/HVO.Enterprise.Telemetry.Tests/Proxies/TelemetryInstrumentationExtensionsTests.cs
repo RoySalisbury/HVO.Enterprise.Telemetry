@@ -31,7 +31,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             IServiceCollection? services = null;
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddTelemetryProxyFactory());
         }
 
@@ -87,7 +87,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         public void AddInstrumentedTransient_NullServices_Throws()
         {
             IServiceCollection? services = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddInstrumentedTransient<ISimpleService, SimpleService>());
         }
 
@@ -152,7 +152,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         public void AddInstrumentedScoped_NullServices_Throws()
         {
             IServiceCollection? services = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddInstrumentedScoped<IOrderService, OrderService>());
         }
 
@@ -191,7 +191,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         public void AddInstrumentedSingleton_NullServices_Throws()
         {
             IServiceCollection? services = null;
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddInstrumentedSingleton<ISimpleService, SimpleService>());
         }
 

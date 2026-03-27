@@ -10,10 +10,9 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
     public class ClientBaseExtensionsTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddTelemetryBehavior_NullEndpoint_ThrowsArgumentNullException()
         {
-            ClientBaseExtensions.AddTelemetryBehavior(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ClientBaseExtensions.AddTelemetryBehavior(null!));
         }
 
         [TestMethod]

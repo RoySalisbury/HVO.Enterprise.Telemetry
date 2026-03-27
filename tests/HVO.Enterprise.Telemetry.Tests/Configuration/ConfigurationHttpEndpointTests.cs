@@ -16,14 +16,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         [TestMethod]
         public void Constructor_WithNullPrefix_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new ConfigurationHttpEndpoint(" ", new TelemetryOptions()));
         }
 
         [TestMethod]
         public void Constructor_WithNullOptions_Throws()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new ConfigurationHttpEndpoint("http://localhost:5055/", null!));
         }
 

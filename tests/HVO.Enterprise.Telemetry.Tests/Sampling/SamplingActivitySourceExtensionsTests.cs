@@ -11,7 +11,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Sampling
         [TestMethod]
         public void ConfigureSampling_ThrowsOnNullSampler()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 SamplingActivitySourceExtensions.ConfigureSampling(null!));
         }
 

@@ -11,7 +11,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         [TestMethod]
         public void Constructor_NullOptions_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new DatadogTraceExporter(null!));
         }
 
@@ -28,7 +28,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         public void EnrichActivity_NullActivity_ThrowsArgumentNullException()
         {
             var exporter = new DatadogTraceExporter(new DatadogOptions());
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => exporter.EnrichActivity(null!));
         }
 
@@ -368,7 +368,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
             var options = new DatadogOptions { EnableTraceExporter = false };
             var exporter = new DatadogTraceExporter(options);
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => exporter.EnrichActivity(null!));
         }
     }

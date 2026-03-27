@@ -53,7 +53,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
         {
             IServiceCollection? services = null;
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddTelemetryStatistics());
         }
 
@@ -92,7 +92,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
         {
             IServiceCollection? services = null;
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services!.AddTelemetryHealthCheck());
         }
 
@@ -104,7 +104,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
 
             var provider = services.BuildServiceProvider();
 
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => provider.GetRequiredService<TelemetryHealthCheck>());
         }
 
@@ -118,7 +118,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 DegradedErrorRateThreshold = -1.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(
                 () => services.AddTelemetryHealthCheck(badOptions));
         }
     }

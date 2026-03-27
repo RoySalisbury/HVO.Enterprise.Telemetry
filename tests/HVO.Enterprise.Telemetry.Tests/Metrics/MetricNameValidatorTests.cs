@@ -12,21 +12,21 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void ValidateName_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => MetricNameValidator.ValidateName(null!, "testParam"));
         }
 
         [TestMethod]
         public void ValidateName_EmptyName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => MetricNameValidator.ValidateName(string.Empty, "testParam"));
         }
 
         [TestMethod]
         public void ValidateName_WhitespaceName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => MetricNameValidator.ValidateName("   ", "testParam"));
         }
 
@@ -45,7 +45,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void ValidateName_ExceptionContainsParameterName()
         {
-            var ex = Assert.ThrowsException<ArgumentException>(
+            var ex = Assert.ThrowsExactly<ArgumentException>(
                 () => MetricNameValidator.ValidateName(null!, "myParam"));
             Assert.IsTrue(ex.Message.Contains("non-empty") && ex.ParamName == "myParam",
                 "Exception should contain 'non-empty' message and reference the parameter name");

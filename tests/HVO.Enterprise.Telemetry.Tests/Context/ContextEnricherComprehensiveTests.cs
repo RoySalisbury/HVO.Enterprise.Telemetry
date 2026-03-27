@@ -43,7 +43,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void EnrichActivity_NullActivity_ThrowsArgumentNullException()
         {
             var enricher = new ContextEnricher();
-            Assert.ThrowsException<ArgumentNullException>(() => enricher.EnrichActivity(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => enricher.EnrichActivity(null!));
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void EnrichProperties_NullProperties_ThrowsArgumentNullException()
         {
             var enricher = new ContextEnricher();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => enricher.EnrichProperties(null!));
         }
 
@@ -155,7 +155,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void RegisterProvider_NullProvider_ThrowsArgumentNullException()
         {
             var enricher = new ContextEnricher();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => enricher.RegisterProvider(null!));
         }
 
@@ -228,7 +228,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void EnvironmentContextProvider_EnrichActivity_NullActivity_Throws()
         {
             var provider = new EnvironmentContextProvider();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => provider.EnrichActivity(null!, new EnrichmentOptions()));
         }
 
@@ -247,7 +247,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
             using var activity = activitySource.StartActivity("test");
             Assert.IsNotNull(activity);
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => provider.EnrichActivity(activity, null!));
         }
 
@@ -255,7 +255,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void EnvironmentContextProvider_EnrichProperties_NullProperties_Throws()
         {
             var provider = new EnvironmentContextProvider();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => provider.EnrichProperties(null!, new EnrichmentOptions()));
         }
 
@@ -263,7 +263,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Context
         public void EnvironmentContextProvider_EnrichProperties_NullOptions_Throws()
         {
             var provider = new EnvironmentContextProvider();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => provider.EnrichProperties(new Dictionary<string, object>(), null!));
         }
 

@@ -14,10 +14,9 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TryAddTelemetryInspector_NullServiceHost_ThrowsArgumentNullException()
         {
-            WcfServerIntegration.TryAddTelemetryInspector(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => WcfServerIntegration.TryAddTelemetryInspector(null!));
         }
 
         [TestMethod]

@@ -185,10 +185,9 @@ namespace HVO.Enterprise.Telemetry.Wcf.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullActivitySource_ThrowsArgumentNullException()
         {
-            new TelemetryClientMessageInspector(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new TelemetryClientMessageInspector(null!));
         }
 
         [TestMethod]

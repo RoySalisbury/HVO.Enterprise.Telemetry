@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
                 DefaultSamplingRate = 1.5
             };
 
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
                 Queue = new QueueOptions { Capacity = 10 }
             };
 
-            Assert.ThrowsException<InvalidOperationException>(() => options.Validate());
+            Assert.ThrowsExactly<InvalidOperationException>(() => options.Validate());
         }
     }
 }

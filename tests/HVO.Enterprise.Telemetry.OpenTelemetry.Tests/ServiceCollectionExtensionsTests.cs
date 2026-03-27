@@ -13,7 +13,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void AddOpenTelemetryExport_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddOpenTelemetryExport(null!));
         }
 
@@ -78,7 +78,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void AddOpenTelemetryExportFromEnvironment_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddOpenTelemetryExportFromEnvironment(null!));
         }
 

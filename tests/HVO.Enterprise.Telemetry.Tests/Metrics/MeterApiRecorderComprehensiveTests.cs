@@ -132,7 +132,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         public void Counter_Add_NegativeValue_ThrowsArgumentOutOfRangeException()
         {
             var counter = _recorder.CreateCounter("test.counter.negative");
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => counter.Add(-1));
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => counter.Add(-1));
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         {
             var counter = _recorder.CreateCounter("test.counter.negative.tag");
             var tag = new MetricTag("k", "v");
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => counter.Add(-1, in tag));
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => counter.Add(-1, in tag));
         }
 
         // --- Counter: unit and description ---
@@ -312,7 +312,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void CreateObservableGauge_NullCallback_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => _recorder.CreateObservableGauge("test.gauge.null", null!));
         }
 
@@ -356,35 +356,35 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void CreateCounter_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _recorder.CreateCounter(null!));
         }
 
         [TestMethod]
         public void CreateCounter_EmptyName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _recorder.CreateCounter(string.Empty));
         }
 
         [TestMethod]
         public void CreateHistogram_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _recorder.CreateHistogram(null!));
         }
 
         [TestMethod]
         public void CreateHistogramDouble_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _recorder.CreateHistogramDouble(null!));
         }
 
         [TestMethod]
         public void CreateObservableGauge_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _recorder.CreateObservableGauge(null!, () => 0.0));
         }
 

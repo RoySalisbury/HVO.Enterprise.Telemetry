@@ -15,7 +15,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
         [TestMethod]
         public void Constructor_NullDictionary_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new LogEnrichmentScope(null!));
         }
 
@@ -147,7 +147,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
                 ["Key"] = "Value"
             });
 
-            Assert.ThrowsException<IndexOutOfRangeException>(() => scope[1]);
+            Assert.ThrowsExactly<IndexOutOfRangeException>(() => scope[1]);
         }
 
         // --- IEnumerable ---

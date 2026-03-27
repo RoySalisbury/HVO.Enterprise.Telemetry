@@ -245,35 +245,37 @@ namespace HVO.Enterprise.Telemetry.Serilog.Tests
         // ===== Constructor Validation =====
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullPropertyName_Throws()
         {
-            new CorrelationEnricher(propertyName: null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new CorrelationEnricher(propertyName: null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_EmptyPropertyName_Throws()
         {
-            new CorrelationEnricher(propertyName: "");
+            Assert.ThrowsExactly<ArgumentNullException>(() => new CorrelationEnricher(propertyName: ""));
         }
 
         // ===== Null Parameter Validation =====
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Enrich_NullLogEvent_Throws()
         {
-            var enricher = new CorrelationEnricher();
-            enricher.Enrich(null!, SerilogTestHelpers.CreatePropertyFactory());
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var enricher = new CorrelationEnricher();
+                enricher.Enrich(null!, SerilogTestHelpers.CreatePropertyFactory());
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Enrich_NullPropertyFactory_Throws()
         {
-            var enricher = new CorrelationEnricher();
-            enricher.Enrich(SerilogTestHelpers.CreateLogEvent(), null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var enricher = new CorrelationEnricher();
+                enricher.Enrich(SerilogTestHelpers.CreateLogEvent(), null!);
+            });
         }
 
         // ===== Performance Test =====

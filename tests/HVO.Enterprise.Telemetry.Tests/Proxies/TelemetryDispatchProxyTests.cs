@@ -84,7 +84,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
-            Assert.ThrowsException<InvalidOperationException>(() => proxy.ThrowSync());
+            Assert.ThrowsExactly<InvalidOperationException>(() => proxy.ThrowSync());
 
             Assert.IsNotNull(_scopeFactory.LastScope);
             Assert.IsNotNull(_scopeFactory.LastScope!.FailException);
@@ -97,7 +97,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
-            var ex = Assert.ThrowsException<InvalidOperationException>(() => proxy.ThrowSync());
+            var ex = Assert.ThrowsExactly<InvalidOperationException>(() => proxy.ThrowSync());
             Assert.AreEqual("sync-boom", ex.Message);
         }
 

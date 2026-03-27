@@ -214,33 +214,35 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConfigurationFileProvider_LoadFromFile_ThrowsOnNullPath()
         {
-            ConfigurationFileProvider.LoadFromFile(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ConfigurationFileProvider.LoadFromFile(null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConfigurationFileProvider_LoadFromJson_ThrowsOnNullJson()
         {
-            ConfigurationFileProvider.LoadFromJson(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ConfigurationFileProvider.LoadFromJson(null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConfigurationFileProvider_ApplyTo_ThrowsOnNullProvider()
         {
-            var payload = new HierarchicalConfigurationFile();
-            ConfigurationFileProvider.ApplyTo(null!, payload);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var payload = new HierarchicalConfigurationFile();
+                ConfigurationFileProvider.ApplyTo(null!, payload);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConfigurationFileProvider_ApplyTo_ThrowsOnNullFile()
         {
-            var provider = new ConfigurationProvider();
-            ConfigurationFileProvider.ApplyTo(provider, null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var provider = new ConfigurationProvider();
+                ConfigurationFileProvider.ApplyTo(provider, null!);
+            });
         }
 
         private static Type? ResolveType(string typeName)

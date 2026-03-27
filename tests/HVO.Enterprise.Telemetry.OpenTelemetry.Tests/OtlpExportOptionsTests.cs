@@ -12,8 +12,8 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         {
             var options = new OtlpExportOptions();
 
-            Assert.AreEqual("http://localhost:4317", options.Endpoint);
-            Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
+            Assert.AreEqual("http://localhost:4318", options.Endpoint);
+            Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
             Assert.IsTrue(options.EnableTraceExport);
             Assert.IsTrue(options.EnableMetricsExport);
             Assert.IsFalse(options.EnableLogExport);
@@ -83,12 +83,12 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         public void ApplyEnvironmentDefaults_SetsEndpointFromEnv()
         {
             var options = new OtlpExportOptions();
-            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4317");
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4318");
 
             try
             {
                 options.ApplyEnvironmentDefaults();
-                Assert.AreEqual("http://collector:4317", options.Endpoint);
+                Assert.AreEqual("http://collector:4318", options.Endpoint);
             }
             finally
             {
@@ -99,13 +99,13 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void ApplyEnvironmentDefaults_ExplicitEndpointTakesPrecedence()
         {
-            var options = new OtlpExportOptions { Endpoint = "http://custom:4317" };
-            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://env:4317");
+            var options = new OtlpExportOptions { Endpoint = "http://custom:4318" };
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://env:4318");
 
             try
             {
                 options.ApplyEnvironmentDefaults();
-                Assert.AreEqual("http://custom:4317", options.Endpoint);
+                Assert.AreEqual("http://custom:4318", options.Endpoint);
             }
             finally
             {
@@ -237,7 +237,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
             var options = new OtlpExportOptions();
             options.ApplyEnvironmentDefaults();
 
-            Assert.AreEqual("http://localhost:4317", options.Endpoint);
+            Assert.AreEqual("http://localhost:4318", options.Endpoint);
             Assert.IsNull(options.ServiceName);
             Assert.IsNull(options.Environment);
             Assert.AreEqual(0, options.Headers.Count);
@@ -338,7 +338,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         }
 
         [TestMethod]
-        public void ApplyEnvironmentDefaults_Port4317_KeepsGrpcTransport()
+        public void ApplyEnvironmentDefaults_Port4317_AutoDetectsGrpcTransport()
         {
             var options = new OtlpExportOptions();
             System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4317");
@@ -358,23 +358,22 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void ApplyEnvironmentDefaults_ExplicitTransport_NotOverriddenByPort()
         {
-            // Explicitly set transport away from the default (Grpc)
-            // so that environment-based auto-detection should NOT change it.
+            // Explicitly set transport to HttpProtobuf (same as default, but explicitly assigned)
+            // so that environment-based auto-detection should NOT change it, even though
+            // the endpoint port (4317) would normally trigger auto-detection to Grpc.
             var options = new OtlpExportOptions
             {
                 Transport = OtlpTransport.HttpProtobuf
             };
 
-            // Environment sets endpoint with the "HTTP" OTLP port (4318), which would normally
-            // trigger auto-detection if the transport were still at its default (Grpc).
-            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4318");
+            System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:4317");
 
             try
             {
                 options.ApplyEnvironmentDefaults();
 
-                // Because Transport was explicitly set, it should not be overridden
-                // by the auto-detection based on the endpoint port.
+                // Because Transport was explicitly set (even though it matches the default),
+                // auto-detection should NOT override it.
                 Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
             }
             finally
@@ -384,22 +383,22 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         }
 
         [TestMethod]
-        public void ApplyEnvironmentDefaults_ExplicitEndpointPort4318_AutoDetectsTransport()
+        public void ApplyEnvironmentDefaults_ExplicitEndpointPort4317_AutoDetectsGrpcTransport()
         {
-            // When endpoint is set programmatically (not via env var) to port 4318,
-            // auto-detection should still work if transport is at default.
+            // When endpoint is set programmatically (not via env var) to port 4317,
+            // auto-detection should switch from the default HttpProtobuf to Grpc.
             var options = new OtlpExportOptions
             {
-                Endpoint = "http://collector:4318"
+                Endpoint = "http://collector:4317"
             };
 
             options.ApplyEnvironmentDefaults();
 
-            Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
+            Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
         }
 
         [TestMethod]
-        public void ApplyEnvironmentDefaults_NonStandardPort_KeepsGrpcTransport()
+        public void ApplyEnvironmentDefaults_NonStandardPort_KeepsHttpProtobufTransport()
         {
             var options = new OtlpExportOptions();
             System.Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT", "http://collector:9090");
@@ -407,7 +406,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
             try
             {
                 options.ApplyEnvironmentDefaults();
-                Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
+                Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
             }
             finally
             {
@@ -416,7 +415,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         }
 
         [TestMethod]
-        public void ApplyEnvironmentDefaults_InvalidUri_KeepsGrpcTransport()
+        public void ApplyEnvironmentDefaults_InvalidUri_KeepsHttpProtobufTransport()
         {
             var options = new OtlpExportOptions
             {
@@ -425,7 +424,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
 
             options.ApplyEnvironmentDefaults();
 
-            Assert.AreEqual(OtlpTransport.Grpc, options.Transport);
+            Assert.AreEqual(OtlpTransport.HttpProtobuf, options.Transport);
         }
     }
 }

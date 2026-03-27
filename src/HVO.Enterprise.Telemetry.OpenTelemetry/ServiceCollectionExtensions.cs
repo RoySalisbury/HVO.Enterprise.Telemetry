@@ -253,9 +253,11 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry
             OtlpExportOptions options)
         {
             exporterOptions.Endpoint = new Uri(options.Endpoint);
+#pragma warning disable CS0618 // OTel 1.15 warns about gRPC on netstandard2.0; users opt in via config
             exporterOptions.Protocol = options.Transport == OtlpTransport.Grpc
                 ? OtlpExportProtocol.Grpc
                 : OtlpExportProtocol.HttpProtobuf;
+#pragma warning restore CS0618
 
             if (options.Headers.Count > 0)
             {

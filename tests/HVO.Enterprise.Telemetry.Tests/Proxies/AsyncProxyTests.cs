@@ -119,7 +119,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => proxy.ThrowAsync());
 
             Assert.IsNotNull(_scopeFactory.LastScope);
@@ -133,7 +133,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
-            await Assert.ThrowsExceptionAsync<ArgumentException>(
+            await Assert.ThrowsExactlyAsync<ArgumentException>(
                 () => proxy.ThrowAsyncWithResult());
 
             Assert.IsNotNull(_scopeFactory.LastScope!.FailException);
@@ -145,7 +145,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
-            var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            var ex = await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => proxy.ThrowAsync());
 
             Assert.AreEqual("async-boom", ex.Message);
@@ -174,7 +174,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
             var proxy = _factory.CreateProxy<ISyncThrowingAsyncService>(
                 new SyncThrowingAsyncService());
 
-            await Assert.ThrowsExceptionAsync<ArgumentException>(
+            await Assert.ThrowsExactlyAsync<ArgumentException>(
                 async () => await proxy.ValidatedGetAsync(-1));
 
             // The scope should have been created before invocation and recorded the failure
@@ -189,7 +189,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
             var proxy = _factory.CreateProxy<ISyncThrowingAsyncService>(
                 new SyncThrowingAsyncService());
 
-            await Assert.ThrowsExceptionAsync<ArgumentException>(
+            await Assert.ThrowsExactlyAsync<ArgumentException>(
                 async () => await proxy.ValidatedDoAsync(-1));
 
             Assert.AreEqual(1, _scopeFactory.CreatedScopes.Count);
@@ -203,7 +203,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
             var proxy = _factory.CreateProxy<ISyncThrowingAsyncService>(
                 new SyncThrowingAsyncService());
 
-            var ex = await Assert.ThrowsExceptionAsync<ArgumentException>(
+            var ex = await Assert.ThrowsExactlyAsync<ArgumentException>(
                 async () => await proxy.ValidatedGetAsync(0));
 
             Assert.AreEqual("id", ex.ParamName);
@@ -227,7 +227,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
             var proxy = _factory.CreateProxy<IExceptionService>(new ExceptionService());
 
             // Verify that the exception type and message are preserved through the proxy
-            var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(
+            var ex = await Assert.ThrowsExactlyAsync<InvalidOperationException>(
                 () => proxy.ThrowAsync());
 
             Assert.AreEqual("async-boom", ex.Message);

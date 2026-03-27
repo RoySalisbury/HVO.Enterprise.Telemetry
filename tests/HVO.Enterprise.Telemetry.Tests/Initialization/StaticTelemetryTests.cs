@@ -67,7 +67,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void Initialize_ThrowsOnNullOptions()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => Telemetry.Initialize((TelemetryOptions)null!));
         }
 
@@ -75,7 +75,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void Initialize_ThrowsOnInvalidOptions()
         {
             var options = new TelemetryOptions { ServiceName = "" };
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => Telemetry.Initialize(options));
         }
 
@@ -108,7 +108,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void StartOperation_ThrowsWhenNotInitialized()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => Telemetry.StartOperation("test"));
         }
 
@@ -125,7 +125,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void TrackEvent_ThrowsWhenNotInitialized()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => Telemetry.TrackEvent("test"));
         }
 
@@ -140,14 +140,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         public void TrackEvent_ThrowsOnNullEventName()
         {
             Telemetry.Initialize(new TelemetryOptions { ServiceName = "Test" });
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => Telemetry.TrackEvent(null!));
         }
 
         [TestMethod]
         public void TrackException_ThrowsWhenNotInitialized()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => Telemetry.TrackException(new Exception("test")));
         }
 
@@ -161,7 +161,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void RecordMetric_ThrowsWhenNotInitialized()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => Telemetry.RecordMetric("metric", 42.0));
         }
 
@@ -184,7 +184,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void Statistics_ThrowsWhenNotInitialized()
         {
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => _ = Telemetry.Statistics);
         }
 
@@ -217,14 +217,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Initialization
         [TestMethod]
         public void SetCorrelationId_ThrowsOnEmpty()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => Telemetry.SetCorrelationId(""));
         }
 
         [TestMethod]
         public void SetCorrelationId_ThrowsOnNull()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => Telemetry.SetCorrelationId(null!));
         }
 

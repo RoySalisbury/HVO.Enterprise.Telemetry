@@ -12,7 +12,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void WithOpenTelemetry_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithOpenTelemetry(
                     null!, (Action<OtlpExportOptions>?)null));
         }
@@ -84,7 +84,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void WithPrometheusEndpoint_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithPrometheusEndpoint(null!));
         }
 
@@ -137,7 +137,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void WithOtlpLogExport_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithOtlpLogExport(null!));
         }
 

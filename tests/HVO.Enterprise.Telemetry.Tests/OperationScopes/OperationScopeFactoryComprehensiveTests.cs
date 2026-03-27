@@ -32,14 +32,14 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public void Constructor_NullName_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new OperationScopeFactory(activitySourceName: null!));
         }
 
         [TestMethod]
         public void Constructor_EmptyName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new OperationScopeFactory(activitySourceName: string.Empty));
         }
 
@@ -70,7 +70,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         [TestMethod]
         public void Constructor_NullActivitySource_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new OperationScopeFactory(activitySource: null!));
         }
 
@@ -95,7 +95,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void Begin_NullName_ThrowsArgumentNullException()
         {
             var factory = new OperationScopeFactory(_testSource.Source);
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => factory.Begin(null!));
         }
 
@@ -103,7 +103,7 @@ namespace HVO.Enterprise.Telemetry.Tests.OperationScopes
         public void Begin_EmptyName_ThrowsArgumentException()
         {
             var factory = new OperationScopeFactory(_testSource.Source);
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => factory.Begin(string.Empty));
         }
 

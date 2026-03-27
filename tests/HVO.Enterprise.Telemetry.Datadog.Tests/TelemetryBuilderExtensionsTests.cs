@@ -10,7 +10,7 @@ namespace HVO.Enterprise.Telemetry.Datadog.Tests
         [TestMethod]
         public void WithDatadog_NullBuilder_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryBuilderExtensions.WithDatadog(
                     null!, (Action<DatadogOptions>?)null));
         }

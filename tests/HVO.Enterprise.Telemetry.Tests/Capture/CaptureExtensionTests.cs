@@ -113,44 +113,54 @@ namespace HVO.Enterprise.Telemetry.Tests.Capture
         // ─── Argument validation ────────────────────────────────────────
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullScope_Throws()
         {
-            IOperationScope scope = null!;
-            var method = typeof(ISampleService).GetMethod("DoWork")!;
-            scope.CaptureParameters(method.GetParameters(), new object?[] { 1, "x" });
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                IOperationScope scope = null!;
+                var method = typeof(ISampleService).GetMethod("DoWork")!;
+                scope.CaptureParameters(method.GetParameters(), new object?[] { 1, "x" });
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullParams_Throws()
         {
-            var scope = _scopeFactory.Begin("TestOp");
-            scope.CaptureParameters(null!, new object?[] { });
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var scope = _scopeFactory.Begin("TestOp");
+                scope.CaptureParameters(null!, new object?[] { });
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureParameters_NullValues_Throws()
         {
-            var scope = _scopeFactory.Begin("TestOp");
-            scope.CaptureParameters(new ParameterInfo[0], null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var scope = _scopeFactory.Begin("TestOp");
+                scope.CaptureParameters(new ParameterInfo[0], null!);
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureReturnValue_NullScope_Throws()
         {
-            IOperationScope scope = null!;
-            scope.CaptureReturnValue("x", typeof(string));
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                IOperationScope scope = null!;
+                scope.CaptureReturnValue("x", typeof(string));
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void CaptureReturnValue_NullReturnType_Throws()
         {
-            var scope = _scopeFactory.Begin("TestOp");
-            scope.CaptureReturnValue("x", null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var scope = _scopeFactory.Begin("TestOp");
+                scope.CaptureReturnValue("x", null!);
+            });
         }
 
         // ─── Chaining ───────────────────────────────────────────────────

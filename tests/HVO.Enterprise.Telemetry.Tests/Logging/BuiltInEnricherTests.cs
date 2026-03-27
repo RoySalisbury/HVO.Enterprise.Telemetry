@@ -56,7 +56,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
             var enricher = new EnvironmentLogEnricher();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => enricher.Enrich(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => enricher.Enrich(null!));
         }
 
         [TestMethod]
@@ -175,7 +175,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
             var enricher = new UserContextLogEnricher(new FakeUserContextAccessor());
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => enricher.Enrich(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => enricher.Enrich(null!));
         }
 
         [TestMethod]
@@ -293,7 +293,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Logging
             var enricher = new HttpRequestLogEnricher(new FakeHttpRequestAccessor());
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => enricher.Enrich(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => enricher.Enrich(null!));
         }
 
         [TestMethod]

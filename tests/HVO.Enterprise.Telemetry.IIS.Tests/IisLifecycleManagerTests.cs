@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
             }
 
             // Act & Assert
-            Assert.ThrowsException<InvalidOperationException>(
+            Assert.ThrowsExactly<InvalidOperationException>(
                 () => new IisLifecycleManager(null));
         }
 
@@ -35,7 +35,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
                 return;
             }
 
-            var ex = Assert.ThrowsException<InvalidOperationException>(
+            var ex = Assert.ThrowsExactly<InvalidOperationException>(
                 () => new IisLifecycleManager(null));
 
             Assert.IsTrue(ex.Message.Contains("IisHostingEnvironment.IsIisHosted"));
@@ -59,7 +59,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
             var options = new IisExtensionOptions { ShutdownTimeout = TimeSpan.FromSeconds(-1) };
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(
                 () => new IisLifecycleManager(null, options, null, requireIis: false));
         }
 
@@ -87,7 +87,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
             manager.Initialize();
 
             // Act & Assert
-            Assert.ThrowsException<InvalidOperationException>(() => manager.Initialize());
+            Assert.ThrowsExactly<InvalidOperationException>(() => manager.Initialize());
 
             // Cleanup
             manager.Dispose();

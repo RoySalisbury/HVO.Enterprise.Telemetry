@@ -180,7 +180,7 @@ namespace HVO.Enterprise.Telemetry.IIS.Tests
             var handler = new IisShutdownHandler(null, options);
 
             // Act & Assert
-            await Assert.ThrowsExceptionAsync<OperationCanceledException>(
+            await Assert.ThrowsExactlyAsync<OperationCanceledException>(
                 () => handler.OnGracefulShutdownAsync(cts.Token));
         }
 

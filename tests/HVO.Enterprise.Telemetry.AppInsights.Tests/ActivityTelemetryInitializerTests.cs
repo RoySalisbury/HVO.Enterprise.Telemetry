@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         public void Initialize_NullTelemetry_ThrowsArgumentNullException()
         {
             var initializer = new ActivityTelemetryInitializer();
-            Assert.ThrowsException<ArgumentNullException>(() => initializer.Initialize(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => initializer.Initialize(null!));
         }
 
         [TestMethod]

@@ -43,7 +43,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         [TestMethod]
         public void CreateProxy_NullTarget_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => _factory.CreateProxy<ISimpleService>(null!));
         }
 
@@ -52,14 +52,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Proxies
         {
             var obj = new NotAnInterface { Value = 1 };
 
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => _factory.CreateProxy(obj));
         }
 
         [TestMethod]
         public void CreateProxy_NullScopeFactory_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new TelemetryProxyFactory(null!));
         }
 

@@ -63,7 +63,7 @@ namespace HVO.Enterprise.Telemetry.OpenTelemetry.Tests
         [TestMethod]
         public void Constructor_NullOptions_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<System.ArgumentNullException>(
+            Assert.ThrowsExactly<System.ArgumentNullException>(
                 () => new HvoActivitySourceRegistrar(null!));
         }
     }

@@ -18,21 +18,21 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         public void RecordException_NullException_ThrowsArgumentNullException()
         {
             var aggregator = new ExceptionAggregator();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => aggregator.RecordException(null!));
         }
 
         [TestMethod]
         public void Constructor_ZeroExpirationWindow_ThrowsArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(
                 () => new ExceptionAggregator(TimeSpan.Zero));
         }
 
         [TestMethod]
         public void Constructor_NegativeExpirationWindow_ThrowsArgumentOutOfRangeException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(
                 () => new ExceptionAggregator(TimeSpan.FromHours(-1)));
         }
 

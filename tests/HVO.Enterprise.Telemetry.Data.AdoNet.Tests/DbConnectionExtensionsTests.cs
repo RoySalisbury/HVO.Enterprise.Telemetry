@@ -38,10 +38,9 @@ namespace HVO.Enterprise.Telemetry.Data.AdoNet.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void WithTelemetry_NullConnection_ThrowsArgumentNullException()
         {
-            DbConnectionExtensions.WithTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => DbConnectionExtensions.WithTelemetry(null!));
         }
 
         private class FakeDbConnection : DbConnection

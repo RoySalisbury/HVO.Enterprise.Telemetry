@@ -13,7 +13,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
         {
             var configurator = new TelemetryConfigurator(new ConfigurationProvider());
 
-            Assert.ThrowsException<ArgumentNullException>(() => configurator.ForMethod(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => configurator.ForMethod(null!));
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
             var provider = new ConfigurationProvider();
             var global = new GlobalConfigurator(provider);
 
-            Assert.ThrowsException<ArgumentNullException>(() => global.AddTag(" ", "value"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => global.AddTag(" ", "value"));
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
             var provider = new ConfigurationProvider();
             var ns = new NamespaceConfigurator(provider, "HVO.Enterprise.Telemetry.Tests");
 
-            Assert.ThrowsException<ArgumentNullException>(() => ns.AddTag("", "value"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => ns.AddTag("", "value"));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Configuration
             var method = typeof(ConfiguratorEdgeCaseTests).GetMethod(nameof(SampleMethod), BindingFlags.Static | BindingFlags.NonPublic);
             var methodConfigurator = new MethodConfigurator(provider, method!);
 
-            Assert.ThrowsException<ArgumentNullException>(() => methodConfigurator.AddTag(" ", "value"));
+            Assert.ThrowsExactly<ArgumentNullException>(() => methodConfigurator.AddTag(" ", "value"));
         }
 
         [TestMethod]

@@ -5,5 +5,8 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- MSTEST0032: "assertion condition always true" — suppress because tests
+         intentionally verify default/constant values for regression safety. -->
+    <NoWarn>$(NoWarn);MSTEST0032</NoWarn>
   </PropertyGroup>
 </Project>

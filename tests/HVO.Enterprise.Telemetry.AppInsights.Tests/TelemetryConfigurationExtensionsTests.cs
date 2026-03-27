@@ -11,7 +11,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void AddHvoEnrichers_NullConfiguration_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => TelemetryConfigurationExtensions.AddHvoEnrichers(null!));
         }
 

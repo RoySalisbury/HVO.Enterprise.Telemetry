@@ -446,7 +446,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         public void Constructor_NullLogger_Throws()
         {
             var optionsMonitor = CreateOptionsMonitor(new FirstChanceExceptionOptions());
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new FirstChanceExceptionMonitor(null!, optionsMonitor));
         }
 
@@ -454,7 +454,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         public void Constructor_NullOptionsMonitor_Throws()
         {
             var logger = new TestLogger<FirstChanceExceptionMonitor>();
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 new FirstChanceExceptionMonitor(logger, null!));
         }
 
@@ -908,7 +908,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
         {
             IServiceCollection? services = null;
 
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 services!.AddFirstChanceExceptionMonitoring());
         }
 
@@ -963,7 +963,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Exceptions
             var services = new ServiceCollection();
             Microsoft.Extensions.Configuration.IConfiguration? config = null;
 
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
                 services.AddFirstChanceExceptionMonitoring(config!));
         }
 

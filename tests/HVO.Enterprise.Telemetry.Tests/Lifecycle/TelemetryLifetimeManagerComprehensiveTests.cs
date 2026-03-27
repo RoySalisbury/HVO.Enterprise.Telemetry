@@ -20,7 +20,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
         [TestMethod]
         public void Constructor_NullWorker_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new TelemetryLifetimeManager(null!));
         }
 

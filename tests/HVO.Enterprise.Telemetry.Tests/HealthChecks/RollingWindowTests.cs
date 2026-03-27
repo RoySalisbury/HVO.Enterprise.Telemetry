@@ -63,10 +63,10 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
         [TestMethod]
         public void Constructor_NonPositiveDuration_Throws()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
                 new TelemetryStatistics.RollingWindow(TimeSpan.Zero));
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
                 new TelemetryStatistics.RollingWindow(TimeSpan.FromSeconds(-1)));
         }
 

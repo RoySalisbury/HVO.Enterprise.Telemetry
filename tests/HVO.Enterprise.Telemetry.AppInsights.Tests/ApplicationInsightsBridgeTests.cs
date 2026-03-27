@@ -40,7 +40,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void Constructor_NullTelemetryClient_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => new ApplicationInsightsBridge(null!));
         }
 
@@ -169,7 +169,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
             var client = new TelemetryClient(_configuration!);
             using var bridge = new ApplicationInsightsBridge(client, forceOtlpMode: false);
 
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => bridge.TrackException(null!));
         }
 

@@ -47,7 +47,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 DegradedErrorRateThreshold = -1.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 UnhealthyErrorRateThreshold = -1.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 UnhealthyErrorRateThreshold = 5.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 MaxExpectedQueueDepth = 0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 DegradedQueueDepthPercent = 101.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 UnhealthyQueueDepthPercent = 80.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 DegradedDropRatePercent = 101.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]
@@ -127,7 +127,7 @@ namespace HVO.Enterprise.Telemetry.Tests.HealthChecks
                 UnhealthyDropRatePercent = 1.0
             };
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => options.Validate());
+            Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.Validate());
         }
 
         [TestMethod]

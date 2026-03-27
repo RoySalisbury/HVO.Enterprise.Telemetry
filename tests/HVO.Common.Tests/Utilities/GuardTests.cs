@@ -11,7 +11,7 @@ public class GuardTests
     public void AgainstNull_ThrowsWhenNull()
     {
         string? value = null;
-        Assert.ThrowsException<ArgumentNullException>(() => Guard.AgainstNull(value));
+        Assert.ThrowsExactly<ArgumentNullException>(() => Guard.AgainstNull(value));
     }
 
     [TestMethod]
@@ -25,7 +25,7 @@ public class GuardTests
     [TestMethod]
     public void AgainstNullOrWhiteSpace_ThrowsWhenWhitespace()
     {
-        Assert.ThrowsException<ArgumentException>(() => Guard.AgainstNullOrWhiteSpace("   "));
+        Assert.ThrowsExactly<ArgumentException>(() => Guard.AgainstNullOrWhiteSpace("   "));
     }
 
     [TestMethod]
@@ -38,20 +38,20 @@ public class GuardTests
     [TestMethod]
     public void AgainstNullOrEmpty_ThrowsWhenEmpty()
     {
-        Assert.ThrowsException<ArgumentException>(() => Guard.AgainstNullOrEmpty(Array.Empty<int>()));
+        Assert.ThrowsExactly<ArgumentException>(() => Guard.AgainstNullOrEmpty(Array.Empty<int>()));
     }
 
     [TestMethod]
     public void AgainstNullOrEmpty_ThrowsWhenNullCollection()
     {
         IEnumerable<int>? value = null;
-        Assert.ThrowsException<ArgumentNullException>(() => Guard.AgainstNullOrEmpty(value));
+        Assert.ThrowsExactly<ArgumentNullException>(() => Guard.AgainstNullOrEmpty(value));
     }
 
     [TestMethod]
     public void AgainstNullOrEmptyString_ThrowsWhenNull()
     {
-        Assert.ThrowsException<ArgumentException>(() => Guard.AgainstNullOrEmpty((string?)null));
+        Assert.ThrowsExactly<ArgumentException>(() => Guard.AgainstNullOrEmpty((string?)null));
     }
 
     [TestMethod]
@@ -64,13 +64,13 @@ public class GuardTests
     [TestMethod]
     public void AgainstOutOfRange_ThrowsWhenOutOfRange()
     {
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => Guard.AgainstOutOfRange(15, 1, 10));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => Guard.AgainstOutOfRange(15, 1, 10));
     }
 
     [TestMethod]
     public void AgainstLessThanOrEqual_ThrowsWhenZero()
     {
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => Guard.AgainstLessThanOrEqual(0, 0));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => Guard.AgainstLessThanOrEqual(0, 0));
     }
 
     [TestMethod]
@@ -83,7 +83,7 @@ public class GuardTests
     [TestMethod]
     public void Against_ThrowsWhenConditionIsTrue()
     {
-        Assert.ThrowsException<ArgumentException>(() => Guard.Against(true, "Condition was true"));
+        Assert.ThrowsExactly<ArgumentException>(() => Guard.Against(true, "Condition was true"));
     }
 
     [TestMethod]
@@ -97,7 +97,7 @@ public class GuardTests
     [TestMethod]
     public void AgainstInvalidEnum_ThrowsWhenInvalid()
     {
-        Assert.ThrowsException<ArgumentException>(() => Guard.AgainstInvalidEnum((TestEnum)99));
+        Assert.ThrowsExactly<ArgumentException>(() => Guard.AgainstInvalidEnum((TestEnum)99));
     }
 
     [TestMethod]
@@ -114,7 +114,7 @@ public class EnsureTests
     [TestMethod]
     public void That_ThrowsWhenConditionIsFalse()
     {
-        Assert.ThrowsException<InvalidOperationException>(() => Ensure.That(false, "Condition was false"));
+        Assert.ThrowsExactly<InvalidOperationException>(() => Ensure.That(false, "Condition was false"));
     }
 
     [TestMethod]
@@ -127,7 +127,7 @@ public class EnsureTests
     public void NotNull_ThrowsWhenNull()
     {
         string? value = null;
-        Assert.ThrowsException<InvalidOperationException>(() => Ensure.NotNull(value));
+        Assert.ThrowsExactly<InvalidOperationException>(() => Ensure.NotNull(value));
     }
 
     [TestMethod]
@@ -141,7 +141,7 @@ public class EnsureTests
     [TestMethod]
     public void NotNullOrWhiteSpace_ThrowsWhenWhitespace()
     {
-        Assert.ThrowsException<InvalidOperationException>(() => Ensure.NotNullOrWhiteSpace("   "));
+        Assert.ThrowsExactly<InvalidOperationException>(() => Ensure.NotNullOrWhiteSpace("   "));
     }
 
     [TestMethod]
@@ -154,12 +154,12 @@ public class EnsureTests
     [TestMethod]
     public void InRange_ThrowsWhenOutOfRange()
     {
-        Assert.ThrowsException<InvalidOperationException>(() => Ensure.InRange(15, 1, 10, "value"));
+        Assert.ThrowsExactly<InvalidOperationException>(() => Ensure.InRange(15, 1, 10, "value"));
     }
 
     [TestMethod]
     public void Unreachable_AlwaysThrows()
     {
-        Assert.ThrowsException<InvalidOperationException>(() => Ensure.Unreachable("This should never be reached"));
+        Assert.ThrowsExactly<InvalidOperationException>(() => Ensure.Unreachable("This should never be reached"));
     }
 }

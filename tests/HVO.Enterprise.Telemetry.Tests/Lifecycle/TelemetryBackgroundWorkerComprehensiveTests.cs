@@ -19,35 +19,35 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
         [TestMethod]
         public void Constructor_ZeroCapacity_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new TelemetryBackgroundWorker(capacity: 0));
         }
 
         [TestMethod]
         public void Constructor_NegativeCapacity_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new TelemetryBackgroundWorker(capacity: -1));
         }
 
         [TestMethod]
         public void Constructor_NegativeRestartAttempts_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new TelemetryBackgroundWorker(maxRestartAttempts: -1));
         }
 
         [TestMethod]
         public void Constructor_NegativeBaseRestartDelay_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new TelemetryBackgroundWorker(baseRestartDelay: TimeSpan.FromSeconds(-1)));
         }
 
         [TestMethod]
         public void Constructor_ExcessiveBaseRestartDelay_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => new TelemetryBackgroundWorker(baseRestartDelay: TimeSpan.FromMinutes(10)));
         }
 
@@ -118,7 +118,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
         public void TryEnqueue_NullItem_ThrowsArgumentNullException()
         {
             using var worker = new TelemetryBackgroundWorker();
-            Assert.ThrowsException<ArgumentNullException>(() => worker.TryEnqueue(null!));
+            Assert.ThrowsExactly<ArgumentNullException>(() => worker.TryEnqueue(null!));
         }
 
         [TestMethod]
@@ -240,7 +240,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Lifecycle
             var worker = new TelemetryBackgroundWorker();
             worker.Dispose();
 
-            await Assert.ThrowsExceptionAsync<ObjectDisposedException>(
+            await Assert.ThrowsExactlyAsync<ObjectDisposedException>(
                 () => worker.FlushAsync(TimeSpan.FromSeconds(1)));
         }
 

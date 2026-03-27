@@ -239,42 +239,43 @@ namespace HVO.Enterprise.Telemetry.Serilog.Tests
         // ===== Constructor Validation =====
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NullTraceIdPropertyName_Throws()
         {
-            new ActivityEnricher(traceIdPropertyName: null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => new ActivityEnricher(traceIdPropertyName: null!));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_EmptySpanIdPropertyName_Throws()
         {
-            new ActivityEnricher(spanIdPropertyName: "");
+            Assert.ThrowsExactly<ArgumentNullException>(() => new ActivityEnricher(spanIdPropertyName: ""));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_EmptyParentIdPropertyName_Throws()
         {
-            new ActivityEnricher(parentIdPropertyName: "");
+            Assert.ThrowsExactly<ArgumentNullException>(() => new ActivityEnricher(parentIdPropertyName: ""));
         }
 
         // ===== Null Parameter Validation =====
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Enrich_NullLogEvent_Throws()
         {
-            var enricher = new ActivityEnricher();
-            enricher.Enrich(null!, SerilogTestHelpers.CreatePropertyFactory());
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var enricher = new ActivityEnricher();
+                enricher.Enrich(null!, SerilogTestHelpers.CreatePropertyFactory());
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Enrich_NullPropertyFactory_Throws()
         {
-            var enricher = new ActivityEnricher();
-            enricher.Enrich(SerilogTestHelpers.CreateLogEvent(), null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
+            {
+                var enricher = new ActivityEnricher();
+                enricher.Enrich(SerilogTestHelpers.CreateLogEvent(), null!);
+            });
         }
 
         // ===== Performance Test =====

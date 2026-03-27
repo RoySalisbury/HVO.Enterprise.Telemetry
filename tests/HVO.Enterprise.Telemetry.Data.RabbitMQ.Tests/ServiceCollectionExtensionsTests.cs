@@ -49,10 +49,9 @@ namespace HVO.Enterprise.Telemetry.Data.RabbitMQ.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void AddRabbitMqTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            ServiceCollectionExtensions.AddRabbitMqTelemetry(null!);
+            Assert.ThrowsExactly<ArgumentNullException>(() => ServiceCollectionExtensions.AddRabbitMqTelemetry(null!));
         }
 
         [TestMethod]

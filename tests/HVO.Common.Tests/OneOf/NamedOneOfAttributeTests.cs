@@ -22,30 +22,26 @@ public class NamedOneOfAttributeTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
     public void Constructor_NullArgs_Throws()
     {
-        _ = new NamedOneOfAttribute(null!);
+        Assert.ThrowsExactly<ArgumentNullException>(() => _ = new NamedOneOfAttribute(null!));
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void Constructor_OddArgumentCount_Throws()
     {
-        _ = new NamedOneOfAttribute("Ok", typeof(string), "Extra");
+        Assert.ThrowsExactly<ArgumentException>(() => _ = new NamedOneOfAttribute("Ok", typeof(string), "Extra"));
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void Constructor_NonStringName_Throws()
     {
-        _ = new NamedOneOfAttribute(42, typeof(string));
+        Assert.ThrowsExactly<ArgumentException>(() => _ = new NamedOneOfAttribute(42, typeof(string)));
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
     public void Constructor_NonTypeValue_Throws()
     {
-        _ = new NamedOneOfAttribute("Ok", 42);
+        Assert.ThrowsExactly<ArgumentException>(() => _ = new NamedOneOfAttribute("Ok", 42));
     }
 }

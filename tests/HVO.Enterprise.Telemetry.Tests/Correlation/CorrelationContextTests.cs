@@ -153,7 +153,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Correlation
         public void CorrelationScope_ThrowsOnNullCorrelationId()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 CorrelationContext.BeginScope(null!);
             });
@@ -163,7 +163,7 @@ namespace HVO.Enterprise.Telemetry.Tests.Correlation
         public void CorrelationScope_ThrowsOnEmptyCorrelationId()
         {
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 CorrelationContext.BeginScope(string.Empty);
             });

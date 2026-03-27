@@ -14,7 +14,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void AddAppInsightsTelemetry_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddAppInsightsTelemetry(
                     null!, (Action<AppInsightsOptions>?)null));
         }
@@ -22,7 +22,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         [TestMethod]
         public void AddAppInsightsTelemetry_WithConnectionString_NullServices_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => ServiceCollectionExtensions.AddAppInsightsTelemetry(
                     null!, "connection-string"));
         }
@@ -31,7 +31,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         public void AddAppInsightsTelemetry_WithEmptyConnectionString_ThrowsArgumentException()
         {
             var services = new ServiceCollection();
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => services.AddAppInsightsTelemetry(""));
         }
 
@@ -39,7 +39,7 @@ namespace HVO.Enterprise.Telemetry.AppInsights.Tests
         public void AddAppInsightsTelemetry_WithNullConnectionString_ThrowsArgumentNullException()
         {
             var services = new ServiceCollection();
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => services.AddAppInsightsTelemetry((string)null!));
         }
 

@@ -51,14 +51,14 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void RecordDuration_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => OperationScopeMetrics.RecordDuration(null!, TimeSpan.FromSeconds(1), false));
         }
 
         [TestMethod]
         public void RecordDuration_EmptyName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => OperationScopeMetrics.RecordDuration(string.Empty, TimeSpan.FromSeconds(1), false));
         }
 
@@ -79,21 +79,21 @@ namespace HVO.Enterprise.Telemetry.Tests.Metrics
         [TestMethod]
         public void RecordError_NullName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => OperationScopeMetrics.RecordError(null!, new Exception("test")));
         }
 
         [TestMethod]
         public void RecordError_EmptyName_ThrowsArgumentException()
         {
-            Assert.ThrowsException<ArgumentException>(
+            Assert.ThrowsExactly<ArgumentException>(
                 () => OperationScopeMetrics.RecordError(string.Empty, new Exception("test")));
         }
 
         [TestMethod]
         public void RecordError_NullException_ThrowsArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(
+            Assert.ThrowsExactly<ArgumentNullException>(
                 () => OperationScopeMetrics.RecordError("test-op", null!));
         }
 

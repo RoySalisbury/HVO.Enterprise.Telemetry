@@ -6,7 +6,7 @@ namespace HVO.Enterprise.Telemetry.Data.Tests
     [TestClass]
     public class SqlOperationDetectorTests
     {
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(null, "EXECUTE")]
         [DataRow("", "EXECUTE")]
         [DataRow("   ", "EXECUTE")]
