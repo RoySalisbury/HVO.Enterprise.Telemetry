@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     tags:
-      - '**/v*'  # e.g., HVO.Common/v1.0.0, HVO.Enterprise.Telemetry/v1.2.0
+      - '*/v*'  # e.g., HVO.Common/v1.0.0, HVO.Enterprise.Telemetry/v1.2.0
   workflow_dispatch:
     inputs:
       package:
