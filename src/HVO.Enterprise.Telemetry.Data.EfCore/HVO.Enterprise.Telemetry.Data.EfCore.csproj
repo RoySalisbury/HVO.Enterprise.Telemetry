@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Data.EfCore</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>Entity Framework Core extension for HVO.Enterprise.Telemetry providing automatic distributed tracing for EF Core database operations via DbCommandInterceptor with OpenTelemetry semantic conventions.</Description>
     <PackageTags>telemetry;efcore;entity-framework;database;interceptor;tracing</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>v1.0.2: Update HVO.Enterprise.Telemetry.Data dependency to 1.0.2.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

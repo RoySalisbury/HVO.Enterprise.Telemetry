@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Wcf</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>WCF extension for HVO.Enterprise.Telemetry providing automatic distributed tracing for WCF operations with W3C TraceContext propagation in SOAP headers, client and server message inspectors, and fault tracking.</Description>
     <PackageTags>telemetry;wcf;soap;tracing;w3c-tracecontext;distributed-tracing;message-inspector</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>v1.0.2: Update core HVO.Enterprise.Telemetry dependency to 1.0.2.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
