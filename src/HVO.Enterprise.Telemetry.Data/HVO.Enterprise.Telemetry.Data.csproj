@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Data</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Description>Shared data instrumentation infrastructure for HVO.Enterprise.Telemetry providing OpenTelemetry semantic conventions for database operations, parameter sanitization, database system detection, and common configuration for data extension packages.</Description>
     <PackageTags>telemetry;data;database;instrumentation;opentelemetry;semantic-conventions</PackageTags>
     <PackageReleaseNotes>v1.0.2: Update core HVO.Enterprise.Telemetry dependency to 1.0.2.</PackageReleaseNotes>

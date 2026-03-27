@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Data.AdoNet</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Description>ADO.NET extension for HVO.Enterprise.Telemetry providing automatic distributed tracing for raw ADO.NET database operations via instrumented DbConnection and DbCommand wrappers with OpenTelemetry semantic conventions.</Description>
     <PackageTags>telemetry;adonet;database;sql;command;tracing</PackageTags>
     <PackageReleaseNotes>v1.0.2: Update HVO.Enterprise.Telemetry.Data dependency to 1.0.2.</PackageReleaseNotes>

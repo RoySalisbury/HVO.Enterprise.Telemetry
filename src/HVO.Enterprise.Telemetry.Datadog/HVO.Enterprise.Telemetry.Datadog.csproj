@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>HVO.Enterprise.Telemetry.Datadog</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Description>Datadog integration for HVO.Enterprise.Telemetry with dual-mode OTLP and DogStatsD support, metrics export, trace enrichment, and cross-platform transport (UDP and Unix domain socket).</Description>
     <PackageTags>telemetry;datadog;dogstatsd;apm;monitoring;metrics;tracing</PackageTags>
     <PackageReleaseNotes>v1.0.2: Update core HVO.Enterprise.Telemetry dependency to 1.0.2.</PackageReleaseNotes>
